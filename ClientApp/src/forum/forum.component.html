@@ -1,0 +1,24 @@
+<div class="container-fluid about-me padding">
+
+
+
+  <div class="container"  style="background-color: #A3A398;"*ngFor="let item of Listartice"  >
+    <div class="row" >
+          <div class="col-xs-12"   >
+             <h2 >{{item.Tittle}}</h2>
+               <img src="assets/Foto/aleja-kaszt.jpg" alt="none" (click)="RouteToArticle(item.Content)">
+               <br> <br> <br>
+         <p >{{item.Content}}</p>
+          </div>
+         </div>
+  <button (click)="RouteToArticle(item.Content)">Go to article</button>
+    </div>
+
+</div>
+
+
+
+
+
+
+<app-footer></app-footer>

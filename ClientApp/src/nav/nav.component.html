@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto mr-auto justify-content-center">
+      <li class="nav-item" >
+        <a class="nav-link" routerLink='/about'> O mnie </a>
+      </li>
+      <li class="nav-item dropdown" >
+        <div ngbDropdown  class="d-inline-block">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button"
+             ngbDropdownToggle>
+            Portfolio
+          </a>
+          <div class="dropdown-menu"  ngbDropdownMenu id="drop" aria-labelledby="navbarDropdown" >
+            <a class="dropdown-item" routerLink='/slub' >Fotografia ślubna</a>
+            <a class="dropdown-item disabled" href="#" aria-disabled="true">Sesje narzeczeńskie</a>
+            <a class="dropdown-item" routerLink='/chrzciny'>Chrzciny</a>
+            <a class="dropdown-item" routerLink='/monuments'>Zabytki</a>
+          </div>
+        </div>
+      <li>
+      </li>
+      <a class="navbar-brand" href="../index.html"> <img [src]="logoSrc" width="120" height="69" alt="Logotyp">
+      </a>
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/timetable' >Terminarz </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/contact'>Kontakt </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/forum'>Forum </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
