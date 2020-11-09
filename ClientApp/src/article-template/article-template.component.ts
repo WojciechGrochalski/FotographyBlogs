@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import {Article} from '../forum/forum.component';
+import {ForumService} from '../app/forum.service';
+import {ArticleService} from '../app/article.service';
 @Component({
   selector: 'app-article-template',
   templateUrl: './article-template.component.html',
@@ -8,10 +11,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ArticleTemplateComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
-  Content: string;
+  constructor(private route: ActivatedRoute, private articleService: ArticleService) { }
+  Content: Article;
   ngOnInit(): void {
-    this.Content = this.route.snapshot.paramMap.get('content');
+    //this.Content = this.route.snapshot.paramMap.get('content');
+    const articleObservable = this.articleService.GetArticle();
+    articleObservable.subscribe((res: Article) => {
+      this.Content = res;
+    });
 
   }
 

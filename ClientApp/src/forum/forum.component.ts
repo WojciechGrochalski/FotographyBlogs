@@ -4,9 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { ForumService } from 'src/app/forum.service';
 import {Route} from '@angular/router';
 import {ArticleService} from '../app/article.service';
+import {Observable} from 'rxjs';
 
 
-class Article {
+export class Article {
   ID: number;
   Tittle: string;
   Content: string;
@@ -38,6 +39,7 @@ export class ForumComponent implements Article, OnInit {
   date: string;
   contents: string;
   id: number;
+
   constructor(private http: HttpClient, private forumservice: ForumService,  private  articleService: ArticleService) {}
 
   ID: number;
@@ -80,6 +82,10 @@ export class ForumComponent implements Article, OnInit {
 
   RouteToArticle( article: string): void {
     this.articleService.RouteTOArticle(article);
+  }
+
+  RouteToArticleOB( article: Article) {
+     this.articleService.RouteTOArticleOB(article);
   }
 
 
