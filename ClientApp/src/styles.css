@@ -217,8 +217,8 @@ hr.dark{
 
 /* Stopka */
 .footer-img{
-  width: 120px;
-  height: 70px;
+  width: 120px!important;
+  height: 70px!important;
 }
 
 footer{

@@ -1,24 +1,32 @@
+
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <div class="container-fluid about-me padding">
 
+<br>
+<div class="container">
+  <div id="blog" class="row">
 
 
-  <div class="container"  style="background-color: #A3A398;"  >
-    <div class="row" >
-      <div class="col-xs-12"   >
-        <h2 >{{Content.Tittle}}</h2>
-        <img src="assets/Foto/aleja-kaszt.jpg" alt="none">
-        <br> <br> <br>
-        <p >{{Content.Content}}</p>
-      </div>
+    <div class="col-md-10 blogShort">
+
+      <img src='assets/Foto/jakies_zdj.png' alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+
+      <em class="tittle"> &nbsp; {{Content.Tittle}} </em>
+      <hr>
+      <small>10 - 04 -2017</small><br>
+      <small><strong>Author</strong></small>
+      <hr>
+      <article><p>
+        {{Content.Content}}
+        {{Content.Content}}
+      </p></article>
+
     </div>
 
   </div>
-
 </div>
-
-
-
-
-
+</div>
 
 <app-footer></app-footer>
