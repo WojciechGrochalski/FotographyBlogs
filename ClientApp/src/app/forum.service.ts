@@ -18,7 +18,6 @@ export class ForumService {
 
 
   SendListOfArticle(data: Article[]): Observable<any> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origins': '*'})};
     return this.http.post(this.baseUrl + 'api/File', data);
 
   }

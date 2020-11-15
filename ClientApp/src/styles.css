@@ -250,7 +250,12 @@ hr.light-100{
   height: 70px;;
 }
 
-
+p{
+  color: black!important;
+}
+input{
+  color: black!important;
+}
 /*--- O mnie ---*/
 
 /* Sekcja 2-kolumnowa */

@@ -12,12 +12,15 @@ import { NavComponent } from '../nav/nav.component';
 import { ContactComponent } from '../contact/contact.component';
 import { TimetableComponent } from '../timetable/timetable.component';
 import {HomeComponent} from '../home/home.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 import { FooterComponent } from '../footer/footer.component';
 import { ForumComponent } from '../forum/forum.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ArticleTemplateComponent} from '../article-template/article-template.component';
+import { LogInComponent } from './log-in/log-in.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import {ArticleTemplateComponent} from '../article-template/article-template.com
     FooterComponent,
     ForumComponent,
     ArticleTemplateComponent,
+    LogInComponent,
+    RegistrationComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,7 @@ import {ArticleTemplateComponent} from '../article-template/article-template.com
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'about', component: AboutComponent},
       {path: 'slub', component: SlubComponent},
       {path: 'chrzciny', component: ChrzcinyComponent},
@@ -48,9 +54,12 @@ import {ArticleTemplateComponent} from '../article-template/article-template.com
       {path: 'monument', component: MonumentsComponent},
       {path: 'timetable', component: TimetableComponent},
       {path: 'forum', component: ForumComponent},
-      {path: 'article-template', component: ArticleTemplateComponent}
+      {path: 'article-template', component: ArticleTemplateComponent},
+      {path: 'reg', component: RegistrationComponent},
+      {path: 'log-in', component: LogInComponent}
     ]),
-    MDBBootstrapModule.forRoot()
+   
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
