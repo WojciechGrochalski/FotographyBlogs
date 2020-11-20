@@ -49,7 +49,7 @@ namespace foto_full.Controllers
             if ((user.Username == query.Username
                 && user.Password==query.Password))
             {
-                return new OkObjectResult(true);
+                return new OkObjectResult(user);
 
             }
             return new OkObjectResult(false);

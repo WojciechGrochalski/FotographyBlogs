@@ -15,6 +15,7 @@ export class LogInComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+  res;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,9 +25,9 @@ export class LogInComponent implements OnInit {
     private alertService: AlertService
   ) {
     // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
-    }
+    // if (this.authenticationService.currentUserValue) {
+    //   this.router.navigate(['/']);
+    // }
   }
 
   ngOnInit() {
@@ -51,17 +52,17 @@ export class LogInComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .subscribe(
-        res => {
-          if(res) {
+    this.res =this.authenticationService.login(this.f.username.value, this.f.password.value);
+
+          if(this.res) {
             this.router.navigate([this.returnUrl]);
+
+
           }
           else{
             this.alertService.error("Nieprawidłowe dane");
             this.loading=false;
           }
-        },
-      );
+
   }
 }

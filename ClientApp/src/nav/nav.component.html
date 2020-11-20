@@ -37,6 +37,16 @@
       <li class="nav-item">
         <a class="nav-link" routerLink='/forum'>Forum </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logout()" >Logout </a>
+      </li>
+      <div *ngIf="user; then log; "></div>
+
+      <ng-template #log>
+      <li class="nav-item" >
+        <a class="nav-link" >{{user}} </a>
+      </li>
+      </ng-template>
     </ul>
   </div>
 </nav>

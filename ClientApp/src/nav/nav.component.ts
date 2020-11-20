@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {User} from '../app/models/user';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../app/auth.service';
+import {AlertService} from '../app/alert.service';
+import {Article} from '../forum/forum.component';
 
 
 @Component({
@@ -9,11 +15,32 @@ import { Component, OnInit } from '@angular/core';
 
 
 
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, DoCheck{
   logoSrc = 'assets/Foto/logo.png';
-  constructor() { }
+  user:string ;
+  constructor(
+    private authenticationService: AuthService){
+
+  }
 
   ngOnInit(): void {
+    this.user=sessionStorage.getItem('userName');
+
+    }
+    ngO
+
+    refresh(){
+    window.location.reload();
+    }
+    ngDoCheck() {
+    if(this.user!=sessionStorage.getItem('userName') ){
+      this.user=sessionStorage.getItem('userName');
+    }
+    }
+
+  logout(){
+    this.authenticationService.logout();
+    this.user=null;
   }
 
 }
