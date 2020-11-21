@@ -21,6 +21,7 @@ import {ArticleTemplateComponent} from '../article-template/article-template.com
 import { LogInComponent } from './log-in/log-in.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AlertComponent } from './alert/alert.component';
+import {PostForumComponent} from '../post-forum/post-forum.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AlertComponent } from './alert/alert.component';
     LogInComponent,
     RegistrationComponent,
     AlertComponent,
+    PostForumComponent
   ],
   imports: [
     BrowserModule,
@@ -56,9 +58,10 @@ import { AlertComponent } from './alert/alert.component';
       {path: 'forum', component: ForumComponent},
       {path: 'article-template', component: ArticleTemplateComponent},
       {path: 'reg', component: RegistrationComponent},
-      {path: 'log-in', component: LogInComponent}
+      {path: 'log-in', component: LogInComponent},
+      {path: 'post-forum', component: PostForumComponent}
     ]),
-   
+
     ReactiveFormsModule
   ],
   providers: [],

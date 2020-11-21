@@ -1,12 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Article} from '../../forum/forum.component';
-
-@Component({
-  selector: 'app-post-forum',
-  templateUrl: './post-forum.component.html',
-  styleUrls: ['./post-forum.component.css']
-})
-
 export class Post {
   ID: number;
   Tittle: string;
@@ -22,6 +14,14 @@ export class Post {
 
   }
 }
+
+@Component({
+  selector: 'app-post-forum',
+  templateUrl: './post-forum.component.html',
+  styleUrls: ['./post-forum.component.css']
+})
+
+
 export class PostForumComponent implements OnInit {
 
   constructor() { }
@@ -30,6 +30,8 @@ export class PostForumComponent implements OnInit {
   ngOnInit() {
   let post = new Post(1,'test','It is a long established fact that a reader will be distracted by the readable content of a page when','20.01.2020','Tomek');
   this.listOfPost.push(post);
+    this.listOfPost.push(post);
+    this.listOfPost.push(post);
   }
 
 }

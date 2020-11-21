@@ -16,9 +16,17 @@ export class ArticleTemplateComponent implements OnInit {
   ngOnInit(): void {
     //this.Content = this.route.snapshot.paramMap.get('content');
     const articleObservable = this.articleService.GetArticle();
-    articleObservable.subscribe((res: Article) => {
-      this.Content = res;
-    });
+
+      articleObservable.subscribe((res: Article) => {
+        if(res) {
+          this.Content = res;
+          sessionStorage.setItem('content',JSON.stringify(res) );
+        }
+        else{
+          this.Content= JSON.parse(sessionStorage.getItem('content')) ;
+        }
+      });
+
 
   }
 

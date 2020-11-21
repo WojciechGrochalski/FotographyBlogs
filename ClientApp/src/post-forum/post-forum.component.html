@@ -7,40 +7,36 @@
       <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-3">
           <a href="#">
-            <img src="http://wanderluxe.theluxenomad.com/wp-content/uploads/2014/10/http-www.urchinbali.comgallery.jpg" class="img-responsive img-box img-thumbnail">
+            <img src="" class="img-responsive img-box img-thumbnail" alt="user foto">
           </a>
         </div>
         <div class="col-xs-12 col-sm-9 col-md-9">
           <div class="list-group">
             <div class="list-group-item">
-              <div class="row-picture">
-                <a href="#" title="sintret">
-                  <img class="circle img-thumbnail img-box" src="http://sintret.com/img/andy.jpg" alt="sintret">
-                </a>
-              </div>
+
               <div class="row-content">
                 <div class="list-group-item-heading">
-                  <a href="#" title="sintret">
-                    <small>{{item.Tittle}}</small>
-                  </a>
+                  <span title="sintret">
+                    <p>{{item.Tittle}}</p>
+                  </span>
                 </div>
                 <small>
-                  <i class="glyphicon glyphicon-time"></i> {{item.Date}} via <span class="twitter"> <i class="fa fa-twitter"></i> <a target="_blank" href="https://twitter.com/sintret" alt="sintret" title="sintret">@Author name</a></span>
+                  <i class="glyphicon glyphicon-time"></i> {{item.Date}}  <span class="twitter"> <i class="fa fa-twitter"></i> <a target="_blank" href="https://twitter.com/sintret" alt="sintret" title="sintret">{{item.author}}</a></span>
                   <br>
-
+                  <span class="b">{{item.Content}}</span>
                 </small>
               </div>
             </div>
           </div>
-          <h4 ><a (click)="RouteToArticleOB(item)" >Article link </a></h4>
-          <span class="b">{{item.Content}}</span>
+
+
         </div>
       </div>
-      <hr>
-
-      <hr>
     </div>
+    <br>
+    <br>
   </div>
+
 </div>
 
 

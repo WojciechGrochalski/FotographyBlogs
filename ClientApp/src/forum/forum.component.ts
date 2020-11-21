@@ -31,7 +31,7 @@ export class Article {
 export class ForumComponent implements Article, OnInit {
   lorem: string[] = [];
   img: string[] = [];
-  public Listartice: Article[] = []   ;
+  public Listartice: Article[] = [];
   public article = {} as Article;
   readyArticle: string[];
   text: string;
@@ -48,16 +48,6 @@ export class ForumComponent implements Article, OnInit {
   Date: string;
 
 
-
-  test = '  <div class="row" >\n' +
-    '      <div class="col-xs-12"  >\n' +
-    '      <h2 >Tittle</h2>\n' +
-    '        <img src="assets/Foto/aleja-kaszt.jpg" alt="none">\n' +
-    '        <br> <br> <br>\n' +
-    '  <p >Lorem ipsum ..</p> ' +
-    '      </div>' +
-    '    </div>';
-  p = '<p>lorem ipsum</p>';
 
 
   ngOnInit(): void {
