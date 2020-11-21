@@ -3,6 +3,7 @@ import {Router, NavigationStart, ActivatedRoute} from '@angular/router';
 import { filter } from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Article} from '../forum/forum.component';
+import {Post} from '../post-forum/post-forum.component';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class ArticleService {
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   articleToSend: Article;
+  post: Post
 
   RouteTOArticle(article: string) {
    this.router.navigate(['article-template', {content: article}]);
@@ -22,6 +24,11 @@ export class ArticleService {
     this.articleToSend = article;
   }
 
+  RouteToPost(post: Post) {
+    this.router.navigate(['post-template']);
+    this.post=post;
+  }
+
   GetArticle( ): any {
     const articleObserve = new Observable(observe => {
       setTimeout(() => {
@@ -29,5 +36,13 @@ export class ArticleService {
       }, 200);
     });
     return articleObserve;
+  }
+  GetPost( ): any {
+    const postObserve = new Observable(observe => {
+      setTimeout(() => {
+        observe.next(this.post);
+      }, 200);
+    });
+    return postObserve;
   }
 }

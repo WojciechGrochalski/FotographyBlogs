@@ -1,1 +1,35 @@
-<p>post-template works!</p>
+<div class="container-fluid about-me padding">
+
+  <div class="container">
+    <div id="blog" class="row">
+
+
+      <div class="col-xs-12 col-sm-9 col-md-9">
+        <div class="list-group">
+          <div class="list-group-item">
+
+            <div class="row-content">
+              <div class="list-group-item-heading">
+                  <span title="sintret">
+                    <p>{{post.Tittle}}</p>
+                  </span>
+              </div>
+              <small>
+                <i class="glyphicon glyphicon-time"></i> {{post.Date}}  <span class="twitter"> <i class="fa fa-twitter"></i> <a target="_blank" href="https://twitter.com/sintret" alt="sintret" title="sintret">{{post.author}}</a></span>
+                <br>
+                <span class="b">{{post.Content}}</span>
+              </small>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<app-footer></app-footer>

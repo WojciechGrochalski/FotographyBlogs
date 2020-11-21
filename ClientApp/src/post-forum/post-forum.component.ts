@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Article} from '../forum/forum.component';
+import {HttpClient} from '@angular/common/http';
+import {ForumService} from '../app/forum.service';
+import {ArticleService} from '../app/article.service';
 export class Post {
   ID: number;
   Tittle: string;
@@ -24,7 +28,7 @@ export class Post {
 
 export class PostForumComponent implements OnInit {
 
-  constructor() { }
+  constructor( private  articleService: ArticleService) { }
   listOfPost: Post[]=[];
    post = {} as Post;
   ngOnInit() {
@@ -33,5 +37,7 @@ export class PostForumComponent implements OnInit {
     this.listOfPost.push(post);
     this.listOfPost.push(post);
   }
-
+  RouteToPost( post: Post) {
+    this.articleService.RouteToPost(post);
+  }
 }

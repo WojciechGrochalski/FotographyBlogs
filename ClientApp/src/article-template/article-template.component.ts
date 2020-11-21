@@ -14,7 +14,6 @@ export class ArticleTemplateComponent implements OnInit {
   constructor(private route: ActivatedRoute, private articleService: ArticleService) { }
   Content: Article;
   ngOnInit(): void {
-    //this.Content = this.route.snapshot.paramMap.get('content');
     const articleObservable = this.articleService.GetArticle();
 
       articleObservable.subscribe((res: Article) => {
