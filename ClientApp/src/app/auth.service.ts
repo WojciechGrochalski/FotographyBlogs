@@ -12,13 +12,10 @@ export class AuthService {
   public user: Observable<any>;
   baseUrl: string = '';
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('userName')));
-    // this.userName = this.currentUserSubject.asObservable();
+
      this.baseUrl = baseUrl;
   }
-  public get currentUserValue(): User {
-    return this.currentUserSubject.value;
-  }
+
   login(username: string, password: string) {
    // return this.http.post<any>(`/users/authenticate`, { username, password })
     return this.http.post<User>(this.baseUrl+ 'api/login/login', { username, password })
