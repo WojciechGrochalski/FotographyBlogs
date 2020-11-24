@@ -24,10 +24,7 @@ export class RegistrationComponent implements OnInit {
     private userService: UserService,
     private alertService: AlertService
   ) {
-    // redirect to home if already logged in
-    if (this.authService.currentUserValue) {
-      this.router.navigate(['/']);
-    }
+
   }
 
   ngOnInit(): void {

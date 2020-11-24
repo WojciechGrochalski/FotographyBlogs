@@ -10,42 +10,44 @@
       <li class="nav-item" >
         <a class="nav-link" routerLink='/about'> O mnie </a>
       </li>
-      <li class="nav-item dropdown" >
-        <div ngbDropdown  class="d-inline-block">
-          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button"
-             ngbDropdownToggle>
-            Portfolio
-          </a>
-          <div class="dropdown-menu"  ngbDropdownMenu id="drop" aria-labelledby="navbarDropdown" >
-            <a class="dropdown-item" routerLink='/slub' >Fotografia ślubna</a>
-            <a class="dropdown-item disabled" href="#" aria-disabled="true">Sesje narzeczeńskie</a>
-            <a class="dropdown-item" routerLink='/chrzciny'>Chrzciny</a>
-            <a class="dropdown-item" routerLink='/monuments'>Zabytki</a>
-          </div>
-        </div>
-      <li>
-      </li>
+<!--      <li class="nav-item dropdown" >-->
+<!--        <div ngbDropdown  class="d-inline-block">-->
+<!--          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button"-->
+<!--             ngbDropdownToggle>-->
+<!--            Portfolio-->
+<!--          </a>-->
+<!--          <div class="dropdown-menu"  ngbDropdownMenu id="drop" aria-labelledby="navbarDropdown" >-->
+<!--            <a class="dropdown-item" routerLink='/slub' >Fotografia ślubna</a>-->
+<!--            <a class="dropdown-item disabled" href="#" aria-disabled="true">Sesje narzeczeńskie</a>-->
+<!--            <a class="dropdown-item" routerLink='/chrzciny'>Chrzciny</a>-->
+<!--            <a class="dropdown-item" routerLink='/monuments'>Zabytki</a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      <li>-->
+<!--      </li>-->
       <a class="navbar-brand" href="../index.html"> <img [src]="logoSrc" width="120" height="69" alt="Logotyp">
       </a>
+      <div *ngIf="!user; then out; "></div>
+      <ng-template #out>
       <li class="nav-item">
         <a class="nav-link" routerLink='/log-in' >Login</a>
       </li>
+      </ng-template>
       <li class="nav-item">
         <a class="nav-link" routerLink='/contact'>Kontakt </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" routerLink='/forum'>Forum </a>
+        <a class="nav-link" routerLink='/forum'>Blog </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink='/post-forum'>Posty </a>
       </li>
+      <div *ngIf="user; then log; "></div>
+      <ng-template #log>
       <li class="nav-item">
         <a class="nav-link" (click)="logout()" >Logout </a>
       </li>
-      <div *ngIf="user; then log; "></div>
-
-      <ng-template #log>
       <li class="nav-item" >
         <a class="nav-link" >{{user}} </a>
       </li>

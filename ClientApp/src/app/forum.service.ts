@@ -17,8 +17,8 @@ export class ForumService {
   }
 
 
-  SendListOfArticle(data: Article[]): Observable<any> {
-    return this.http.post(this.baseUrl + 'api/File', data);
+  GetArticle(): Observable<any> {
+    return this.http.get(this.baseUrl + 'api/File');
 
   }
 

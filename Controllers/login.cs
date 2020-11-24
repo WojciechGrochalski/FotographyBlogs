@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Backend_Foto;
-using Backend_Foto.Data;
+using Backend_Foto.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,9 +47,10 @@ namespace foto_full.Controllers
             await Task.CompletedTask;
             if(query!=null)
             if ((user.Username == query.Username
-                && user.Password==query.Password))
+                    && user.Password==query.Password))
             {
-                return new OkObjectResult(user);
+                ReturnedUser returnedUser = new ReturnedUser(user.FirstName, user.LastName, user.Username);
+                return new OkObjectResult(returnedUser);
 
             }
             return new OkObjectResult(false);

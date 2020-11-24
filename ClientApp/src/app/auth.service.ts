@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {User} from './models/user';
@@ -35,5 +35,9 @@ export class AuthService {
     // remove user from local storage to log user out
     sessionStorage.removeItem('userName');
 
+  }
+
+  public uploadFile(file: FormData) {
+   return  this.http.post(this.baseUrl+'api/File/photo', file, {reportProgress: true, observe: 'events'});
   }
 }

@@ -1,4 +1,4 @@
-﻿using Backend_Foto.Data;
+﻿using Backend_Foto.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,8 +30,12 @@ namespace Backend_Foto.Tools
                 File.WriteAllText(path, jsonString);
             }
 
-
-
+        }
+        public static string GetArticle()
+        {
+            
+            string content = File.ReadAllText(articleJsonPath);
+            return content;
         }
     }
 }
