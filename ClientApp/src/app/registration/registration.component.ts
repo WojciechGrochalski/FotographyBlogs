@@ -48,12 +48,12 @@ export class RegistrationComponent implements OnInit {
     this.loading = true;
     this.userService.register(this.registerForm.value).subscribe(res => {
       if (res) {
-
-        this.alertService.success('Registration successful', true);
         this.router.navigate(['log-in']);
+        this.alertService.success('Registration successful', true);
+        this.loading=true;
       } else {
 
-        this.alertService.error("Nieprawidłowa lub użyta nazwa użytkownika");
+        this.alertService.error("Nieprawidłowa lub użyta nazwa użytkownika",true);
         this.loading=false;
       }
     }

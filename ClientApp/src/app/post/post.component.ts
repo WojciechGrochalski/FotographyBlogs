@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Post} from '../../post-forum/post-forum.component';
+import {ArticleService} from '../article.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
-  constructor() { }
+  @Input() post: Post
 
+  constructor(private route: ActivatedRoute, private articleService: ArticleService) { }
+  RouteToPost( post: Post) {
+    this.articleService.RouteToPost(post);
+  }
   ngOnInit() {
+
+
   }
 
 }

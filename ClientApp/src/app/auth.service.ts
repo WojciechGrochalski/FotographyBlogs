@@ -18,16 +18,8 @@ export class AuthService {
 
   login(username: string, password: string) {
    // return this.http.post<any>(`/users/authenticate`, { username, password })
-    return this.http.post<User>(this.baseUrl+ 'api/login/login', { username, password })
-      .subscribe(res => {
-        // login successful if there's a jwt token in the response
-        if (res) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          sessionStorage.setItem('userName', res.username);
-        }
-        return true;
+    return this.http.post<User>(this.baseUrl+ 'api/login/login', { username, password });
 
-      });
 
   }
 

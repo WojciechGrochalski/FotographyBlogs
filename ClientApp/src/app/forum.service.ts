@@ -18,7 +18,12 @@ export class ForumService {
 
 
   GetArticle(): Observable<any> {
-    return this.http.get(this.baseUrl + 'api/File');
+    return this.http.get(this.baseUrl + 'api/File/Article');
+
+  }
+
+  GetPost(): Observable<any> {
+    return this.http.get(this.baseUrl + 'api/File/Post');
 
   }
 

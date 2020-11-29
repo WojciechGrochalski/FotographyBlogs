@@ -18,6 +18,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { AlertComponent } from './alert/alert.component';
 import {PostForumComponent} from '../post-forum/post-forum.component';
 import { PostTemplateComponent } from './post-template/post-template.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PostTemplateComponent } from './post-template/post-template.component';
     RegistrationComponent,
     AlertComponent,
     PostForumComponent,
-    PostTemplateComponent
+    PostTemplateComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

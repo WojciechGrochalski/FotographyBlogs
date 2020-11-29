@@ -28,14 +28,16 @@ export class Post {
 
 export class PostForumComponent implements OnInit {
 
-  constructor( private  articleService: ArticleService) { }
-  listOfPost: Post[]=[];
-   post = {} as Post;
+  constructor( private  articleService: ArticleService, private forumService: ForumService) { }
+  posts: Post[]=[];
   ngOnInit() {
   let post = new Post(1,'test','It is a long established fact that a reader will be distracted by the readable content of a page when','20.01.2020','Tomek');
-  this.listOfPost.push(post);
-    this.listOfPost.push(post);
-    this.listOfPost.push(post);
+  this.posts.push(post);
+    this.posts.push(post);
+    this.posts.push(post);
+    // this.forumService.GetPost().subscribe(res =>{
+    //   this.post=res;
+    // });
   }
   RouteToPost( post: Post) {
     this.articleService.RouteToPost(post);

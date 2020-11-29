@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Article} from '../../forum/forum.component';
-import {Post} from '../../post-forum/post-forum.component';
-import {ActivatedRoute} from '@angular/router';
+
 import {ArticleService} from '../article.service';
+import {Post} from '../../post-forum/post-forum.component';
+
+
 
 @Component({
   selector: 'app-post-template',
@@ -10,9 +11,9 @@ import {ArticleService} from '../article.service';
   styleUrls: ['./post-template.component.css']
 })
 export class PostTemplateComponent implements OnInit {
+  post={} as Post;
+  constructor( private articleService: ArticleService) { }
 
-  constructor(private route: ActivatedRoute, private articleService: ArticleService) { }
-  post: Post;
   ngOnInit() {
 
     const postObserve = this.articleService.GetPost();

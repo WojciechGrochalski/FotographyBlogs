@@ -62,27 +62,21 @@ export class LogInComponent implements OnInit {
     }
 
     this.loading = true;
-    this.res =this.authenticationService.login(this.f.username.value, this.f.password.value);
-
-          if(this.res) {
-            this.router.navigate([this.returnUrl]);
-
-
-          }
-          else{
-            this.alertService.error("Nieprawidłowe dane");
-            this.loading=false;
-          }
+    this.authenticationService.login(this.f.username.value, this.f.password.value).subscribe(res =>{
+      if (res) {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        sessionStorage.setItem('userName', res.username);
+        this.router.navigate([this.returnUrl]);
+      }
+      else{
+        this.alertService.error("Nieprawidłowe dane",true);
+        this.loading=false;
+    }},
+      error =>{
+        this.alertService.error(error,true);
+      });
 
   }
-  // onFileChanged(event) {
-  //   this.selectedFile = event.target.files[0]
-  // }
-  // onUpload(){
-  //   const uploadData = new FormData();
-  //   uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
-  //   this.authenticationService.Uploud(uploadData);
-  // }
   public uploadFile = (files) => {
     if (files.length === 0) {
       return;
@@ -100,13 +94,5 @@ export class LogInComponent implements OnInit {
         }
       });
 
-
-  // public upload(event) {
-  //   if (event.target.files && event.target.files.length > 0) {
-  //     const file = event.target.files[0];
-  //
-  //     this.authenticationService.uploadFile(file).subscribe();
-  //
-  // }
 }
 }

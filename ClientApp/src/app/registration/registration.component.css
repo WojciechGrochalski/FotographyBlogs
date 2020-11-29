@@ -1,0 +1,36 @@
+.wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: url('src/assets/Foto/aleja-kaszt.jpg') no-repeat center center/cover;
+}
+.container{
+  width: 400px;
+  max-height: 80%;
+  border-radius: 5px;
+  background: lightgray;
+  padding: 30px 15px;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+}
+.container h2{
+  text-align: center;
+}
+
+.container form{
+  margin-top: 30px;
+}
+.container .form-group{
+  padding: 5px;
+}
+.btn-register{
+  width: 100%;
+  margin-top: 15px;
+}
+.container span>a{
+  color: inherit;
+}

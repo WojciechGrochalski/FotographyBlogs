@@ -1,43 +1,10 @@
-<div class="container-fluid about-me padding">
-
-
-
-  <div class="container" *ngFor="let item of listOfPost"  >
-    <div class="row">
-      <div class="row">
-        <div class="col-xs-12 col-sm-3 col-md-3">
-          <a href="#">
-            <img src="" class="img-responsive img-box img-thumbnail" alt="user foto">
-          </a>
-        </div>
-        <div class="col-xs-12 col-sm-9 col-md-9">
-          <div class="list-group">
-            <div class="list-group-item">
-
-              <div class="row-content">
-                <div class="list-group-item-heading">
-                  <span title="sintret">
-                    <p>{{item.Tittle}}</p>
-                  </span>
-                </div>
-                <small>
-                  <i class="glyphicon glyphicon-time"></i> {{item.Date}}  <span class="twitter"> <i class="fa fa-twitter"></i> <a target="_blank" href="https://twitter.com/sintret" alt="sintret" title="sintret">{{item.author}}</a></span>
-                  <br>
-                  <span class="b">{{item.Content}}</span>
-                </small>
-                <h4 ><a (click)="RouteToPost(item)" >Inspekt</a></h4>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-    </div>
-    <br>
-    <br>
+<div class="content">
+  <div class="main-content">
+    <h1 class="recent-title">Najnowsze publikacje</h1>
+    <hr class="dark">
+    <app-post *ngFor="let post of posts" [post]="post">
+    </app-post>
   </div>
-
 </div>
 
 

@@ -1,34 +1,24 @@
-<div class="container-fluid about-me padding">
-
-  <div class="container">
-    <div id="blog" class="row">
-
-
-      <div class="col-xs-12 col-sm-9 col-md-9">
-        <div class="list-group">
-          <div class="list-group-item">
-
-            <div class="row-content">
-              <div class="list-group-item-heading">
-                  <span title="sintret">
-                    <p>{{post.Tittle}}</p>
-                  </span>
-              </div>
-              <small>
-                <i class="glyphicon glyphicon-time"></i> {{post.Date}}  <span class="twitter"> <i class="fa fa-twitter"></i> <a target="_blank" href="https://twitter.com/sintret" alt="sintret" title="sintret">{{post.author}}</a></span>
-                <br>
-                <span class="b">{{post.Content}}</span>
-              </small>
-
-            </div>
-          </div>
-        </div>
+<div class="wrapper">
+  <div class="image">
+    <div class="img-overlay">
+      <div class="overlay-content">
+        <h1 class="overlay-title">{{post.Tittle}}</h1>
+        <p class="overlay-meta"> {{post.Date}}</p>
+        <p class="overlay-meta">Author: {{post.author}}</p>
+        <!-- <i class="far fa-user"> {{post.author}}</i>
+        <i class="far fa-calendar"> {{post.date}}</i>  -->
       </div>
-
     </div>
+  </div>
+  <div class="post-content">
+    <div class="shadow-box"></div>
+    <div class="avatar">
+      <img src="http://sintret.com/img/andy.jpg" alt="profile picture" class="avatar">
+    </div>
+    <div class="post-text"> <p>{{post.Content}}{{post.Content}}{{post.Content}}{{post.Content}}{{post.Content}}
+      {{post.Content}}{{post.Content}}{{post.Content}}{{post.Content}}{{post.Content}}</p></div>
 
   </div>
-
 </div>
 
 

@@ -41,7 +41,7 @@ export class ArticleService {
     const postObserve = new Observable(observe => {
       setTimeout(() => {
         observe.next(this.post);
-      }, 200);
+      }, 300);
     });
     return postObserve;
   }

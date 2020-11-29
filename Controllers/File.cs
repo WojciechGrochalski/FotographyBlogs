@@ -28,7 +28,7 @@ namespace foto_full.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("Article")]
         public string GetListOfArticle()
         {
             return ApiTools.GetArticle();

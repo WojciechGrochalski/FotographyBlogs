@@ -1,0 +1,79 @@
+
+.wrapper .image{
+  background: url("src/assets/Foto/burza.png") no-repeat center center/cover;
+  height: 570px;
+  position: relative;
+}
+
+.wrapper .image .img-overlay{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 50px 0;
+  width: 100%;
+  text-align: left;
+}
+
+.wrapper .image .img-overlay .overlay-content,
+.wrapper .image .img-overlay p.overlay-meta{
+  margin: 0 auto;
+
+  max-width: 780px;
+  color: white;
+}
+.wrapper .image .img-overlay .overlay-content{
+  margin-bottom: 80px;
+}
+.wrapper .overlay-title{
+  font-weight: bold;
+  font-size: 45px;
+}
+.wrapper .overlay-meta{
+  font-size: 20px;
+}
+
+.wrapper p.overlay-meta{
+  margin-bottom: .5rem;
+}
+.wrapper .post-content .shadow-box{
+  position: absolute;
+  height: 90px;
+  top: 78px;
+  width: 100%;
+}
+
+.wrapper .post-content .shadow-box::before{
+  content: url('src/assets/Foto/shadow.png');
+  left: -8px;
+  position: absolute;
+}
+
+.wrapper .post-content .shadow-box::after{
+  content: url('src/assets/Foto/shadow.png');
+  right: -8px;
+  position: absolute;
+  transform: rotateY(180deg);
+}
+
+.wrapper .post-content{
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  max-width: 1100px;
+  margin: -80px auto 30px auto;
+  background-color: white;
+  position: relative;
+  padding: 20px;
+  padding-right: 50px;
+  border-radius: 3px;
+}
+.wrapper .post-content .avatar{
+  text-align: center;
+}
+.wrapper .post-content .avatar img{
+  border-radius: 50%;
+}
+.wrapper .post-content p{
+  text-align: justify;
+  line-height: 2;
+  font-size: 18px;
+}
