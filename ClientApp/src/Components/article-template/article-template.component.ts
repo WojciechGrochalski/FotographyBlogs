@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import {Article} from '../forum/forum.component';
-import {ForumService} from '../app/forum.service';
-import {ArticleService} from '../app/article.service';
+import {ArticleService} from '../../Services/article.service';
+import {Article} from '../../models/Article';
+
 @Component({
   selector: 'app-article-template',
   templateUrl: './article-template.component.html',
@@ -12,7 +11,7 @@ import {ArticleService} from '../app/article.service';
 export class ArticleTemplateComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private articleService: ArticleService) { }
-  Content: Article;
+  Content={ } as Article;
   ngOnInit(): void {
     const articleObservable = this.articleService.GetArticle();
 

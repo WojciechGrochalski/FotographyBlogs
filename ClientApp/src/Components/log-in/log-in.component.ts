@@ -1,10 +1,10 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import {AuthService} from '../auth.service';
-import {AlertService} from '../alert.service';
 import {HttpClient, HttpEventType} from '@angular/common/http';
+import {AuthService} from '../../Services/auth.service';
+import {AlertService} from '../../Services/alert.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-log-in',
@@ -24,6 +24,9 @@ export class LogInComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   res;
+  //
+
+  messageA: any;
   @Input() public disabled: boolean;
   constructor(
     private formBuilder: FormBuilder,
@@ -34,10 +37,11 @@ export class LogInComponent implements OnInit {
      private http: HttpClient
   ) {
 
-    // redirect to home if already logged in
-    // if (this.authenticationService.currentUserValue) {
-    //   this.router.navigate(['/']);
-    // }
+    //redirect to home if already logged in
+    if (   sessionStorage.getItem('userName')) {
+      this.router.navigate(['/']);
+    }
+
   }
 
   ngOnInit() {
@@ -48,6 +52,9 @@ export class LogInComponent implements OnInit {
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+    this.messageA=sessionStorage.getItem('alert')
+    sessionStorage.removeItem('alert')
   }
 
   // convenience getter for easy access to form fields

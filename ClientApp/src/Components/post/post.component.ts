@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Post} from '../../post-forum/post-forum.component';
-import {ArticleService} from '../article.service';
+
 import {ActivatedRoute} from '@angular/router';
+import {ArticleService} from '../../Services/article.service';
+import {Post} from '../../models/Post';
 
 @Component({
   selector: 'app-post',

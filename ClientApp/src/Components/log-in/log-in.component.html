@@ -1,4 +1,4 @@
-<!--<div class="container-fluid about-me padding">-->
+
 
 
   <div class="wrapper">
@@ -6,6 +6,10 @@
     <div class="container">
       <h2>Zaloguj się</h2>
       <app-alert></app-alert>
+      <div *ngIf="messageA; then alert; "></div>
+      <ng-template #alert>
+        <div  *ngIf="messageA"  class="alert alert-success">{{messageA}}</div>
+      </ng-template>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="username">Nazwa użytkownika</label>
@@ -45,3 +49,4 @@
     </span>
   </div>
 </div>
+<br><br><br><br>

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthService} from '../auth.service';
-import {first} from 'rxjs/operators';
-import {AlertService} from '../alert.service';
-import {UserService} from '../user.service';
-import {HttpRequest} from '@angular/common/http';
+import {AuthService} from '../../Services/auth.service';
+import {UserService} from '../../Services/user.service';
+import {AlertService} from '../../Services/alert.service';
+
+
 
 @Component({
   selector: 'app-registration',
@@ -48,12 +48,13 @@ export class RegistrationComponent implements OnInit {
     this.loading = true;
     this.userService.register(this.registerForm.value).subscribe(res => {
       if (res) {
-        this.router.navigate(['log-in']);
+
         this.alertService.success('Registration successful', true);
-        this.loading=true;
+        sessionStorage.setItem('alert','Registration successful');
+        this.router.navigate(['/log-in']);
       } else {
 
-        this.alertService.error("Nieprawidłowa lub użyta nazwa użytkownika",true);
+        this.alertService.error("Nieprawidłowa lub użyta nazwa użytkownika");
         this.loading=false;
       }
     }

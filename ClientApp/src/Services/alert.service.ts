@@ -16,7 +16,7 @@ export class AlertService {
           this.keepAfterRouteChange = false;
         } else {
           // clear alert message
-         this.clear();
+          this.clear();
         }
       }
     });
@@ -26,12 +26,12 @@ export class AlertService {
     return this.subject.asObservable();
   }
 
-  success(message: string, keepAfterRouteChange: boolean ) {
-    this.keepAfterRouteChange = true;
+  success(message: string, keepAfterRouteChange = false) {
+    this.keepAfterRouteChange = keepAfterRouteChange;
     this.subject.next({ type: 'success', text: message });
   }
 
-  error(message: string, keepAfterRouteChange ) {
+  error(message: string, keepAfterRouteChange = false) {
     this.keepAfterRouteChange = keepAfterRouteChange;
     this.subject.next({ type: 'error', text: message });
   }

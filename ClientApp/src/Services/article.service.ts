@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {Router, NavigationStart, ActivatedRoute} from '@angular/router';
 import { filter } from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {Article} from '../forum/forum.component';
-import {Post} from '../post-forum/post-forum.component';
+import {Article} from '../models/Article';
+import {Post} from '../models/Post';
 
 @Injectable({
   providedIn: 'root'

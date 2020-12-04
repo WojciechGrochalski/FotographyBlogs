@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {catchError} from 'rxjs/operators';
+
 
 
 @Injectable({
@@ -28,10 +28,4 @@ export class ForumService {
   }
 
 }
-interface Article {
-  ID: number;
-  Tittle: string;
-  Content: string;
-  Date: string;
-  img: string[];
-}
+

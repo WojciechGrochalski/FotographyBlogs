@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Post} from '../../models/Post';
+import {ArticleService} from '../../Services/article.service';
 
-import {ArticleService} from '../article.service';
-import {Post} from '../../post-forum/post-forum.component';
+
 
 
 

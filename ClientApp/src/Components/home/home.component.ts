@@ -1,7 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import {NavComponent} from '../nav/nav.component';
-import {AuthService} from '../app/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -19,10 +17,6 @@ export class HomeComponent  {
     config.pauseOnHover = false;
 
   }
-
-  imgSrc = 'assets/Foto/kradzone.jpg';
-  logoSrc = 'assets/Foto/logo.png';
-  xd = 'src/assets/Foto/aleja-kaszt.jpg';
 
 
 ngOnInit(): void {

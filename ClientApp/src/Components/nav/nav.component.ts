@@ -1,10 +1,6 @@
 import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {User} from '../app/models/user';
-import {FormBuilder} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../app/auth.service';
-import {AlertService} from '../app/alert.service';
-import {Article} from '../forum/forum.component';
+import {AuthService} from '../../Services/auth.service';
+
 
 
 @Component({

@@ -4,21 +4,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AboutComponent } from '../about/about.component';
-import { NavComponent } from '../nav/nav.component';
-import { ContactComponent } from '../contact/contact.component';
-import {HomeComponent} from '../home/home.component';
-import { FooterComponent } from '../footer/footer.component';
-import { ForumComponent } from '../forum/forum.component';
-import {HttpClientModule} from '@angular/common/http';
+import {NavComponent} from '../Components/nav/nav.component';
+import {AboutComponent} from '../Components/about/about.component';
+import {FooterComponent} from '../Components/footer/footer.component';
+import {HomeComponent} from '../Components/home/home.component';
+import {ContactComponent} from '../Components/contact/contact.component';
+import {ForumComponent} from '../Components/forum/forum.component';
+import {ArticleTemplateComponent} from '../Components/article-template/article-template.component';
+import {LogInComponent} from '../Components/log-in/log-in.component';
+import {RegistrationComponent} from '../Components/registration/registration.component';
+import {AlertComponent} from '../Components/alert/alert.component';
+import {PostForumComponent} from '../Components/post-forum/post-forum.component';
+import {PostTemplateComponent} from '../Components/post-template/post-template.component';
+import {PostComponent} from '../Components/post/post.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ArticleTemplateComponent} from '../article-template/article-template.component';
-import { LogInComponent } from './log-in/log-in.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { AlertComponent } from './alert/alert.component';
-import {PostForumComponent} from '../post-forum/post-forum.component';
-import { PostTemplateComponent } from './post-template/post-template.component';
-import { PostComponent } from './post/post.component';
+import {HttpClientModule} from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { PostComponent } from './post/post.component';
     AlertComponent,
     PostForumComponent,
     PostTemplateComponent,
-    PostComponent
+    PostComponent,
   ],
   imports: [
     BrowserModule,

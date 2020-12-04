@@ -1,23 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Article} from '../forum/forum.component';
-import {HttpClient} from '@angular/common/http';
-import {ForumService} from '../app/forum.service';
-import {ArticleService} from '../app/article.service';
-export class Post {
-  ID: number;
-  Tittle: string;
-  Content: string;
-  Date: string;
-  author: string;
-  constructor( id: number, tittle: string, content: string, date: string, author: string) {
-    this.ID = id;
-    this.Tittle = tittle;
-    this.Content = content;
-    this.Date = date;
-    this.author=author;
 
-  }
-}
+import {Post} from '../../models/Post';
+import {ArticleService} from '../../Services/article.service';
+import {ForumService} from '../../Services/forum.service';
+
+
 
 @Component({
   selector: 'app-post-forum',
@@ -35,9 +22,9 @@ export class PostForumComponent implements OnInit {
   this.posts.push(post);
     this.posts.push(post);
     this.posts.push(post);
-    // this.forumService.GetPost().subscribe(res =>{
-    //   this.post=res;
-    // });
+  //   this.forumService.GetPost().subscribe(res =>{
+  //     this.posts=res;
+  //   });
   }
   RouteToPost( post: Post) {
     this.articleService.RouteToPost(post);
