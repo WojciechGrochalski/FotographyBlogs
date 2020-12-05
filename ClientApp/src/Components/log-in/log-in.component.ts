@@ -53,8 +53,8 @@ export class LogInComponent implements OnInit {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    this.messageA=sessionStorage.getItem('alert')
-    sessionStorage.removeItem('alert')
+    // this.messageA=sessionStorage.getItem('alert')
+    // sessionStorage.removeItem('alert')
   }
 
   // convenience getter for easy access to form fields
