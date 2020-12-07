@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {ActivatedRoute} from '@angular/router';
-import {ArticleService} from '../../Services/article.service';
+
 import {Post} from '../../models/Post';
+import {PostService} from '../../Services/post.service';
 
 @Component({
   selector: 'app-post',
@@ -11,11 +12,12 @@ import {Post} from '../../models/Post';
 })
 export class PostComponent implements OnInit {
 
-  @Input() post: Post
+  @Input() post: Post;
 
-  constructor(private route: ActivatedRoute, private articleService: ArticleService) { }
+  constructor(private route: ActivatedRoute, private postService: PostService) { }
+
   RouteToPost( post: Post) {
-    this.articleService.RouteToPost(post);
+    this.postService.RouteToPost(this.post);
   }
   ngOnInit() {
 

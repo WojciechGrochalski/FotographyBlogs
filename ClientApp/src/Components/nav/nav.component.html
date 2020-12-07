@@ -10,6 +10,21 @@
       <li class="nav-item" >
         <a class="nav-link" routerLink='/about'> O mnie </a>
       </li>
+      <div *ngIf="!user; then out; "></div>
+      <ng-template #out>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/log-in' >Login</a>
+        </li>
+      </ng-template>
+      <div *ngIf="user; then log; "></div>
+      <ng-template #log>
+        <li class="nav-item" >
+          <a class="nav-link" >{{user}} </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logout()" >Logout </a>
+        </li>
+      </ng-template>
 <!--      <li class="nav-item dropdown" >-->
 <!--        <div ngbDropdown  class="d-inline-block">-->
 <!--          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button"-->
@@ -27,31 +42,15 @@
 <!--      </li>-->
       <a class="navbar-brand" href="../index.html"> <img [src]="logoSrc" width="120" height="69" alt="Logotyp">
       </a>
-      <div *ngIf="!user; then out; "></div>
-      <ng-template #out>
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/log-in' >Login</a>
-      </li>
-      </ng-template>
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/contact'>Kontakt </a>
-      </li>
 
       <li class="nav-item">
         <a class="nav-link" routerLink='/forum'>Blog </a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link" routerLink='/post-forum'>Posty </a>
       </li>
-      <div *ngIf="user; then log; "></div>
-      <ng-template #log>
-      <li class="nav-item">
-        <a class="nav-link" (click)="logout()" >Logout </a>
-      </li>
-      <li class="nav-item" >
-        <a class="nav-link" >{{user}} </a>
-      </li>
-      </ng-template>
+
     </ul>
   </div>
 </nav>

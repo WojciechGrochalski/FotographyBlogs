@@ -19,7 +19,31 @@ namespace foto_full.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Backend_Foto.Data.Interest", b =>
+            modelBuilder.Entity("Backend_Foto.Models.Comment", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Post_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Backend_Foto.Models.Interest", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -34,27 +58,31 @@ namespace foto_full.Migrations
                     b.ToTable("Interests");
                 });
 
-            modelBuilder.Entity("Backend_Foto.Data.Post", b =>
+            modelBuilder.Entity("Backend_Foto.Models.Post", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("Backend_Foto.Data.User", b =>
+            modelBuilder.Entity("Backend_Foto.Models.User", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -78,7 +106,7 @@ namespace foto_full.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Backend_Foto.Data.UserHobby", b =>
+            modelBuilder.Entity("Backend_Foto.Models.UserHobby", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -103,22 +131,13 @@ namespace foto_full.Migrations
                     b.ToTable("UserHobbies");
                 });
 
-            modelBuilder.Entity("Backend_Foto.Data.Post", b =>
+            modelBuilder.Entity("Backend_Foto.Models.UserHobby", b =>
                 {
-                    b.HasOne("Backend_Foto.Data.User", "DisplayName")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Backend_Foto.Data.UserHobby", b =>
-                {
-                    b.HasOne("Backend_Foto.Data.Interest", "Interest")
+                    b.HasOne("Backend_Foto.Models.Interest", "Interest")
                         .WithMany("userHobby")
                         .HasForeignKey("InterestID");
 
-                    b.HasOne("Backend_Foto.Data.User", "User")
+                    b.HasOne("Backend_Foto.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)

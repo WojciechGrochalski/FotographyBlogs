@@ -2,7 +2,6 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import {Article} from '../../models/Article';
-import {ForumService} from '../../Services/forum.service';
 import {ArticleService} from '../../Services/article.service';
 
 
@@ -16,20 +15,16 @@ import {ArticleService} from '../../Services/article.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class ForumComponent implements  OnInit {
-  img: string[] = [];
-  public Listartice: Article[] = [];
+  public articles: Article[] = [];
   public article = {} as Article;
-  text: string;
-  date: string;
-  contents: string;
-  id: number;
 
-  constructor(private http: HttpClient, private forumservice: ForumService,  private  articleService: ArticleService) {}
+
+  constructor(private http: HttpClient,  private  articleService: ArticleService) {}
 
   ngOnInit(): void {
 
-    this.forumservice.GetArticle().subscribe(res =>{
-      this.Listartice=res;
+    this.articleService.GetArticleFromDB().subscribe(res =>{
+      this.articles=res;
     });
 
   }

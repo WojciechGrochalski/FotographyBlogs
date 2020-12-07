@@ -8,7 +8,7 @@ import {NavComponent} from '../Components/nav/nav.component';
 import {AboutComponent} from '../Components/about/about.component';
 import {FooterComponent} from '../Components/footer/footer.component';
 import {HomeComponent} from '../Components/home/home.component';
-import {ContactComponent} from '../Components/contact/contact.component';
+
 import {ForumComponent} from '../Components/forum/forum.component';
 import {ArticleTemplateComponent} from '../Components/article-template/article-template.component';
 import {LogInComponent} from '../Components/log-in/log-in.component';
@@ -19,6 +19,7 @@ import {PostTemplateComponent} from '../Components/post-template/post-template.c
 import {PostComponent} from '../Components/post/post.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { CommentComponent } from './comment/comment.component';
 
 
 
@@ -28,7 +29,6 @@ import {HttpClientModule} from '@angular/common/http';
     AppComponent,
     NavComponent,
     AboutComponent,
-    ContactComponent,
     HomeComponent,
     FooterComponent,
     ForumComponent,
@@ -39,6 +39,7 @@ import {HttpClientModule} from '@angular/common/http';
     PostForumComponent,
     PostTemplateComponent,
     PostComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +49,6 @@ import {HttpClientModule} from '@angular/common/http';
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'about', component: AboutComponent},
-      {path: 'contact', component: ContactComponent},
       {path: 'forum', component: ForumComponent},
       {path: 'article-template', component: ArticleTemplateComponent},
       {path: 'reg', component: RegistrationComponent},

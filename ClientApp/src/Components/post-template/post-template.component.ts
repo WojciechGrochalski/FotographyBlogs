@@ -1,40 +1,82 @@
-import {Component, DoCheck, Input, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, DoCheck, OnInit} from '@angular/core';
 import {Post} from '../../models/Post';
 import {Comment} from '../../models/Comment';
-import {ArticleService} from '../../Services/article.service';
-import {Observable, Subscription} from 'rxjs';
-import {CommentService} from '../../Services/comment.service';
-
+import {PostService} from '../../Services/post.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-post-template',
   templateUrl: './post-template.component.html',
   styleUrls: ['./post-template.component.css']
 })
-export class PostTemplateComponent implements OnInit {
+export class PostTemplateComponent implements OnInit, DoCheck {
   post={} as Post;
-  comments: Comment[]=[];
+  id: number;
+ comments: Comment[]=[];
+  defaultValue: string="write a comment..."
 
-  constructor( private articleService: ArticleService, private commentService: CommentService) { }
+  constructor( private postService: PostService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    let comment = new Comment('asd','ads','ads',1);
-    this.comments.push(comment);
-    const postObserve = this.articleService.GetPost();
+    await this.SetPost();
+    await new Promise(resolve => setTimeout(resolve,1000));
+    try {
+      let ID = JSON.parse(sessionStorage.getItem('post')).ID;
+      console.log('ID from session storage = '+ID);
+      this.comments = await this.postService.GetComentFromDB(this.id).toPromise();
 
-    postObserve.subscribe((res: Post) => {
-      if(res) {
-        this.post = res;
-        sessionStorage.setItem('post',JSON.stringify(res) );
-      }
-      else{
-        this.post= JSON.parse(sessionStorage.getItem('post')) ;
-      }
-    });
+    } catch (e) {
+      console.error(e);
+    }
+
   }
 
-  AddComment(content: string) {
-    let comment=new Comment(content,'a','a',1);
+  AddComment(content: string,post_id: number ) {
+    let author=sessionStorage.getItem('userName');
+    let date_now = new Date().toLocaleDateString();
+    let hour = new Date().toLocaleTimeString();
+    let date = date_now+' '+ hour;
+    let comment=new Comment(content,author,date,post_id);
+    this.postService.SendComentToDB(comment);
     this.comments.push(comment);
+    this.defaultValue="write a comment..."
   }
+      SetPost() {
+     const postObserve = this.postService.GetPost();
+     postObserve.subscribe((res: Post) => {
+         if(res) {
+           this.post = res;
+           this.id=res.ID;
+           console.log(this.post.ID +" from subscribe");
+           sessionStorage.setItem('post',JSON.stringify(res));
+         }
+         else{
+           this.post= JSON.parse(sessionStorage.getItem('post'));
+           this.id=this.post.ID;
+         }
+       });
+  }
+
+  async ngDoCheck(): Promise<void> {
+
+    try {
+      let ID = JSON.parse(sessionStorage.getItem('post')).ID;
+  //    console.log('ID from session storage = '+ID);
+      this.comments = await this.postService.GetComentFromDB(this.id).toPromise();
+
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  Clear(){
+    if(this.defaultValue=="write a comment...") {
+      this.defaultValue = "";
+    }
+  }
+UnClear(){
+    if(this.defaultValue==""){
+      this.defaultValue="write a comment..."
+    }
+}
+
 }

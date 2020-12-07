@@ -8,14 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-
+  profile:boolean;
   constructor() { }
 
   ngOnInit(): void {
+     this.profile=true;
 
 
+  }
 
-
+  Change(){
+    this.profile= !this.profile;
   }
 
 }

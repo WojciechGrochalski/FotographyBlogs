@@ -1,22 +1,19 @@
-import { Injectable } from '@angular/core';
-import {Router, NavigationStart, ActivatedRoute} from '@angular/router';
-import { filter } from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {Article} from '../models/Article';
-import {Post} from '../models/Post';
+import {Inject, Injectable} from '@angular/core';
+import { Router, NavigationStart, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Article } from '../models/Article';
+import { Post } from '../models/Post';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
-
-  constructor(private router: Router, private route: ActivatedRoute) { }
-
+  baseUrl: string = '';
   articleToSend: Article;
-  post: Post
 
-  RouteTOArticle(article: string) {
-   this.router.navigate(['article-template', {content: article}]);
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    this.baseUrl = baseUrl;
   }
 
   RouteTOArticleOB(article: Article) {
@@ -24,12 +21,7 @@ export class ArticleService {
     this.articleToSend = article;
   }
 
-  RouteToPost(post: Post) {
-    this.router.navigate(['post-template']);
-    this.post=post;
-  }
-
-  GetArticle( ): any {
+  GetArticle(): any {
     const articleObserve = new Observable(observe => {
       setTimeout(() => {
         observe.next(this.articleToSend);
@@ -37,12 +29,10 @@ export class ArticleService {
     });
     return articleObserve;
   }
-  GetPost( ): any {
-    const postObserve = new Observable(observe => {
-      setTimeout(() => {
-        observe.next(this.post);
-      }, 300);
-    });
-    return postObserve;
+
+  GetArticleFromDB(): Observable<any> {
+    return this.http.get(this.baseUrl + 'api/File/Article');
+
   }
+
 }

@@ -1,12 +1,12 @@
 export class Post {
   ID: number;
-  Tittle: string;
+  Title: string;
   Content: string;
   Date: string;
   author: string;
-  constructor( id: number, tittle: string, content: string, date: string, author: string) {
-    this.ID = id;
-    this.Tittle = tittle;
+  constructor( title: string, content: string, date: string, author: string) {
+
+    this.Title = title;
     this.Content = content;
     this.Date = date;
     this.author=author;

@@ -9,11 +9,11 @@ namespace Backend_Foto.Models
     {
 
         public int ID { get; set; }
-        public DateTime Data { get; set; }
+        public string Title { get; set; }
+        public string Content{ get; set; }
+        public string Date { get; set; }
+        public string Author { get; set; }
   
-        //-- navigation property
-        
-        public int UserId { get; set; }
-        public User DisplayName { get; set; }
+
     }
 }

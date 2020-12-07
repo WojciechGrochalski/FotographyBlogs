@@ -35,11 +35,14 @@
 p{
   color: black;
 }
+.content .main-content{
+  margin: 70px 200px 0 200px;
+  padding-top: 80px;
+}
 
-.content{
-  margin-top: 200px;
-  padding-bottom: 50px;
-
+.content .main-content .recent-title{
+  margin: 50px;
+  text-align: center;
 }
 
 
