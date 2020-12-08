@@ -25,9 +25,9 @@ export class PostService {
   }
   GetPost(): any {
     const postObserve = new Observable(observe => {
-      setTimeout(() => {
+      // setTimeout(() => {
         observe.next(this.post);
-      }, 350);
+      // }, 350);
     });
     return postObserve;
   }
