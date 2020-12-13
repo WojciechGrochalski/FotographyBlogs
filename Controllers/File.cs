@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Backend_Foto;
 using Backend_Foto.Models;
 using Backend_Foto.Tools;
+using foto_full.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -15,9 +16,10 @@ namespace foto_full.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class File : ControllerBase
+    public class File : Controller
     {
         private readonly DBCTX _context;
+        string lastUrl;
         public File(DBCTX context)
         {
             _context = context;
@@ -66,7 +68,7 @@ namespace foto_full.Controllers
         [HttpGet("{id}/Comment")]
         public async Task<List<Comment>> GetComments(int id)
         {
-           var query  = _context.Comments.Where(com=>com.Post_Id==id ).ToList();
+            var query = _context.Comments.Where(com => com.Post_Id == id).ToList();
             await Task.CompletedTask;
             return query;
 
@@ -77,6 +79,8 @@ namespace foto_full.Controllers
         {
             return ApiTools.GetArticle();
         }
+
+
         [HttpPost("photo")]
         public async Task<IActionResult> GetFile()
         {
@@ -84,14 +88,62 @@ namespace foto_full.Controllers
             if (photo != null)
             {
                 string photoId = Guid.NewGuid().ToString();
-                string filePath = @"wwwroot/Photo/" + photoId + ".jpg";
+                string filePath = @"ClientApp\src\assets\Post\" + photoId + ".jpg";
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await photo.CopyToAsync(stream);
+                }
+                lastUrl = filePath;
+                return Ok();
+            }
+            return BadRequest();
+        }
+        [HttpPost("photoC")]
+        public IActionResult GetFileC([FromBody] UploadedImg img)
+        {
+
+            // Create unique file name
+            string photoId = Guid.NewGuid().ToString();
+            //string filePath = @"ClientApp\src\assets\Post\" + photoId + ".jpg";
+            string filePath = @"wwwroot\Photo\" + photoId + ".jpg"; 
+            // Remove file type from base64 encoding, if any
+            if (img.FileAsBase64.Contains(","))
+            {
+                img.FileAsBase64 = img.FileAsBase64
+                  .Substring(img.FileAsBase64.IndexOf(",") + 1);
+            }
+
+            // Convert base64 encoded string to binary
+            img.FileAsByteArray = Convert.FromBase64String(img.FileAsBase64);
+
+            // Write binary file to server path
+            using (var fs = new FileStream(filePath, FileMode.CreateNew))
+            {
+                fs.Write(img.FileAsByteArray, 0, img.FileAsByteArray.Length);
+            }
+            return new OkObjectResult("Photo/"+ photoId+ ".jpg" );
+        }
+
+        [HttpGet("photo")]
+        public string GetLastUrl()
+        {
+            return lastUrl;
+        }
+        [HttpPost("photoShow")]
+        public async Task<IActionResult> GetFileWithShow()
+        {
+            var photo = Request.Form.Files[0];
+            if (photo != null)
+            {
+                string photoId = Guid.NewGuid().ToString();
+                string filePath = @"ClientApp\src\assets\Post\" + photoId + ".jpg";
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await photo.CopyToAsync(stream);
 
 
                 }
-                return Ok();
+                return new OkObjectResult(filePath);
             }
 
             return BadRequest();

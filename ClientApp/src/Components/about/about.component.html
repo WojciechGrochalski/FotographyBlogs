@@ -82,7 +82,7 @@
         <!-- END MENU -->
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 col-lg-6">
       <div class="profile-head">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
@@ -105,7 +105,19 @@
       <div *ngIf="!profile; then gall;"></div>
         <ng-template #gall>
           <div class="tab-pane in fade" id="owngallery" role="tabpanel" aria-labelledby="owngallery-tab">
-            <p>Hello Paulina</p>
+            <div class="container-fluid galery">
+              <div class="row">
+                <div class="col-sm-6 col-md-4 picture">
+                  <a href="#"><img src="../../assets/Foto/burza.png" alt="1"></a>
+                </div>
+                <div class="col-sm-6 col-md-4 picture">
+                  <a href="#"><img src="img/Budynki/001 (2).jpg" alt="2"></a>
+                </div>
+                <div class="col-sm-6 col-md-4 picture">
+                  <a href="#"><img src="img/Budynki/001 (3).jpg" alt="3"></a>
+                </div>
+              </div>
+            </div>
           </div>
       </ng-template>
 

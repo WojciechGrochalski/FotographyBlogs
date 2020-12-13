@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Backend_Foto;
 using Backend_Foto.Models;
+using foto_full.Tools;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +34,7 @@ namespace foto_full.Controllers
 
                 }
             }
+            user.Password = SecurePasswordHasher.Hash(user.Password);
             _context.Users.Add(user);
             _context.SaveChanges();
 
@@ -43,17 +45,20 @@ namespace foto_full.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(User user)
         {
-            var query = _context.Users.FirstOrDefault(login => login.Username == user.Username && login.Password == user.Password);
+            //Do sprawdzenia czy działa hash
+            var query = _context.Users.FirstOrDefault(login => login.Username == user.Username );
             await Task.CompletedTask;
-            if(query!=null)
-            if ((user.Username == query.Username
-                    && user.Password==query.Password))
+            if (query != null)
             {
-                ReturnedUser returnedUser = new ReturnedUser(user.FirstName, user.LastName, user.Username);
-                return new OkObjectResult(returnedUser);
+                if ((user.Username == query.Username
+                        && SecurePasswordHasher.Verify(user.Password, query.Password)))
+                {
+                    ReturnedUser returnedUser = new ReturnedUser(user.FirstName, user.LastName, user.Username);
+                    return new OkObjectResult(returnedUser);
 
+                }
             }
-            return  new OkObjectResult(false);
+            return new OkObjectResult(false);
 
 
         }

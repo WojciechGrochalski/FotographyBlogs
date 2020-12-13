@@ -1,9 +1,10 @@
 import {Inject, Injectable} from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Post} from '../models/Post';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Comment} from '../models/Comment';
+import {FileToUpload} from '../models/File';
 
 
 @Injectable({
@@ -48,6 +49,32 @@ export class PostService {
   GetComentFromDB(post_id: Number): Observable<any> {
     return this.http.get<Comment[]>(this.baseUrl + 'api/File/'+post_id+'/Comment');
 
+  }
+  // public uploadFile(post: Post, file: FormData) {
+  //   return  this.http.post(this.baseUrl+'api/File/photo', file, {reportProgress: true, observe: 'events'});
+  // }
+
+  // public uploadFile( file: FormData) {
+  //   return  this.http.post<any>(this.baseUrl+'api/File/photo', file, {reportProgress: true, observe: 'events'});
+  // }
+
+  public uploadFile(file: FileToUpload):Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    // Create form data
+    //const formData = new FormData();
+
+    // Store form name as "file" with file data
+   // formData.append("file", file, file.name);
+
+
+    return this.http.post(this.baseUrl+'api/File/photoC/', file,{responseType: 'text'});
+  }
+  public getUrl( ) {
+    return  this.http.get<string>(this.baseUrl+'api/File/photo' );
   }
 
 }

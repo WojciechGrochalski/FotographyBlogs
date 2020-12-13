@@ -33,9 +33,7 @@ export class LogInComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthService,
-    private alertService: AlertService,
-     private http: HttpClient
-  ) {
+    private alertService: AlertService) {
 
     //redirect to home if already logged in
     if (   sessionStorage.getItem('userName')) {
@@ -74,6 +72,7 @@ export class LogInComponent implements OnInit {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         sessionStorage.setItem('userName', res.username);
         this.router.navigate([this.returnUrl]);
+
       }
       else{
         this.alertService.error("Nieprawidłowe dane",true);

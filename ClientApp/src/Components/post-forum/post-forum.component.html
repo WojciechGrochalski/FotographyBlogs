@@ -3,6 +3,49 @@
   <div class="main-content">
     <h1 class="recent-title">Najnowsze publikacje</h1>
     <hr class="dark">
+    <button (click)="Switch()">Dodaj Post</button>
+<!--    <div *ngIf="canAddPost; then add; "></div>-->
+<!--    <ng-template #add>-->
+      <label>Tytuł</label>
+      <input #title>
+      <label>Treść postu</label>
+      <textarea class="form-control" maxlength="500" rows="15"   #content></textarea>
+<!--      <div class="text-center">-->
+<!--        <input class="form-control" type="file"-->
+<!--               (change)="onChange($event)">-->
+<!--    <img src="{{url}}" alt="brak-->
+<!--">-->
+<!--        <button (click)="onUpload()"-->
+<!--                class="btn btn-success">-->
+<!--          Upload-->
+<!--        </button>-->
+<!--      </div>-->
+    <h1>File Upload</h1>
+
+    <label>Select a File (&lt; 1MB)</label><br/>
+    <input type="file" (change)="onFileChange($event)" /><br/>
+    <button (click)="uploadFile()" [disabled]="!theFile">Upload File</button><br/><br/>
+
+    <!-- ** BEGIN: INFORMATION MESSAGE AREA ** -->
+    <div *ngIf="messages.length > 0">
+    <span *ngFor="let msg of messages">
+        {{msg}}
+      <br />
+        </span>
+    </div>
+    <img src="{{url}}" alt="Loadding" width="200">
+      <!-- Shareable short link of  uoloaded file -->
+
+
+      <!--Flag variable is used here-->
+      <div class="container" *ngIf="loading">
+        <h3>Loading ...</h3>
+      </div>
+      <button (click)="SavePost(title.value, content.value )">Utwórz post</button>
+
+      <button (click)="ExitTemplate()">Wyjdz</button>
+<!--    </ng-template>-->
+
     <app-post *ngFor="let post of posts" [post]="post">
     </app-post>
   </div>

@@ -29,6 +29,7 @@ namespace foto_full
             });
             services.AddDbContext<DBCTX>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("FotoBase")));
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +58,12 @@ namespace foto_full
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
+            app.UseCors(
+         options => options.WithOrigins("http://localhost:4200")
+             .AllowAnyMethod().AllowAnyHeader()
+       );
 
+            app.UseHttpsRedirection();
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
