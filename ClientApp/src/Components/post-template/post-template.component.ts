@@ -19,12 +19,8 @@ export class PostTemplateComponent implements OnInit, DoCheck {
   }
 
   async ngOnInit() {
-
     await this.SetPost();
-    // await new Promise(resolve => setTimeout(resolve, 1000));
     await this.GetComment();
-
-
   }
 
   AddComment(content: string, post_id: number) {
@@ -65,7 +61,6 @@ export class PostTemplateComponent implements OnInit, DoCheck {
   }
 
   async ngDoCheck(): Promise<void> {
-
     try {
       let ID = JSON.parse(sessionStorage.getItem('post')).ID;
       //    console.log('ID from session storage = '+ID);

@@ -46,7 +46,6 @@ export class RegistrationComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-
     this.loading = true;
     this.userService.register(this.registerForm.value).subscribe(res => {
       if (res) {

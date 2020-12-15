@@ -9,9 +9,12 @@ import {Article} from '../../models/Article';
   styleUrls: ['./article-template.component.css']
 })
 export class ArticleTemplateComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute, private articleService: ArticleService) { }
   Content={ } as Article;
+
+  constructor(
+    private route: ActivatedRoute,
+    private articleService: ArticleService ) { }
+
   ngOnInit(): void {
     const articleObservable = this.articleService.GetArticle();
 

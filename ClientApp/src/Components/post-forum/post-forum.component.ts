@@ -1,11 +1,8 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 import {Post} from '../../models/Post';
 import {ArticleService} from '../../Services/article.service';
 import {PostService} from '../../Services/post.service';
 import {FileToUpload} from '../../models/File';
-import {Observable} from 'rxjs';
-
 
 const MAX_SIZE: number = 4194304;
 
@@ -20,7 +17,7 @@ export class PostForumComponent implements OnInit, DoCheck {
   theFile: any = null;
   messages: string[] = [];
   url:string | ArrayBuffer;
-  urlU:string =null;
+  UrlToPostImg: string = null;
   loading: boolean = false; // Flag variable
   file: File = null; // Variable to store file
   PostReady: boolean=false;
@@ -28,8 +25,9 @@ export class PostForumComponent implements OnInit, DoCheck {
   IsUser: string;
   canAddPost: boolean=false;
 
-  constructor( private  articleService: ArticleService, private postService: PostService,
-               private router: Router){ }
+  constructor(
+    private articleService: ArticleService,
+    private postService: PostService){ }
 
  async ngOnInit() {
    this.IsUser=sessionStorage.getItem('userName');
@@ -40,36 +38,27 @@ export class PostForumComponent implements OnInit, DoCheck {
     catch (e){
       console.error(e);
     }
-
   }
   ngDoCheck() {
     if(this.IsUser!=sessionStorage.getItem('userName') ){
       this.IsUser=sessionStorage.getItem('userName');
     }
   }
-  Switch(){
-    this.canAddPost=true;
-  }
-  ExitTemplate(){
-    this.canAddPost=false;
-  }
-  SavePost(title: string, content: string) {
 
+  async SavePost(title: string, content: string) {
     let date_now = new Date().toLocaleDateString();
-    console.log('Data time now',date_now)
-
-    let post = new Post(title,content,date_now,sessionStorage.getItem('userName'),this.urlU);
-    this.postService.AddPost(post).subscribe(res=>{
-      if(res) {
+    console.log('Data time now', date_now)
+    let post = await new Post(title, content, date_now, sessionStorage.getItem('userName'), this.UrlToPostImg);
+    await this.postService.AddPost(post).subscribe(res => {
+      if (res) {
         window.location.reload();
       }
     });
-
   }
+
 
   private  readAndUploadFile(theFile: any) {
     let file = new FileToUpload();
-    let url="";
     // Set File Information
     file.fileName = theFile.name;
     file.fileSize = theFile.size;
@@ -84,9 +73,8 @@ export class PostForumComponent implements OnInit, DoCheck {
       // POST to server
      this.postService.uploadFile(file).subscribe(resp => {
         this.messages.push("Upload complete");
-        url = resp;
-        this.urlU=resp;
-        console.log(url, 'from upload');
+        this.UrlToPostImg=resp;
+        console.log(this.UrlToPostImg, 'from upload');
       });
     }
     // Read the file
@@ -100,7 +88,6 @@ export class PostForumComponent implements OnInit, DoCheck {
 
   onFileChange(event) {
     this.theFile = null;
-
     if (event.target.files && event.target.files.length > 0) {
       // Don't allow file sizes over 1MB
       if (event.target.files[0].size < MAX_SIZE) {
@@ -117,7 +104,12 @@ export class PostForumComponent implements OnInit, DoCheck {
         this.messages.push("File: " + event.target.files[0].name + " is too large to upload.");
       }
     }
-
+  }
+  Switch(){
+    this.canAddPost=true;
+  }
+  ExitTemplate(){
+    this.canAddPost=false;
   }
 
 }

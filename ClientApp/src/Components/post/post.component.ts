@@ -14,7 +14,9 @@ export class PostComponent implements OnInit {
 
   @Input() post: Post;
 
-  constructor(private route: ActivatedRoute, private postService: PostService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private postService: PostService) { }
 
   RouteToPost( post: Post) {
     this.postService.RouteToPost(this.post);

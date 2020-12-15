@@ -31,7 +31,7 @@ export class LogInComponent implements OnInit {
     private alertService: AlertService) {
 
     //redirect to home if already logged in
-    if (   sessionStorage.getItem('userName')) {
+    if ( sessionStorage.getItem('userName')) {
       this.router.navigate(['/']);
     }
 
@@ -62,7 +62,8 @@ export class LogInComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value).subscribe(res =>{
+    this.authenticationService.login(this.f.username.value, this.f.password.value)
+      .subscribe(res =>{
       if (res) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         sessionStorage.setItem('userName', res.username);
