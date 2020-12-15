@@ -1,8 +1,8 @@
 <div class="post">
-  <img class="post-img" src="assets/Foto/aleja-kaszt.jpg" alt="burza">
+  <img class="post-img" src="{{post.ImgUrl}}" alt="post foto">
   <div class="post-preview">
     <h2><a (click)="RouteToPost(post)">{{post.Title}}</a></h2>
-    <i class="far fa-user"> {{post.author}}</i>
+    <i class="far fa-user"> {{post.Author}}</i>
     <i class="far fa-calendar"> {{post.Date}}</i>
     <p class="preview-text">{{post.Content}}</p>
     <a (click)="RouteToPost(post)" class="btn">Czytaj więcej</a>

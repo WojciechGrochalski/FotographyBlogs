@@ -1,10 +1,9 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {HttpClient, HttpEventType} from '@angular/common/http';
 import {AuthService} from '../../Services/auth.service';
 import {AlertService} from '../../Services/alert.service';
-import {Subscription} from 'rxjs';
+
 
 @Component({
   selector: 'app-log-in',
@@ -13,10 +12,7 @@ import {Subscription} from 'rxjs';
 })
 export class LogInComponent implements OnInit {
 
-  //uploud
-  public progress: number;
-  public message: string;
-  @Output() public onUploadFinished = new EventEmitter();
+
 
   ////
   loginForm: FormGroup;
@@ -24,8 +20,7 @@ export class LogInComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   res;
-  //
-
+  messageB: any;
   messageA: any;
   @Input() public disabled: boolean;
   constructor(
@@ -51,8 +46,8 @@ export class LogInComponent implements OnInit {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    // this.messageA=sessionStorage.getItem('alert')
-    // sessionStorage.removeItem('alert')
+    this.messageA=sessionStorage.getItem('alert')
+    sessionStorage.removeItem('alert')
   }
 
   // convenience getter for easy access to form fields
@@ -76,29 +71,11 @@ export class LogInComponent implements OnInit {
       }
       else{
         this.alertService.error("Nieprawidłowe dane",true);
+        this.messageB="Nieprawidłowe dane";
         this.loading=false;
     }},
       error =>{
         this.alertService.error(error,true);
       });
-
   }
-  public uploadFile = (files) => {
-    if (files.length === 0) {
-      return;
-    }
-    let fileToUpload = <File>files[0];
-    const formData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
-
-      this.authenticationService.uploadFile(formData).subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress)
-          this.progress = Math.round(100 * event.loaded / event.total);
-        else if (event.type === HttpEventType.Response) {
-          this.message = 'Upload success.';
-          this.onUploadFinished.emit(event.body);
-        }
-      });
-
-}
 }

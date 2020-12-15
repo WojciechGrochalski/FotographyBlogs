@@ -23,7 +23,7 @@ export class NavComponent implements OnInit, DoCheck{
     this.user=sessionStorage.getItem('userName');
 
     }
-    ngO
+
 
     refresh(){
     window.location.reload();

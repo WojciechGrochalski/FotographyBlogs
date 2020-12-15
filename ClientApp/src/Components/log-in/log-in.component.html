@@ -6,9 +6,13 @@
     <div class="container">
       <h2>Zaloguj się</h2>
       <app-alert></app-alert>
-      <div *ngIf="messageA; then alert; "></div>
-      <ng-template #alert>
+      <div *ngIf="messageA; then alertA; "></div>
+      <ng-template #alertA>
         <div  *ngIf="messageA"  class="alert alert-success">{{messageA}}</div>
+      </ng-template>
+      <div *ngIf="messageB; then alertB; "></div>
+      <ng-template #alertB>
+        <div  *ngIf="messageB"  class="alert alert-danger">{{messageB}}</div>
       </ng-template>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
@@ -35,18 +39,3 @@
       <span>Nie masz konta?<a routerLink='/reg' class="btn btn-link">Zarejestruj się</a></span>
     </div>
   </div>
-<div class="row" style="margin-bottom:15px;">
-  <div class="col-md-3">
-    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
-    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
-  </div>
-  <div class="col-md-4">
-    <span class="upload" *ngIf="progress > 0">
-      {{progress}}%
-    </span>
-    <span class="upload" *ngIf="message">
-      {{message}}
-    </span>
-  </div>
-</div>
-<br><br><br><br>

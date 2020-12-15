@@ -19,7 +19,6 @@ import {PostTemplateComponent} from '../Components/post-template/post-template.c
 import {PostComponent} from '../Components/post/post.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { CommentComponent } from './comment/comment.component';
 
 
 
@@ -39,7 +38,6 @@ import { CommentComponent } from './comment/comment.component';
     PostForumComponent,
     PostTemplateComponent,
     PostComponent,
-    CommentComponent,
   ],
   imports: [
     BrowserModule,

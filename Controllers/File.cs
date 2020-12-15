@@ -42,13 +42,13 @@ namespace foto_full.Controllers
             _context.Posts.Add(post);
             _context.SaveChanges();
             await Task.CompletedTask;
-            return Ok();
+            return new OkObjectResult(true);
 
         }
         [HttpGet("Post")]
         public async Task<string> GetPosts()
         {
-            var query = _context.Posts.ToList();
+            var query = _context.Posts.ToList().OrderBy(o=>o.Date);
             await Task.CompletedTask;
             string result = JsonConvert.SerializeObject(query, Formatting.Indented);
             return result;

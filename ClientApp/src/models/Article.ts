@@ -1,14 +1,16 @@
 export class Article {
   ID: number;
-  Tittle: string;
+  Title: string;
   Content: string;
+  Author:string;
   Date: string;
-  img: string[];
-  constructor( id: number, tittle: string, content: string, date: string, img: string[]) {
+  ImgUrl: string;
+  constructor( id: number, tittle: string,author:string, content: string, date: string, img: string) {
     this.ID = id;
-    this.Tittle = tittle;
+    this.Title = tittle;
+    this.Author=author;
     this.Content = content;
     this.Date = date;
-    this.img = img;
+    this.ImgUrl = img;
   }
 }

@@ -3,6 +3,7 @@
   <div class="main-content">
     <h1 class="recent-title">Najnowsze publikacje</h1>
     <hr class="dark">
+    <div *ngIf="IsUser">
     <button (click)="Switch()">Dodaj Post</button>
 <!--    <div *ngIf="canAddPost; then add; "></div>-->
 <!--    <ng-template #add>-->
@@ -33,7 +34,7 @@
       <br />
         </span>
     </div>
-    <img src="{{url}}" alt="Loadding" width="200">
+    <img [src]="url" alt="Loadding" width="200" *ngIf="url">
       <!-- Shareable short link of  uoloaded file -->
 
 
@@ -41,11 +42,14 @@
       <div class="container" *ngIf="loading">
         <h3>Loading ...</h3>
       </div>
-      <button (click)="SavePost(title.value, content.value )">Utwórz post</button>
+    <div *ngIf="PostReady">
 
+
+      <button (click)="SavePost(title.value, content.value )">Utwórz post</button>
+    </div>
       <button (click)="ExitTemplate()">Wyjdz</button>
 <!--    </ng-template>-->
-
+    </div>
     <app-post *ngFor="let post of posts" [post]="post">
     </app-post>
   </div>

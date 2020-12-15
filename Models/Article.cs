@@ -11,14 +11,13 @@ namespace Backend_Foto.Models
     {
         public int ID { get; set; }
         public string Title { get; set; }
-        // public string NameAuthor { get; set; }
+         public string Author { get; set; }
         public string Content { get; set; }
         public string Date { get; set; }
     
-        public string[] img { get; set; }
+        public string ImgUrl { get; set; }
 
-    //public List<Grade> Grades { get; set; }
-    //public List<string> Tags { get; set; }
+
 
 
 }

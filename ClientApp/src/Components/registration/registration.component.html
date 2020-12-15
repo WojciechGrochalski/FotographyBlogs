@@ -3,6 +3,14 @@
     <br>
     <h2>Załóż konto</h2>
     <app-alert></app-alert>
+    <div *ngIf="messageA; then alertA; "></div>
+    <ng-template #alertA>
+      <div  *ngIf="messageA"  class="alert alert-success">{{messageA}}</div>
+    </ng-template>
+    <div *ngIf="messageB; then alertB; "></div>
+    <ng-template #alertB>
+      <div  *ngIf="messageB"  class="alert alert-danger">{{messageB}}</div>
+    </ng-template>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="firstName">Imię</label>

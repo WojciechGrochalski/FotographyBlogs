@@ -63,7 +63,6 @@ namespace foto_full
              .AllowAnyMethod().AllowAnyHeader()
        );
 
-            app.UseHttpsRedirection();
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,

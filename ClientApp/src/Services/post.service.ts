@@ -37,10 +37,11 @@ export class PostService {
     return this.http.get(this.baseUrl + 'api/File/Post');
 
   }
-  SendPostsToDB(post: Post) {
+  AddPost(post: Post) {
     return this.http.post(this.baseUrl + 'api/File/Post',post);
 
   }
+
   SendComentToDB(com: Comment) {
     console.log(com);
     return this.http.post(this.baseUrl + 'api/File/Comment',com).subscribe();
@@ -58,19 +59,12 @@ export class PostService {
   //   return  this.http.post<any>(this.baseUrl+'api/File/photo', file, {reportProgress: true, observe: 'events'});
   // }
 
-  public uploadFile(file: FileToUpload):Observable<any> {
+  public uploadFile(file: FileToUpload) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    // Create form data
-    //const formData = new FormData();
-
-    // Store form name as "file" with file data
-   // formData.append("file", file, file.name);
-
-
     return this.http.post(this.baseUrl+'api/File/photoC/', file,{responseType: 'text'});
   }
   public getUrl( ) {

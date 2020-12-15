@@ -17,6 +17,8 @@ export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
   submitted = false;
+  messageA: any;
+  messageB: any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -51,10 +53,11 @@ export class RegistrationComponent implements OnInit {
 
         this.alertService.success('Registration successful', true);
         sessionStorage.setItem('alert','Registration successful');
-        this.router.navigate(['/log-in']);
+        this.router.navigate(['log-in']);
       } else {
 
         this.alertService.error("Nieprawidłowa lub użyta nazwa użytkownika");
+        this.messageB="Nieprawidłowa lub użyta nazwa użytkownika";
         this.loading=false;
       }
     }
