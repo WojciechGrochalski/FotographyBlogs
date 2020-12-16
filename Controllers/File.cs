@@ -25,14 +25,13 @@ namespace foto_full.Controllers
             _context = context;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddArticle(List<Article> articles)
+        [HttpPost("Article")]
+        public async Task<IActionResult> AddArticle(Article article)
         {
-            string jsonString = JsonConvert.SerializeObject(articles, Formatting.Indented);
-            ApiTools.WriteToJson(ApiTools.articleJsonPath, jsonString);
-
+            _context.Article.Add(article);
+            _context.SaveChanges();
             await Task.CompletedTask;
-            return Ok();
+            return new OkObjectResult(true);
 
         }
 
@@ -45,10 +44,31 @@ namespace foto_full.Controllers
             return new OkObjectResult(true);
 
         }
+
+        [HttpGet("Article/{skip}/{first}")]
+        public async Task<string> GetArticles(int skip, int first)
+        {
+            var query = _context.Article.Skip(skip).Take(first).ToList();
+            _context.SaveChanges();
+            await Task.CompletedTask;
+            string result = JsonConvert.SerializeObject(query, Formatting.Indented);
+            return result;
+
+        }
+        [HttpGet("Article/{keyword}")]
+        public async Task<string> GetArticlesWithKeyword(string keyword)
+        {
+            var query = _context.Article.Where(s => s.Title.Contains(keyword)).ToList();
+            _context.SaveChanges();
+            await Task.CompletedTask;
+            string result = JsonConvert.SerializeObject(query, Formatting.Indented);
+            return result;
+
+        }
         [HttpGet("Post")]
         public async Task<string> GetPosts()
         {
-            var query = _context.Posts.ToList().OrderBy(o=>o.Date);
+            var query = _context.Posts.ToList().OrderByDescending(o => o.Date);
             await Task.CompletedTask;
             string result = JsonConvert.SerializeObject(query, Formatting.Indented);
             return result;
@@ -75,9 +95,12 @@ namespace foto_full.Controllers
         }
 
         [HttpGet("Article")]
-        public string GetListOfArticle()
+        public async Task<string> GetListOfArticle()
         {
-            return ApiTools.GetArticle();
+            var query = _context.Article.ToList().OrderByDescending(o => o.Date);
+            await Task.CompletedTask;
+            string result = JsonConvert.SerializeObject(query, Formatting.Indented);
+            return result;
         }
 
 
@@ -105,7 +128,7 @@ namespace foto_full.Controllers
             // Create unique file name
             string photoId = Guid.NewGuid().ToString();
             //string filePath = @"ClientApp\src\assets\Post\" + photoId + ".jpg";
-            string filePath = @"wwwroot\Photo\" + photoId + ".jpg"; 
+            string filePath = @"wwwroot\Photo\" + photoId + ".jpg";
             // Remove file type from base64 encoding, if any
             if (img.FileAsBase64.Contains(","))
             {
@@ -121,7 +144,7 @@ namespace foto_full.Controllers
             {
                 fs.Write(img.FileAsByteArray, 0, img.FileAsByteArray.Length);
             }
-            return new OkObjectResult("Photo/"+ photoId+ ".jpg" );
+            return new OkObjectResult("Photo/" + photoId + ".jpg");
         }
 
         [HttpGet("photo")]

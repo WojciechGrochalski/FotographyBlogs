@@ -48,6 +48,7 @@ export class PostForumComponent implements OnInit, DoCheck {
   async SavePost(title: string, content: string) {
     let date_now = new Date().toLocaleDateString();
     console.log('Data time now', date_now)
+    await this.uploadFile();
     let post = await new Post(title, content, date_now, sessionStorage.getItem('userName'), this.UrlToPostImg);
     await this.postService.AddPost(post).subscribe(res => {
       if (res) {

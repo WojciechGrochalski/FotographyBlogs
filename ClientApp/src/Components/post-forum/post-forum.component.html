@@ -24,17 +24,14 @@
       <div class="container" *ngIf="loading">
         <h3>Loading ...</h3>
       </div>
-    <div *ngIf="!PostReady">
+<!--    <div *ngIf="PostReady">-->
       <button (click)="SavePost(title.value, content.value )">Utwórz post</button>
     </div>
       <button (click)="ExitTemplate()">Wyjdz</button>
-    </div>
+<!--    </div>-->
     <app-post *ngFor="let post of posts" [post]="post">
     </app-post>
   </div>
 </div>
-
-
-
 
 <app-footer></app-footer>

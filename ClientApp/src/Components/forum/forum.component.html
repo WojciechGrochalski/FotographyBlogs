@@ -1,6 +1,21 @@
 
   <div class="content">
     <div class="main-content">
+      <div *ngIf="!IsUser">
+        <button (click)="Switch()">Dodaj Post</button>
+        <label>Tytuł</label>
+        <input #title>
+        <label>Treść postu</label>
+        <textarea class="form-control" maxlength="500" rows="15"   #content></textarea>
+        <button (click)="AddArticle(title.value, content.value )">Utwórz post</button>
+      </div>
+      <button (click)="ExitTemplate()">Wyjdz</button>
+
+    <div *ngIf="articles">
+      <label>Search for article</label>
+      <input #search >
+      <button (click)="Search(search.value)">Search</button>
+    </div>
   <div class="container" *ngFor="let item of articles"  >
       <div class="row">
         <div class="row">
@@ -20,7 +35,7 @@
                 <div class="row-content">
                   <div class="list-group-item-heading">
                     <a href="#" title="sintret">
-                      <small>{{item.Tittle}}</small>
+                      <small>{{item.Title}}</small>
                     </a>
                   </div>
                   <small>

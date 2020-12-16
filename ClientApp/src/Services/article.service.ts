@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import { Router, NavigationStart, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Article } from '../models/Article';
 import { Post } from '../models/Post';
@@ -30,9 +30,17 @@ export class ArticleService {
     return articleObserve;
   }
 
-  GetArticleFromDB(): Observable<any> {
+  GetArticles(): Observable<any> {
     return this.http.get(this.baseUrl + 'api/File/Article');
 
+  }
+  AddArticle(article: Article): Observable<any> {
+    return this.http.post(this.baseUrl + 'api/File/Article',article);
+
+  }
+
+  SearchForArticle(keyword: string): Observable<any>{
+    return this.http.get(this.baseUrl + 'api/File/Article/' + keyword);
   }
 
 }
