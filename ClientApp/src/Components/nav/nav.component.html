@@ -1,58 +1,44 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="main-navigation">
+  <a  class="navbar-brand" routerLink="/"> <img src="assets/Foto/logo.png" alt="Logotyp" >
+  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto mr-auto justify-content-center">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" >
+        <a class="nav-link" routerLink="/"> Start </a>
+      </li>
       <li class="nav-item" >
         <a class="nav-link" routerLink='/about'> O mnie </a>
       </li>
-      <div *ngIf="!user; then out; "></div>
-      <ng-template #out>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/log-in' >Login</a>
-        </li>
-      </ng-template>
-      <div *ngIf="user; then log; "></div>
-      <ng-template #log>
-        <li class="nav-item" >
-          <a class="nav-link" >{{user}} </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="logout()" >Logout </a>
-        </li>
-      </ng-template>
-<!--      <li class="nav-item dropdown" >-->
-<!--        <div ngbDropdown  class="d-inline-block">-->
-<!--          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button"-->
-<!--             ngbDropdownToggle>-->
-<!--            Portfolio-->
-<!--          </a>-->
-<!--          <div class="dropdown-menu"  ngbDropdownMenu id="drop" aria-labelledby="navbarDropdown" >-->
-<!--            <a class="dropdown-item" routerLink='/slub' >Fotografia ślubna</a>-->
-<!--            <a class="dropdown-item disabled" href="#" aria-disabled="true">Sesje narzeczeńskie</a>-->
-<!--            <a class="dropdown-item" routerLink='/chrzciny'>Chrzciny</a>-->
-<!--            <a class="dropdown-item" routerLink='/monuments'>Zabytki</a>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      <li>-->
-<!--      </li>-->
-      <a class="navbar-brand" href="../index.html"> <img [src]="logoSrc" width="120" height="69" alt="Logotyp">
-      </a>
-
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/forum'>Blog </a>
+      <li class="nav-item" >
+        <a class="nav-link" routerLink='/gallery'> Galeria </a>
       </li>
-
       <li class="nav-item">
-        <a class="nav-link" routerLink='/post-forum'>Posty </a>
+        <a class="nav-link" routerLink='/forum'>Forum </a>
       </li>
-
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/blog'>Posty </a>
+      </li>
     </ul>
+    <ul class="navbar-nav justify-content-end">
+      <li class="nav-item" *ngIf="authenticationService.isLoggedIn()">
+        <a class="nav-link ml-auto" routerLink="#">Dashboard</a>
+      </li>
+      <li class="nav-item" *ngIf="authenticationService.isLoggedIn()">
+        <a class="nav-link ml-auto" routerLink="#">Profile</a>
+      </li>
+      <li class="nav-item" *ngIf="!authenticationService.isLoggedIn()">
+        <a class="nav-link ml-auto" routerLink="/log-in">Zaloguj się</a>
+      </li>
+      <li class="nav-item" *ngIf="authenticationService.isLoggedIn()">
+        <a class="nav-link ml-auto" href="#" (click)="logout()">Wyloguj</a>
+      </li>
+    </ul>
+      
   </div>
 </nav>
-
 

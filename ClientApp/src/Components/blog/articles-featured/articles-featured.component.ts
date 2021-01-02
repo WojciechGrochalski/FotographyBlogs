@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticleService } from 'src/app/services/article.service';
 import { Article } from '../../../models/Article'
+import {ArticlesService} from '../../../Services/Articles.service';
 
 @Component({
   selector: 'app-articles-featured',
@@ -12,11 +12,12 @@ export class ArticlesFeaturedComponent implements OnInit {
   mostViewArticles: Article[]
 
   constructor(
-    private articleService: ArticleService
-  ) { }
+    private articleService: ArticlesService) { }
 
-  ngOnInit() {
-    this.articleService.getFeaturedArticles().subscribe(articles => this.mostViewArticles = articles)
+  async ngOnInit() {
+    this.mostViewArticles = await this.articleService.GetFeaturedArticles().toPromise();
   }
-
+  RouteToArticleOB( article: Article) {
+    this.articleService.RouteTOArticleOB(article,'detail');
+  }
 }

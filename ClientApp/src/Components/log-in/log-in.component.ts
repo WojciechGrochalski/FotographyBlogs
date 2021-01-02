@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {AuthService} from '../../Services/auth.service';
+import {AuthorizationsService} from '../../Services/Authorizations.service';
 import {AlertService} from '../../Services/alert.service';
 
 
@@ -27,7 +27,7 @@ export class LogInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthService,
+    private authenticationService: AuthorizationsService,
     private alertService: AlertService) {
 
     //redirect to home if already logged in
@@ -65,8 +65,12 @@ export class LogInComponent implements OnInit {
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .subscribe(res =>{
       if (res) {
+
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         sessionStorage.setItem('userName', res.username);
+        sessionStorage.setItem('userID', res.id.toString());
+        sessionStorage.setItem('user', JSON.stringify(res));
+        console.log(JSON.stringify(res));
         this.router.navigate([this.returnUrl]);
 
       }

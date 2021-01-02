@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {ArticleService} from '../../Services/article.service';
+import {ArticlesService} from '../../Services/Articles.service';
 import {Article} from '../../models/Article';
 
 @Component({
@@ -13,7 +13,7 @@ export class ArticleTemplateComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private articleService: ArticleService ) { }
+    private articleService: ArticlesService ) { }
 
   ngOnInit(): void {
     const articleObservable = this.articleService.GetArticle();

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Article} from '../../../models/Article'
-import { ArticleService } from '../../../services/article.service'
+import { ArticlesService } from '../../../Services/Articles.service'
 
 @Component({
   selector: 'app-articles-recent',
@@ -10,7 +10,7 @@ import { ArticleService } from '../../../services/article.service'
 export class ArticlesRecentComponent implements OnInit {
 
   public articles: Article[];
-  
+
   public config;
   public maxSize: number = 4;
   public autoHide: boolean = true;
@@ -20,19 +20,24 @@ export class ArticlesRecentComponent implements OnInit {
     nextLabel: ''
   }
 
-  constructor(private articleService: ArticleService) {}
+  constructor(private articleService: ArticlesService) {}
 
-  ngOnInit() {
-    this.articleService.getArticles().subscribe(articles => this.articles = articles)
-    this.config = {
-      itemsPerPage: 3,
-      currentPage: 1,
-      totalItems: this.articles.length
-    };
+  async ngOnInit() {
+    this.articles= await this.articleService.GetArticles().toPromise();
+     this.config = {
+           itemsPerPage: 3,
+           currentPage: 1,
+           totalItems: this.articles.length
+         };
+
+
   }
 
   pageChanged(event) {
     this.config.currentPage = event;
+  }
+  RouteToArticleOB( article: Article) {
+    this.articleService.RouteTOArticleOB(article,'detail');
   }
 
 }

@@ -3,7 +3,7 @@
   <div class="main-content">
     <h1 class="recent-title">Najnowsze publikacje</h1>
     <hr class="dark">
-    <div *ngIf="!IsUser">
+    <div *ngIf="IsUser">
       <button (click)="Switch()">Dodaj Post</button>
       <label>Tytuł</label>
       <input #title>

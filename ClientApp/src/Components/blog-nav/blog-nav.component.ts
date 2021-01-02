@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../services/auth.service';
+import {AuthorizationsService} from '../../Services/Authorizations.service';
 
 @Component({
   selector: 'app-blog-nav',
@@ -8,9 +8,13 @@ import {AuthService} from '../../services/auth.service';
 })
 export class BlogNavComponent implements OnInit {
 
-  constructor(private authenticationService: AuthService) { }
+  constructor(private authenticationService: AuthorizationsService) { }
 
   ngOnInit() {
+  }
+  logout(){
+    this.authenticationService.logout();
+
   }
 
 }

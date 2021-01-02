@@ -1,32 +1,49 @@
-nav{
-  margin-bottom: 150px!important;
-}
-/* Nawigacja */
 .navbar
 {
   text-transform: uppercase;
-  font-weight: 450;
-  font-size: 16px;
-  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  font-family: 'Lora', serif;
+  padding: 10px 100px;
   letter-spacing: 1px;
-  background-color: rgba(0, 0, 0, 0.8)!important;
-  margin-bottom: 150px!important;
+  background-color: transparent!important;
+  transition: .5s;
+}
+.navbar .navbar-brand img{
+  width: 100px;
+  height: 58px;
+  transition: .5s;
+}
+nav.expand{
+  background-color: rgba(0,0,0,.85)!important;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 10px 50px;
+}
+nav.expand .navbar-brand img{
+  width: 80px;
+  height: 47px;
 }
 .navbar-dark .navbar-nav .nav-item{
   margin: 0 1rem;
 }
 .navbar-dark .navbar-nav .nav-link
 {
-  color: white;
-  padding-top: 28px;
   position: relative;
+  color: #fff;
+  font-family: 'Lora' serif;
+}
+
+.navbar-dark .navbar-nav .nav-link.log-in{
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
 }
 .navbar-dark .navbar-nav .nav-link::before{
   content:'';
   position: absolute;
   width: 95%;
   transform: scaleX(0);
-  height: 2px;
+  height: 3px;
   bottom: 0;
   left: 0;
   background-color: #fff;
@@ -37,10 +54,7 @@ nav{
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-.navbar-dark .navbar-nav .navbar-brand
-{
-  padding-left: 15px;
-}
+
 .dropdown-menu{
   margin: 0.5rem 0 0;
   background: rgba(0, 0, 0, 0.8);
@@ -74,105 +88,61 @@ nav{
   opacity: 0.9;
 }
 
+@media (max-width: 992px){
 
-/* Slajder */
-.carousel-item
-{
-  height: 100vh;
-  background: no-repeat center center scroll;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-}
-.carousel-item-next, .carousel-item-prev, .carousel-item.active{
-  display: block;
-  transition: -webkit-transform 1.2s ease;
-  transition: transform 1.2s ease;
-  transition: transform 1.2s ease,-webkit-transform 1.2s ease;
-}
-.carousel-caption{
-  font-family: 'Lato', sans-serif;
-  position: absolute;
-  text-transform: uppercase;
-  margin: 0 auto;
-  right: 0;
-  left: 0;
-  top: 42%;
-}
-.carousel-caption h1{
-  font-size: 60px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-shadow: .1rem .1rem .8rem #000;
-  padding-bottom: 15px;
-}
-.carousel-caption h3{
-  font-size: 32px;
-  font-weight: 350;
-  letter-spacing: 0px;
-  text-shadow: .1rem .1rem .5rem #000;
-}
+  .navbar{
+    background-color: rgba(0,0,0,.9)!important;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 10px 50px;
+  }
+  .navbar.expand{
+    padding: 10px 50px;
+  }
+  .navbar-dark button.btn{
+    width: 100%;
+    text-align: start;
+    padding: 0!important;
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: .5rem 0!important;
+    margin: 0 1rem!important;
+    text-transform: uppercase;
+    position: relative;
+  }
 
-/* Jumbotron */
-.narrow{
-  width: 75%;
-  margin: 0 auto;
-  padding-top: 18px;
-}
-.jumbotron{
-  padding: 1rem;
-}
+  .navbar-dark button.btn::before{
+    content:'';
+    position: absolute;
+    width: 95%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    transform-origin: bottom left;
+    transition: transform 0.25s ease-out;
+  }
 
-/* Łącznik */
-.padding{
-  padding-bottom: 2rem;
-  padding-top: 2rem;
-}
-.welcome{
-  width: 75%;
-  margin: 0 auto;
-  padding-top: 2rem;
-}
-.welcome h1{
-  color: #000;
-}
-hr.dark{
-  border-top: 2px solid #b4b4b4;
-  width: 95%;
-  margin-top: .3rem;
-  margin-bottom: .1rem;
-}
+  .navbar-dark .btn:hover::before{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
 
-/* Sekcja 'Card' */
-.card-deck{
-  padding: 1rem;
-  margin-right: 0px!important;
-  margin-left: 0px!important;
-}
-.card{
-  /* background-color: #f0f0f0; */
-  color:  #000;
-}
-.card .card-body h3{
-  font-family: 'Playball', cursive;
-}
-.card .card-body p{
-  font-family: 'Marck Script', cursive;
-  font-size: 1.2rem;
-}
-.card-img{
-  overflow: hidden;
-  max-height: 500px;
-}
-.card-img:hover{
-  cursor: pointer;
-}
-.card-img img {
-  transition: all 1s ease-in-out;
-}
-.card-img:hover img{
-  -webkit-transform: scale(1.15);
-  -ms-transform: scale(1.15);
-  transform: scale(1.1);
+  .navbar-dark .navbar-nav .nav-item.dropdown div{
+    width: 100%;
+  }
+  
+  .navbar-dark .navbar-nav .dropdown-menu{
+    background-color: transparent;
+    border: none;
+  }
+
+  .navbar-brand img{
+    width: 45px;
+    height: 26px;
+
+  }
+
 }

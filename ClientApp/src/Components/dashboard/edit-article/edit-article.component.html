@@ -1,32 +1,38 @@
-<div class="container">
-    <h2 class="section-title">Edytuj artykuł</h2>
-    <form [formGroup]="editForm" (ngSubmit)="articleSubmit()">
+<div class="container"  *ngIf="article" >
+    <h2 class="section-title" >Edytuj artykuł</h2>
+
+    <form (ngSubmit)="articleSubmit() ">
         <div class="mb-3">
-            <label for="title">Tytuł</label>
-            <input 
-                type="text" 
-                formControlName="title" 
-                class="form-control">
+            <label>Tytuł</label>
+            <input
+              (keyup)="onKey($event)"
+                type="text"
+                class="form-control"
+                name="t"
+                [ngModel]="article.Title">
         </div>
         <div class="custom-file mb-4">
-            <input 
-                type="file" 
-                formControlName="image" 
-                id="image" 
+            <input
+                type="file"
+                id="image"
                 class="custom-file-input"
                 (change)="onFileChange($event)">
-            <label 
-                for="image" 
-                class="custom-file-label" 
-                data-browse="Przeglądaj">Dodaj zdjęcie artykułu</label>    
+            <label
+                for="image"
+                class="custom-file-label"
+                data-browse="Przeglądaj">Dodaj zdjęcie artykułu</label>
         </div>
-        <div class="image-details" *ngIf="imageSrc">
-            <img [src]="imageSrc" style="height: 300px; width: 500px;">
-            <p *ngIf="selectedImage">{{selectedImage.file.name}}</p>
-        </div>
+      <div class="image-details" *ngIf="article.Img">
+        <img [src]="article.Img" style="height: 300px; width: 500px;">
+
+        <p *ngIf="theFile">{{theFile.name}}</p>
+        <p *ngIf="article.Img">{{article.Img}}</p>
+      </div>
+
         <div class="mb-3">
             <label for="content">Treść artykułu</label>
-            <ckeditor [editor]="Editor" [tagName]="tagname" formControlName="content" ></ckeditor>
+            <ckeditor [editor]="Editor" [tagName]="tagname"  name="c"
+                      [ngModel]="article.Content"  (change)="onChange($event)"></ckeditor>
         </div>
         <button type="submit" class="btn btn-info">Opublikuj</button>
     </form>

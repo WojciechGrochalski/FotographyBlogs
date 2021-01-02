@@ -1,1 +1,18 @@
-<p>post-item works!</p>
+<li class="list-group-item article-item">
+  <div >
+    <p class="text-muted">{{post.Date}}</p>
+    <p>{{post.Title}}</p>
+    <p class="article-info">{{(post.Content.length >150) ? (post.Content | slice:0:150)+'...':(post.Content)}} </p>
+  </div>
+  <div class="buttons">
+    <a
+      (click)="RouteToEdit(post)"
+      class="btn btn-info edit">
+      Edytuj</a>
+    <a
+      (click)="RouteToPost(post)"
+      class="btn btn-primary preview">
+      Podgląd</a>
+    <button (click)="deletePost(post)" class="btn btn-danger delete">Usuń</button>
+  </div>
+</li>

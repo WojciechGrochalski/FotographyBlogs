@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from '../../models/User';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,12 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   mainPage = true;
-
+  user: User;
   constructor() {}
 
-  ngOnInit() {
-    // Tutaj pobrać dane użytkownika z pamięci lokalnek
-    localStorage.setItem('username', 'Sam Smith')
+  async ngOnInit() {
+    this.user= await JSON.parse(sessionStorage.getItem('user')) ;
+
   }
 
 }

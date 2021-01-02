@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Article } from '../../../../models/Article'
 import { Router} from '@angular/router'
+import {ArticlesService} from '../../../../Services/Articles.service';
 
 @Component({
   selector: 'app-article-item',
@@ -10,15 +11,24 @@ import { Router} from '@angular/router'
 export class ArticleItemComponent implements OnInit {
 
   @Input() article: Article;
-  @Output() deleteArticle: EventEmitter<Article> = new EventEmitter()
 
-  constructor(private router: Router) { }
+
+  constructor(
+    private router: Router,
+    private articleService: ArticlesService) { }
 
   ngOnInit() {
   }
 
-  onDelete(article) {
-    this.deleteArticle.emit(article)
-  }
 
+  RouteToEdit( article: Article) {
+    this.articleService.RouteTOArticleOB(article,'dashboard/edytuj-artykul');
+  }
+  RouteToArticle( article: Article) {
+    this.articleService.RouteTOArticleOB(article,'detail');
+  }
+  deleteArticle(article: Article) {
+    this.articleService.DeleteArticle(article.ID);
+    window.location.reload();
+  }
 }

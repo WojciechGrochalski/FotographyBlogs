@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthService} from '../../Services/auth.service';
-import {UserService} from '../../Services/user.service';
+import {AuthorizationsService} from '../../Services/Authorizations.service';
+import {UsersService} from '../../Services/Users.service';
 import {AlertService} from '../../Services/alert.service';
 
 
@@ -22,8 +22,8 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService,
-    private userService: UserService,
+    private authService: AuthorizationsService,
+    private userService: UsersService,
     private alertService: AlertService
   ) {
 

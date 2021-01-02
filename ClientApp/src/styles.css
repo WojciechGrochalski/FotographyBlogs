@@ -1,42 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato:wght@400;700&family=Lora:wght@400;700&family=Raleway:wght@400;700&family=Roboto:wght@400;500;700&family=Tangerine:wght@400;700&display=swap');
 
-hr.dark{
-  border-top: 2px solid #b4b4b4;
+
+
+:root{
+  --clr-main:  #29c2a8;
+  --clr-main-dark: #24aa94;
+}
+
+body{
+  overflow-x: hidden;
+  font-family: 'Lato', sans-serif;
+  color: #40474e;
+  margin: 0;
+  padding: 0;
+}
+hr{
   width: 95%;
   margin-top: .3rem;
   margin-bottom: .1rem;
+}
+hr.dark{
+  border-top: 2px solid #b4b4b4;
 }
 hr.light{
   border-top: 2px solid #ececec;
-  width: 95%;
-  margin-top: .3rem;
-  margin-bottom: .1rem;
+}
+hr.separator{
+  border-bottom: 1px solid rgb(134, 134, 134);
+  width: 50%;
+}
+.alert{
+  font-weight: bold;
+}
+.btn-info{
+  background-color: var(--clr-main)!important;
+  border-color: var(--clr-main)!important;
+}
+.btn-info:active,
+.btn-info:hover{
+  background-color: var(--clr-main-dark)!important;
+}
+.custom-file{
+  margin-top: 1rem!important;
+}
+input:focus,
+textarea:focus{
+  outline: none!important;
+  box-shadow: none!important;
+  border-color: var(--clr-main)!important;
+  box-shadow: 0 0 0 .2rem rgba(41, 194, 168, .25)!important;
 }
 
-textarea{
-  outline: none;
-  width: 100%;
-  resize: none;
-  border: 1px solid #fff;
-  background-color: transparent;
-  color: #fff;
-  padding: 12px;
-  margin-bottom: 20px;
-}
-
-
-/*--- PORTFOLIO ---*/
-
-/* .galery{
-    background-color: #3f3f3f;
-} */
-.picture{
-  margin: 0!important;
-  padding: 0!important;
-  overflow: hidden;
-  text-align: center;
-}
-.picture img{
-  width: 100%;
-  height: auto;
-  border: 1px solid #000;
-}

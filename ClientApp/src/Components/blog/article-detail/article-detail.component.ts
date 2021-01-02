@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticleService } from '../../../services/article.service'
+import { ArticlesService } from '../../../Services/Articles.service'
 import { ActivatedRoute } from '@angular/router'
 import {Article} from '../../../models/Article'
 
@@ -11,21 +11,30 @@ import {Article} from '../../../models/Article'
 export class ArticleDetailComponent implements OnInit {
 
   article: Article;
+  id: number;
+  constructor(
+    private route: ActivatedRoute,
+    private articleService: ArticlesService  ) { }
 
-  constructor(private route: ActivatedRoute, private articleService: ArticleService) { }
+  async  ngOnInit() {
 
-  ngOnInit() {
-
-    this.getArticle();
+    const articleObservable = this.articleService.GetArticle();
+    articleObservable.subscribe((res: Article) => {
+      if(res) {
+        this.article = res;
+        console.log(res);
+        sessionStorage.setItem('content',JSON.stringify(res) );
+      }
+      else{
+        this.article= JSON.parse(sessionStorage.getItem('content')) ;
+      }
+    });
   }
 
-  getArticle(): void{
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.articleService.getArticle(id).subscribe(article => this.article = article)
-  }
 
   getArticleImage(): string{
-    return this.article.image.imageSrc;
+    return this.article.Img;
+
   }
 
 }

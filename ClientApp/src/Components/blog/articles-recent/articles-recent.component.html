@@ -6,25 +6,27 @@
 
     <hr class="separator">
     <hr class="separator">
-
+    <div *ngIf="articles">
     <div class="card-deck">
         <article class="card article-snippet" *ngFor="let article of articles | paginate: config">
-            <img src="{{article.image.imageSrc}}" alt="" class="card-img-top">
+            <img src="{{article.Img}}" alt="" class="card-img-top">
             <div class="article-review">
-                <h3 class="card-title article-title">{{article.title}}</h3>
-                <p class="card-text article-meta"><small class="text-muted"><i class="fas fa-user"></i> {{article.author}} <i class="fas fa-calendar"></i> {{article.date}}</small></p>
-                <p class="article-info">{{(article.content.length >300) ? (article.content | slice:0:300)+'...':(article.content)}} </p>
+                <h3 class="card-title article-title">{{article.Title}}</h3>
+                <p class="card-text article-meta"><small class="text-muted"><i class="fas fa-user"></i> {{article.Author}} <i class="fas fa-calendar"></i> {{article.Date}}</small></p>
+                <p class="article-info">{{(article.Content.length >300) ? (article.Content | slice:0:300)+'...':(article.Content)}} </p>
                 <div class="btn-wrapper">
-                  <a routerLink="/detail/{{article.id}}" class="btn">Read More</a>
+                  <a (click)="RouteToArticleOB(article)" class="btn">Read More</a>
+<!--                  <a routerLink="/detail/{{article.ID}}" class="btn">Read More</a>-->
                 </div>
             </div>
         </article>
     </div>
   </div>
+  </div>
 </section>
 
 <div class="container pagination-container">
-  <pagination-controls 
+  <pagination-controls
     class="pagination"
     [maxSize]="maxSize"
     [autoHide]="autoHide"

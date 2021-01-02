@@ -1,8 +1,8 @@
 import {Component, DoCheck, OnInit, ViewEncapsulation} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Article} from '../../models/Article';
-import {ArticleService} from '../../Services/article.service';
-import {Post} from '../../models/Post';
+import {ArticlesService} from '../../Services/Articles.service';
+
 
 
 
@@ -16,11 +16,11 @@ export class ForumComponent implements  OnInit, DoCheck {
   public articles: Article[] = [];
   public article = {} as Article;
   IsUser: string;
-  canAddArticle: boolean=false;
+  switch: boolean=false;
 
   constructor(
     private http: HttpClient,
-    private articleService: ArticleService ) {}
+    private articleService: ArticlesService ) {}
 
   ngOnInit(): void {
     this.IsUser=sessionStorage.getItem('userName');
@@ -37,12 +37,13 @@ export class ForumComponent implements  OnInit, DoCheck {
   async AddArticle(title: string, content: string) {
     let date_now = new Date().toLocaleDateString();
     console.log('Data time now', date_now)
-    let article = await new Article(title, content, date_now, sessionStorage.getItem('userName'));
+    let article = await new Article(title, content, date_now, sessionStorage.getItem('userName'),"");
     await this.articleService.AddArticle(article).subscribe(res => {
       if (res) {
         window.location.reload();
       }
     });
+
   }
   Search(keyword: string){
     this.articleService.SearchForArticle(keyword).subscribe(res =>{
@@ -50,12 +51,12 @@ export class ForumComponent implements  OnInit, DoCheck {
     });
   }
   RouteToArticleOB( article: Article) {
-     this.articleService.RouteTOArticleOB(article);
+     this.articleService.RouteTOArticleOB(article,'article-template');
   }
   Switch(){
-    this.canAddArticle=true;
+    this.switch=true;
   }
   ExitTemplate(){
-    this.canAddArticle=false;
+    this.switch=false;
   }
 }

@@ -37,13 +37,13 @@ p.overlay-meta{
 }
 
 .post-content .shadow-box::before{
-    content: url('../../../../assets/Foto/shadow.png');
+    content: url('../../../assets/Foto/shadow.png');
     left: -8px;
     position: absolute;
 }
 
 .post-content .shadow-box::after{
-    content: url('../../../../assets/Foto/shadow.png');
+    content: url('../../../assets/Foto/shadow.png');
     right: -8px;
     position: absolute;
     transform: rotateY(180deg);
@@ -62,7 +62,7 @@ p.overlay-meta{
     -webkit-box-shadow: -34px 30px 16px -32px rgba(0,0,0,0.75), 34px 30px 16px -32px rgba(0,0,0,0.75);
     -moz-box-shadow: -34px 30px 16px -32px rgba(0,0,0,0.75), 34px 30px 16px -32px rgba(0,0,0,0.75);
 }
-.post-content h1, 
+.post-content h1,
 .post-content h2,
 .post-content h3{
     font-family: 'Lora', serif;

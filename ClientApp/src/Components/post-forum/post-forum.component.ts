@@ -1,6 +1,6 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
 import {Post} from '../../models/Post';
-import {ArticleService} from '../../Services/article.service';
+import {ArticlesService} from '../../Services/Articles.service';
 import {PostService} from '../../Services/post.service';
 import {FileToUpload} from '../../models/File';
 
@@ -26,14 +26,15 @@ export class PostForumComponent implements OnInit, DoCheck {
   canAddPost: boolean=false;
 
   constructor(
-    private articleService: ArticleService,
+    private articleService: ArticlesService,
     private postService: PostService){ }
 
- async ngOnInit() {
-   this.IsUser=sessionStorage.getItem('userName');
+  async ngOnInit() {
+    this.IsUser=sessionStorage.getItem('userName');
     try {
       this.posts = await this.postService.GetPostsFromDB().toPromise();
       console.log("Get new post ");
+
     }
     catch (e){
       console.error(e);
@@ -48,17 +49,18 @@ export class PostForumComponent implements OnInit, DoCheck {
   async SavePost(title: string, content: string) {
     let date_now = new Date().toLocaleDateString();
     console.log('Data time now', date_now)
-    await this.uploadFile();
-    let post = await new Post(title, content, date_now, sessionStorage.getItem('userName'), this.UrlToPostImg);
-    await this.postService.AddPost(post).subscribe(res => {
-      if (res) {
-        window.location.reload();
-      }
-    });
+    await this.readAndUploadFile(this.theFile,title,content);
+    // let post = await new Post(title, content, date_now, sessionStorage.getItem('userName'), this.UrlToPostImg);
+    // await this.postService.AddPost(post).subscribe(res => {
+    //   if (res) {
+    //    // window.location.reload();
+    //   }
+    // });
   }
 
 
-  private  readAndUploadFile(theFile: any) {
+  private  readAndUploadFile(theFile: any, title:string,content: string) {
+    console.log(this.file)
     let file = new FileToUpload();
     // Set File Information
     file.fileName = theFile.name;
@@ -68,22 +70,30 @@ export class PostForumComponent implements OnInit, DoCheck {
     file.lastModifiedDate = theFile.lastModifiedDate;
     let reader = new FileReader();
     // Setup onload event for reader
-     reader.onload =  async () => {
+    reader.onload =  async () => {
       // Store base64 encoded representation of file
       file.fileAsBase64 = reader.result.toString();
       // POST to server
-     this.postService.uploadFile(file).subscribe(resp => {
+      this.postService.uploadFile(file).subscribe(resp => {
         this.messages.push("Upload complete");
         this.UrlToPostImg=resp;
         console.log(this.UrlToPostImg, 'from upload');
+        let date_now = new Date().toLocaleDateString();
+        let post = new Post(title, content, date_now, sessionStorage.getItem('userName'));
+        this.postService.AddPost(post).subscribe(res => {
+          if (res) {
+            // window.location.reload();
+          }
+        });
       });
     }
     // Read the file
     reader.readAsDataURL(theFile);
+    console.log("end readAndUploadFile")
   }
 
   uploadFile() {
-    this.readAndUploadFile(this.theFile);
+    //this.readAndUploadFile(this.theFile);
     this.PostReady=true;
   }
 
@@ -93,6 +103,7 @@ export class PostForumComponent implements OnInit, DoCheck {
       // Don't allow file sizes over 1MB
       if (event.target.files[0].size < MAX_SIZE) {
         // Set theFile property
+        console.log(event.target.files[0]);
         this.theFile = event.target.files[0];
         let reader = new FileReader();
         reader.readAsDataURL(event.target.files[0]);

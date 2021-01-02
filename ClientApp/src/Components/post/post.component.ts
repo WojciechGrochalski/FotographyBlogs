@@ -19,7 +19,7 @@ export class PostComponent implements OnInit {
     private postService: PostService) { }
 
   RouteToPost( post: Post) {
-    this.postService.RouteToPost(this.post);
+    this.postService.RouteToPost(post,'post-template');
   }
   ngOnInit() {
 

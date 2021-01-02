@@ -1,10 +1,14 @@
-@import url(https://fonts.googleapis.com/css?family=Fjalla+One:400|Roboto:400,400italic,700);
+.showcase{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 80vh;
+  background: url('../../assets/Img/Ja1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 
-/*body{
-  overflow-x: hidden;
-  color: #40474e;
-  font-family: 'Cinzel', serif;
-}*/
 /*--- O mnie ---*/
 
 /* Sekcja 2-kolumnowa */
@@ -63,7 +67,7 @@ figure::after{
 }
 
 #fixed{
-  background-image: url("/src/assets/Foto/logo.png");
+  background-image: url("../../assets/Img/Ja1.jpg");
   position: fixed;
   display: block;
   top: 0;
@@ -76,194 +80,46 @@ figure::after{
   will-change: transform;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/*user profile css*/
-/***
-User Profile Sidebar by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
-***/
-/*Dla widoku containera*/
-.container {
-  background: #f6f9fb;
+/* Socjalki */
+.welcome a{
+  font-size: 4.5rem;
+  padding: 3rem 0;
 }
-body {
-  background: #f6f9fb;
+.social{
+  margin: 2rem 0;
 }
 
-/* Profile container */
-.profile {
-  margin: 20px 0;
+/* Socjalki w kolorach */
+/* .fa-facebook{
+  color: #3d5998;
+}
+.fa-twitter{
+  color: #00aced;
+}
+.fa-google-plus-g{
+  color: #dd4b39;
+}
+.fa-instagram{
+  color: #517fa4;
+}
+.fa-youtube{
+  color: #bb0000;
+} */
+
+/* Socjalki stonowane */
+
+.fa-facebook,
+.fa-twitter,
+.fa-google-plus-g,
+.fa-instagram,
+.fa-youtube{
+  color: rgb(0,0,0);
 }
 
-/* Profile sidebar */
-.profile-sidebar {
-  padding: 20px 0 10px 0;
-  background: #f6f9fb;
+.fa-facebook:hover,
+.fa-twitter:hover,
+.fa-google-plus-g:hover,
+.fa-instagram:hover,
+.fa-youtube:hover{
+  color: #d5d5d5;
 }
-
-.profile-userpic{
-  position:center;
-}
-.img-fluid {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.profile-userpic img {
-  float: none;
-  width: 50%;
-  height: 50%;
-  -webkit-border-radius: 50% !important;
-  -moz-border-radius: 50% !important;
-  border-radius: 50% !important;
-}
-
-.profile-usertitle {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.profile-usertitle-name {
-  color: #000;
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 7px;
-}
-
-.profile-usertitle-job {
-  text-transform: uppercase;
-  color: #5a7391;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
-.profile-userbuttons {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.profile-userbuttons .btn {
-  text-transform: uppercase;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 6px 15px;
-  margin-right: 5px;
-}
-
-.profile-userbuttons .btn:last-child {
-  margin-right: 0px;
-}
-
-.profile-usermenu {
-  margin-top: 30px;
-}
-
-.profile-usermenu ul li {
-  border-bottom: 1px solid #f0f4f7;
-}
-
-.profile-usermenu ul li:last-child {
-  border-bottom: none;
-}
-
-.profile-usermenu ul li a {
-  color: #93a3b5;
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.profile-usermenu ul li a i {
-  margin-right: 8px;
-  font-size: 14px;
-}
-
-.profile-usermenu ul li a:hover {
-  background-color: #fafcfd;
-  color: #5b9bd1;
-}
-
-.profile-usermenu ul li.active {
-  border-bottom: none;
-}
-
-.profile-usermenu ul li.active a {
-  color: #5b9bd1;
-  background-color: #f6f9fb;
-  border-left: 2px solid #5b9bd1;
-  margin-left: -2px;
-}
-
-/*css do prawej strony*/
-
-.profile-head .nav-tabs {
-  margin-bottom: 5%;
-}
-
-.profile-head .nav-tabs .nav-link {
-  font-weight: 600;
-  border: none;
-}
-
-.profile-head .nav-tabs .nav-link.active {
-  border: none;
-  border-bottom: 2px solid #0062cc;
-}
-
-
-
-
-
-/*new section, nav menu*/
-.profile-work {
-  padding: 14%;
-  margin-top: -15%;
-}
-
-.profile-work p {
-  font-size: 12px;
-  color: #818182;
-  font-weight: 600;
-  margin-top: 10%;
-}
-
-.profile-work a {
-  text-decoration: none;
-  color: #495057;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.profile-work ul {
-  list-style: none;
-}
-
-.profile-tab label {
-  font-weight: 600;
-}
-
-.profile-tab p {
-  font-weight: 600;
-  color: #0062cc;
-}
-.content .main-content{
-  margin: 70px 200px 0 200px;
-  padding-top: 80px;
-}
-
-.content .main-content .recent-title{
-  margin: 50px;
-  text-align: center;
-}
-

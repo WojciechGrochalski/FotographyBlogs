@@ -5,7 +5,7 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" >
@@ -23,10 +23,13 @@
         <li class="nav-item">
           <a class="nav-link" routerLink='/blog'>Posty </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/pforum'>Posty </a>
+        </li>
       </ul>
       <ul class="navbar-nav justify-content-end">
         <li class="nav-item" *ngIf="authenticationService.isLoggedIn()">
-          <a class="nav-link ml-auto" routerLink="#">Dashboard</a>
+          <a class="nav-link ml-auto" routerLink="dashboard">Dashboard</a>
         </li>
         <li class="nav-item" *ngIf="authenticationService.isLoggedIn()">
           <a class="nav-link ml-auto" routerLink="#">Profile</a>
@@ -38,8 +41,7 @@
           <a class="nav-link ml-auto" href="#" (click)="logout()">Wyloguj</a>
         </li>
       </ul>
-        
+
     </div>
   </nav>
-  
-  
+

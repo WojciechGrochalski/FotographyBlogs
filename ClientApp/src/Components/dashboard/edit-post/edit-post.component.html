@@ -1,1 +1,24 @@
-<p>edit-post works!</p>
+<div class="container"  *ngIf="post" >
+  <h2 class="section-title" >Edytuj artykuł</h2>
+
+  <form #form="ngForm" (ngSubmit)="articleSubmit(form)" >
+    <div class="mb-3">
+      <label>Tytuł</label>
+      <input
+        (keyup)="onKey($event)"
+        type="text"
+        class="form-control"
+        name="title"
+        [value]="post.Title"
+        >
+
+    </div>
+
+
+    <div class="mb-3">
+      <label for="content">Treść artykułu</label>
+      <ckeditor     [editor]="Editor" [tagName]="tagname"  name="content"  [ngModel]="post.Content" (change)="onChange($event)"></ckeditor>
+    </div>
+    <button type="submit" class="btn btn-info">Opublikuj</button>
+  </form>
+</div>

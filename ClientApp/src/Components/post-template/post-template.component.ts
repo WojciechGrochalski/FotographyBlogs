@@ -1,8 +1,8 @@
-import {AfterContentInit, AfterViewInit, Component, DoCheck, OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {Post} from '../../models/Post';
 import {Comment} from '../../models/Comment';
 import {PostService} from '../../Services/post.service';
-import {Observable} from 'rxjs';
+
 
 @Component({
   selector: 'app-post-template',
@@ -19,7 +19,18 @@ export class PostTemplateComponent implements OnInit, DoCheck {
   }
 
   async ngOnInit() {
-    await this.SetPost();
+    const postObserve = this.postService.GetPost();
+    postObserve.subscribe( res => {
+      if (res) {
+        this.post = res;
+        console.log(this.post.ID + ' from subscribe');
+        console.log(this.post, '1');
+        sessionStorage.setItem('post', JSON.stringify(res));
+      } else {
+        //this.post = JSON.parse(sessionStorage.getItem('post'));
+       // this.id = this.post.ID;
+      }
+    });
     await this.GetComment();
   }
 
@@ -29,18 +40,19 @@ export class PostTemplateComponent implements OnInit, DoCheck {
     let hour = new Date().toLocaleTimeString();
     let date = date_now + ' ' + hour;
     let comment = new Comment(content, author, date, post_id);
-    this.postService.SendComentToDB(comment);
+    this.postService.SendCommentToDB(comment);
     this.comments.push(comment);
     this.defaultValue = 'write a comment...';
   }
 
   SetPost() {
     const postObserve = this.postService.GetPost();
-    postObserve.subscribe((res: Post) => {
+    postObserve.subscribe( res => {
       if (res) {
         this.post = res;
         this.id = res.ID;
         console.log(this.post.ID + ' from subscribe');
+        console.log(this.post, '1');
         sessionStorage.setItem('post', JSON.stringify(res));
       } else {
         this.post = JSON.parse(sessionStorage.getItem('post'));
@@ -51,23 +63,26 @@ export class PostTemplateComponent implements OnInit, DoCheck {
 
   async GetComment() {
     try {
-      let ID = JSON.parse(sessionStorage.getItem('post')).ID;
-      console.log('ID from session storage = ' + ID);
-      this.comments = await this.postService.GetComentFromDB(this.id).toPromise();
+      this.comments = await this.postService.GetCommentFromDB(this.post.ID).toPromise();
 
     } catch (e) {
       console.error(e);
     }
   }
+   delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 
   async ngDoCheck(): Promise<void> {
-    try {
-      let ID = JSON.parse(sessionStorage.getItem('post')).ID;
-      //    console.log('ID from session storage = '+ID);
-      this.comments = await this.postService.GetComentFromDB(this.id).toPromise();
+    if(this.comments.length>1) {
+      await this.delay(1200);
+      try {
+        this.comments = await this.postService.GetCommentFromDB(this.post.ID).toPromise();
 
-    } catch (e) {
-      console.error(e);
+      } catch (e) {
+        console.error(e);
+      }
+
     }
   }
 

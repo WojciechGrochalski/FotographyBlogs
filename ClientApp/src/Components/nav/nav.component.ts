@@ -1,5 +1,6 @@
-import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {AuthService} from '../../Services/auth.service';
+import {Component, DoCheck,  OnInit} from '@angular/core';
+
+import {AuthorizationsService} from '../../Services/Authorizations.service';
 
 
 
@@ -9,27 +10,31 @@ import {AuthService} from '../../Services/auth.service';
   styleUrls: ['./nav.component.css']
 })
 
-
-
 export class NavComponent implements OnInit, DoCheck{
-  logoSrc = 'assets/Foto/logo.png';
+
   user:string ;
   constructor(
-    private authenticationService: AuthService) {}
+    private authenticationService: AuthorizationsService){
+
+  }
 
   ngOnInit(): void {
     this.user=sessionStorage.getItem('userName');
+
     }
+
     refresh(){
     window.location.reload();
     }
     ngDoCheck() {
     if(this.user!=sessionStorage.getItem('userName') ){
       this.user=sessionStorage.getItem('userName');
-     }
     }
+    }
+
   logout(){
     this.authenticationService.logout();
     this.user=null;
   }
+
 }

@@ -1,13 +1,16 @@
 import { Inject, Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../models/User';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {FileToUpload} from '../models/File';
+import {ImgPath} from '../models/ImgPath';
+import {Album} from '../models/Album';
+import {map} from 'rxjs/operators';
 
 
 
 @Injectable({ providedIn: 'root' })
-export class UserService {
+export class UsersService {
   baseUrl: string = '';
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
@@ -34,8 +37,12 @@ export class UserService {
   }
 
   getAlbums(currUser: string): Observable<any>{
+    return this.http.get(this.baseUrl + 'api/User/album/' + currUser);
 
-     return this.http.get(this.baseUrl+'api/User/album'+currUser);
+  }
+  getAlbumsImg(currUser: number): Observable<any>{
+    return this.http.get(this.baseUrl + 'api/User/album/img' + currUser);
+
   }
 
   getAlbum(albumId: number): Observable<any>{
@@ -57,18 +64,20 @@ export class UserService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post(this.baseUrl+'api/File/photo/', file,{responseType: 'text'});
+    return this.http.post(this.baseUrl+'api/File/photo', file,{responseType: 'text'});
   }
 
   addAlbum(album: any): Observable<any> {
 
-    console.log('New album added: ', album)
-     return this.http.post(this.baseUrl+'api/UserAlbum', album);
+     return this.http.post(this.baseUrl+'api/UserAlbum', album,{responseType: 'text'});
+  }
+  addImgToAlbum(imgPath: ImgPath): Observable<any> {
+
+    return this.http.post(this.baseUrl+'api/UserAlbum/addimg', imgPath );
+  }
+  GetImgFromAlbum(id: number): Observable<any>{
+    return this.http.get(this.baseUrl+'api/UserAlbum/'+ id);
   }
 
-  // getPictures(albumId: number): Observable<ImageSnippet[]>{
-  //   let currAlbum = USERS.find(user => user.username === 'sholaris92').albums.find(album => album.id === albumId)
-  //   return of(currAlbum.images)
-  // }
 }
 

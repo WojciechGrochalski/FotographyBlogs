@@ -22,7 +22,7 @@ namespace foto_full.Controllers
 
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(User user)
+        public async Task<IActionResult> Register(UserModel user)
         {
             var query = _context.Users.FirstOrDefault(login => login.Username == user.Username);
             await Task.CompletedTask;
@@ -43,7 +43,7 @@ namespace foto_full.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(User user)
+        public async Task<IActionResult> Login(UserModel user)
         {
             //Do sprawdzenia czy działa hash
             var query = _context.Users.FirstOrDefault(login => login.Username == user.Username );
@@ -53,7 +53,7 @@ namespace foto_full.Controllers
                 if ((user.Username == query.Username
                         && SecurePasswordHasher.Verify(user.Password, query.Password)))
                 {
-                    ReturnedUser returnedUser = new ReturnedUser(user.FirstName, user.LastName, user.Username);
+                    ReturnedUser returnedUser = new ReturnedUser(query.ID, query.FirstName, query.LastName, query.Username);
                     return new OkObjectResult(returnedUser);
 
                 }

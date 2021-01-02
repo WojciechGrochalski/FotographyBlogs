@@ -3,27 +3,27 @@
     <form [formGroup]="albumForm" (ngSubmit)="albumSubmit()">
         <div class="mb-3">
             <label for="title">Nazwa albumu</label>
-            <input 
-                type="text" 
-                formControlName="name" 
+            <input
+                type="text"
+                formControlName="name"
                 class="form-control">
         </div>
         <div class="custom-file mb-4" >
-            <input 
-                type="file" 
-                formControlName="image" 
-                id="image" 
+            <input
+                type="file"
+                formControlName="image"
+                id="image"
                 class="custom-file-input"
                 (change)="onFileChange($event)"
                >
-            <label 
-                for="image" 
-                class="custom-file-label" 
-                data-browse="Przeglądaj">Dodaj zdjęcie</label>    
+            <label
+                for="image"
+                class="custom-file-label"
+                data-browse="Przeglądaj">Dodaj zdjęcie</label>
         </div>
-        <div class="image-details" *ngIf="selectedImage">
+        <div class="image-details" *ngIf="imageSrc">
             <img [src]="imageSrc" style="height: 100px; width: 200px;">
-            <p>{{selectedImage.file.name}}</p>
+          <p>{{theFile.name}}</p>
         </div>
         <div class="mb-3">
             <label for="description">Krótki opis</label>

@@ -1,151 +1,40 @@
+<!--<app-nav></app-nav>-->
+<div class="showcase"></div>
 
-<!------ Include the above in your HEAD tag ---------->
+<!--- Two Column Section -->
 
-<!--<div class="container-fluid about-me padding">
+<div class="container-fluid about-me padding">
   <div class="row padding">
     <div class="col-lg-6 about">
       <h1>Poznajmy się...</h1>
-      <p>
-        Strona ta ma na celu zrzeszać fotografów z różnymi poziomami zaawansowania.
-        Nie każdy jest zawodowym fotografem jednak większość z nas uwielbia robić zdjęcia i się nimi chwalić.
-        Aby tego dokonać, potrzeba mieć nie tylko możliwość zrobienia zdjęcia, ale także wiedzieć co się chce ująć na nim.
-        Dlatego na tej stronie dowiecie się o podstawach fotografii jak i różnych trikach w niej stosowanych.
+      <p>Mam na imię Rafał. Aktualnie studiuję Inżynierię Systemów na Politechnice Wrocławskiej.
+        Choć wiążę swoją przyszłość z zawodem, nic mi nie przeszkodzi w realizacji planu bycia fotografem.
+        W moim życiu liczy się nie tylko praca i działanie według schematów z góry mi narzuconych,
+        ale w głównej mierze podążanie za marzeniami i robienie tego, co mi sprawia radość.</p>
+      <br>
+      <p>Od wczesnego dzieciństwa jestem zakochany w fotografii i zawsze pragnąłem fotografować.
+        W głównej mierze najtrudniej jest wychwycić moment, który wprowadzi w zachwyt obserwatora.
+        Mam nadzieję, że to co robię jest dla was czymś na co chcielibyście zerkać.
       </p>
       <br>
-      <p>
-        Miłej lektury i mam nadzieję że każdy znajdzie to czego szuka!
-      </p>
-      <br>
-      <p>Dołączcie do obserwowanaia nas i czerpcie radość z fotografii!!!</p>
+      <p>Dołączcie do obserwowanaia mnie i czerpcie radość z fotografii!!!</p>
       <br>
     </div>
     <div class="col-lg-6 me">
-      <img src="../assets/Img/O%20mnie/Ja3.jpg" class="img-fluid" alt="...">
-      <hr class="my-4">
-    </div>
-  </div>
-</div>-->
+      <img src="assets/Img/Ja3.jpg" class="img-fluid" alt="...">
+      <br>
+      <br>
+      <img src="https://www.marcinorzolek.pl/public/strony/certs2.png" alt="Certyfikaty"
+           style="height: 195px; width: 452px;">
+
+  <hr class="my-4">
+</div>
 
 <!-- Fixed Background Section -->
-<div class="content">
-  <div class="main-content">
 <figure>
   <div class="fixed-wrap">
     <div id="fixed"></div>
   </div>
 </figure>
-
-
-
-<div class="container emp-profile">
-  <div class="row profile">
-    <div class="col-md-3">
-      <div class="profile-sidebar">
-        <!-- SIDEBAR USERPIC -->
-        <div class="profile-userpic">
-          <img src="../assets/Img/O%20mnie/Ja3.jpg" class="img-fluid" alt="...">
-        </div>
-        <!-- END SIDEBAR USERPIC -->
-        <!-- SIDEBAR USER TITLE -->
-        <div class="profile-usertitle">
-          <div class="profile-usertitle-name">
-            Rafal Fracz
-          </div>
-          <div class="profile-usertitle-job">
-            Photographer
-          </div>
-        </div>
-        <!-- END SIDEBAR USER TITLE -->
-        <!-- SIDEBAR BUTTONS -->
-        <div class="profile-userbuttons">
-          <button type="button" class="btn btn-success btn-sm">Follow</button>
-          <button type="button" class="btn btn-danger btn-sm">Message</button>
-        </div>
-        <!-- END SIDEBAR BUTTONS -->
-        <!-- SIDEBAR MENU -->
-        <div class="profile-usermenu">
-          <ul class="nav">
-            <li class="active">
-              <a href="#">
-                <i class="glyphicon glyphicon-home"></i>
-                Overview
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="glyphicon glyphicon-user"></i>
-                Edit profile
-              </a>
-            </li>
-          </ul>
-        </div>
-        <!-- END MENU -->
-      </div>
-    </div>
-    <div class="col-md-9 col-lg-6">
-      <div class="profile-head">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" (click)="Change()">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="owngallery-tab" data-toggle="tab" href="#owngallery" role="tab" aria-controls="owngallery" aria-selected="false" (click)="Change()">Album</a>
-          </li>
-        </ul>
-      </div>
-
-
-      <div *ngIf="profile  then pro"></div>
-      <ng-template #pro>
-        <div class="tab-pane fade in active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <p>Hello world</p>
-        </div>
-      </ng-template>
-      <div *ngIf="!profile; then gall;"></div>
-        <ng-template #gall>
-          <div class="tab-pane in fade" id="owngallery" role="tabpanel" aria-labelledby="owngallery-tab">
-            <div class="container-fluid galery">
-              <div class="row">
-                <div class="col-sm-6 col-md-4 picture">
-                  <a href="#"><img src="../../assets/Foto/burza.png" alt="1"></a>
-                </div>
-                <div class="col-sm-6 col-md-4 picture">
-                  <a href="#"><img src="img/Budynki/001 (2).jpg" alt="2"></a>
-                </div>
-                <div class="col-sm-6 col-md-4 picture">
-                  <a href="#"><img src="img/Budynki/001 (3).jpg" alt="3"></a>
-                </div>
-              </div>
-            </div>
-          </div>
-      </ng-template>
-
-      <!--<div class="tab-content profile-tab" id="myTabContent">
-    <div class="tab-pane fade in active" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <p>Hello world</p>
-
-    </div>
-    <div class="tab-pane fade" id="owngallery" role="tabpanel" aria-labelledby="owngallery-tab">
-      <p>Hello Paulina</p>
-    </div>
-  </div>-->
-    </div>
   </div>
-</div>
-
-
-
   </div>
-</div>
-
-
-
-
-
-
-
-
-<!--- Footer -->
-<app-footer></app-footer>
-

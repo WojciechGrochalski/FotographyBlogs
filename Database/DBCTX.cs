@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Backend_Foto.Models;
 
 
-
 namespace Backend_Foto
 {
     public class DBCTX : DbContext
@@ -20,10 +19,12 @@ namespace Backend_Foto
              : base(options)
         {
         }
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserModel> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Article> Article { get; set; }
+        public DbSet<Album> Album { get; set; }
+        public DbSet<ImgPath> ImgPaths { get; set; }
 
     }
 }

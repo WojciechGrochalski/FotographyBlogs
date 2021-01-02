@@ -1,22 +1,24 @@
-<app-blog-nav></app-blog-nav>
-<div class="wrapper">
-<div class="image" [style.background-image] = "'url('+getArticleImage()+')'">
+
+<div class="wrapper" *ngIf="article">
+
+<div *ngIf="article.Img" class="image" [style.background-image] = "'url('+getArticleImage()+')'">
             <div class="overlay-content">
-                <h1 contentEditable role='textbox' aria-multiline='true' class="overlay-title">{{article.title}}</h1>
-                <p class="overlay-meta"> {{article.date}}</p>
-                <p class="overlay-meta">{{article.author}}</p>
+                <h1 contentEditable role='textbox' aria-multiline='true' class="overlay-title">{{article.Title}}</h1>
+                <p class="overlay-meta"> {{article.Date}}</p>
+                <p class="overlay-meta">{{article.Author}}</p>
             </div>
     </div>
     <div class="post-content">
         <div class="shadow-box"></div>
-        <div class="post-text"> 
+        <div class="post-text">
             <h2>Article Subtitle One</h2>
-            <p>{{article.content}}</p>
+
+          <div [innerHTML]="article.Content"></div>
             <br>
             <img src="assets/Img/blog-photo.jpg" alt="">
             <br><br>
-            <p>{{article.content}}</p>
+          <div [innerHTML]="article.Content"></div>
         </div>
-     
+
     </div>
 </div>

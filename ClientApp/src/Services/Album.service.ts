@@ -7,7 +7,7 @@ import {Album} from '../models/Album';
 @Injectable({
   providedIn: 'root'
 })
-export class GalleryService {
+export class AlbumService {
 
   private unsplashUrl: string = 'https://picsum.photos/v2/list?limit=100';
   albumToSend: Album;

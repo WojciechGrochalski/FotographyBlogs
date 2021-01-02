@@ -1,36 +1,10 @@
 
 /* Stopka */
-.footer-img{
-  width: 120px;
-  height: 70px;
-}
-
-footer{
-  background-color: #3f3f3f;
-  color: #d5d5d5 !important;
-  padding-top: 2rem;
-  /* margin-top: 1rem;  */
-}
-footer .row p, footer .row h5{
-  font-family: 'Lato', 'sans-serif';
-}
-hr.light{
-  border-top: 1px solid #d5d5d5;
-  width: 75%;
-  margin-top: .8rem;
-  margin-bottom: 1rem;
-}
-footer a{
-  color: #d5d5d5;
-}
-hr.light-100{
-  border-top: 1px solid #d5d5d5;
-  width: 100%;
-  margin-top: .8rem;
-  margin-bottom: 1rem;
-}
-.container-fluid img{
-  width: 120px;
-  height: 70px;;
-}
-
+  footer{
+    background-color: #3f3f3f;
+    color: #d5d5d5 !important;
+  }
+  footer p{
+    margin: 0;
+  }
+  

@@ -1,11 +1,11 @@
-<app-blog-nav></app-blog-nav>
+
 <main>
-    <div class="sidebar">
+    <div class="sidebar" *ngIf="user">
         <h2 class="header-title">Panel użytkownika</h2>
         <a routerLink="/dashboard">
             <div class="user-detail">
                 <img src="https://unsplash.it/300" alt="">
-                <h4>Nazwa użytkownika</h4>
+                <h4>{{user.username}}</h4>
             </div>
         </a>
         <p>Blog</p>
@@ -17,8 +17,8 @@
         <p>Forum</p>
         <hr class="separator">
         <ul class="sidemenu">
-            <li><i class="fas fa-th-list"></i><a routerLink='threads'>Wątki</a></li>
-            <li><i class="fas fa-plus-circle"></i><a routerLink='new-thread'>Nowy</a></li>
+            <li><i class="fas fa-th-list"></i><a routerLink=mypost>Wątki</a></li>
+            <li><i class="fas fa-plus-circle"></i><a routerLink='new-post'>Nowy</a></li>
         </ul>
         <p>Profil</p>
         <hr class="separator">

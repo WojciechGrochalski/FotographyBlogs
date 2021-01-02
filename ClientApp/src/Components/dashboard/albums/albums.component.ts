@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../../services/user.service'
+import {UsersService} from '../../../Services/Users.service'
 import { Album } from '../../../models/Album'
+import {ImgPath} from '../../../models/ImgPath';
+import {Article} from '../../../models/Article';
+import {AlbumService} from '../../../Services/Album.service';
+
 
 @Component({
   selector: 'app-albums',
@@ -9,13 +13,22 @@ import { Album } from '../../../models/Album'
 })
 export class AlbumsComponent implements OnInit {
 
-  albums: Album[] = [];
-  constructor(private userService: UserService) { }
+  albums: Album[]=[];
+  img : ImgPath[]=[];
+  constructor(
+    private userService: UsersService,
+    private albumService: AlbumService ) { }
 
-  ngOnInit() {
-    this.userService.getAlbums('sholaris92').subscribe(albums => this.albums = albums)
+  async ngOnInit() {
+
+
+  this.albums=await this.userService.getAlbums(sessionStorage.getItem('userID')).toPromise();
+  console.log(this.albums[0].ImgPaths[0].Path)
+
   }
-
+  RouteToAlbum( album: Album) {
+    this.albumService.RouteToAlbum(album,'dashboard/albums/album_id');
+  }
 
 
 }

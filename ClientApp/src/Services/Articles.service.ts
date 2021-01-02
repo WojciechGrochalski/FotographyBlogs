@@ -7,16 +7,20 @@ import {HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ArticleService {
+export class ArticlesService {
   baseUrl: string = '';
   articleToSend: Article;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    @Inject('BASE_URL') baseUrl: string ) {
     this.baseUrl = baseUrl;
   }
 
-  RouteTOArticleOB(article: Article) {
-    this.router.navigate(['article-template']);
+  RouteTOArticleOB(article: Article, path: string) {
+    this.router.navigate([path]);
     this.articleToSend = article;
   }
 
@@ -28,33 +32,33 @@ export class ArticleService {
     });
     return articleObserve;
   }
-  GetArticleWithID(id: number): Observable<any> {
-    return this.http.get(this.baseUrl + 'api/Article/'+id);
+  GetArticleWithID(id: number) {
+    return this.http.get<any>(this.baseUrl + 'api/Articles/one/'+id);
 
   }
   GetArticles(): Observable<any> {
-    return this.http.get(this.baseUrl + 'api/Article');
+    return this.http.get(this.baseUrl + 'api/Articles');
 
   }
   GetFeaturedArticles(): Observable<any>{
-    return this.http.get(this.baseUrl + 'api/Article/Featured');
+    return this.http.get(this.baseUrl + 'api/Articles/Featured');
   }
   AddArticle(article: Article): Observable<any> {
-    return this.http.post(this.baseUrl + 'api/Article',article);
+    return this.http.post(this.baseUrl + 'api/Articles', article);
 
   }
 
   SearchForArticle(keyword: string): Observable<any>{
-    return this.http.get(this.baseUrl + 'api/Article/' + keyword);
+    return this.http.get(this.baseUrl + 'api/Articles/key/' + keyword);
   }
   EditArticle(article: Article): Observable<any>{
 
-     return this.http.post(this.baseUrl + 'api/Article/', article);
+     return this.http.post(this.baseUrl + 'api/Articles/edit', article);
   }
   getUserArticles(user: string): Observable<any>{
-    return this.http.get(this.baseUrl + 'api/Article/userArticle/'+user);
+    return this.http.get(this.baseUrl + 'api/Articles/user/'+user);
   }
-  DeleteArticle(id: number): Observable<any>{
-    return this.http.delete(this.baseUrl + 'api/Article/delete/'+id);
+  DeleteArticle(id: number){
+    return this.http.delete(this.baseUrl + 'api/Articles/delete/'+id).subscribe();
   }
 }

@@ -1,1 +1,18 @@
-<p>new-post works!</p>
+<div class="container" >
+  <h2 class="section-title">Nowy artykuł</h2>
+  <form [formGroup]="postForm" (ngSubmit)="postSubmit()">
+    <div class="mb-3">
+      <label for="title">Tytuł</label>
+      <input
+        type="text"
+        formControlName="title"
+        class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label for="content">Treść Postu</label>
+      <ckeditor [editor]="Editor" [tagName]="tagname" formControlName="content" ></ckeditor>
+    </div>
+    <button type="submit" class="btn btn-info">Opublikuj</button>
+  </form>
+</div>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
-import {User} from '../models/user';
-import {AuthService} from '../Services/auth.service';
+import {User} from '../models/User';
+import {AuthorizationsService} from '../Services/Authorizations.service';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthService
+    private authenticationService: AuthorizationsService
   ) {
 
   }

@@ -1,18 +1,18 @@
 <li class="list-group-item article-item">
     <div class="article-details">
-        <img src="{{article.image.imageSrc}}" alt="">
-        <p class="text-muted">{{article.date}}</p>
-        <p>{{article.title}}</p>
+        <img src="{{article.Img}}" alt="">
+        <p class="text-muted">{{article.Date}}</p>
+        <p>{{article.Title}}</p>
     </div>
     <div class="buttons">
-        <a 
-        [routerLink]="['/dashboard/edytuj-artykul', article.id]"
-        class="btn btn-info edit">
+        <a
+      (click)="RouteToEdit(article)"
+              class="btn btn-info edit">
         Edytuj</a>
-        <a 
-            routerLink='/detail/{{article.id}}'
+        <a
+          (click)="RouteToArticle(article)"
             class="btn btn-primary preview">
            Podgląd</a>
-        <button (click)="onDelete(article)" class="btn btn-danger delete">Usuń</button>        
+        <button (click)="deleteArticle(article)" class="btn btn-danger delete">Usuń</button>
     </div>
 </li>

@@ -5,6 +5,7 @@ import {Post} from '../models/Post';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Comment} from '../models/Comment';
 import {FileToUpload} from '../models/File';
+import {Article} from '../models/Article';
 
 
 @Injectable({
@@ -15,49 +16,44 @@ export class PostService {
   baseUrl: string = '';
   post: Post;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,
-              @Inject('BASE_URL') baseUrl: string) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
   }
 
-  RouteToPost(post: Post) {
-    this.router.navigate(['post-template']);
+  RouteToPost(post: Post, path: string) {
     this.post = post;
+    this.router.navigate([path]);
+
   }
   GetPost(): any {
     const postObserve = new Observable(observe => {
-      // setTimeout(() => {
         observe.next(this.post);
-      // }, 350);
     });
     return postObserve;
   }
 
   GetPostsFromDB(): Observable<any> {
-    return this.http.get(this.baseUrl + 'api/File/Post');
+    return this.http.get(this.baseUrl + 'api/Posts/Post');
 
   }
   AddPost(post: Post) {
-    return this.http.post(this.baseUrl + 'api/File/Post',post);
+    return this.http.post(this.baseUrl + 'api/Posts/Post',post);
 
   }
 
-  SendComentToDB(com: Comment) {
+  SendCommentToDB(com: Comment) {
     console.log(com);
-    return this.http.post(this.baseUrl + 'api/File/Comment',com).subscribe();
+    return this.http.post(this.baseUrl + 'api/Posts/Comment',com).subscribe();
 
   }
-  GetComentFromDB(post_id: Number): Observable<any> {
-    return this.http.get<Comment[]>(this.baseUrl + 'api/File/'+post_id+'/Comment');
+  GetCommentFromDB(post_id: Number): Observable<any> {
+    return this.http.get<Comment[]>(this.baseUrl + 'api/Posts/'+post_id+'/Comment');
 
   }
-  // public uploadFile(post: Post, file: FormData) {
-  //   return  this.http.post(this.baseUrl+'api/File/photo', file, {reportProgress: true, observe: 'events'});
-  // }
-
-  // public uploadFile( file: FormData) {
-  //   return  this.http.post<any>(this.baseUrl+'api/File/photo', file, {reportProgress: true, observe: 'events'});
-  // }
 
   public uploadFile(file: FileToUpload) {
     const httpOptions = {
@@ -65,11 +61,18 @@ export class PostService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post(this.baseUrl+'api/File/photoC/', file,{responseType: 'text'});
-  }
-  public getUrl( ) {
-    return  this.http.get<string>(this.baseUrl+'api/File/photo' );
+    return this.http.post(this.baseUrl+'api/File/photo/', file,{responseType: 'text'});
   }
 
+  getUserPosts(user: string): Observable<any>{
+    return this.http.get(this.baseUrl + 'api/Posts/user/'+user);
+  }
+  DeletePost(id: number){
+    return this.http.delete(this.baseUrl + 'api/Posts/delete/'+id).subscribe();
+  }
+
+  EditPost(post: Post) : Observable<any>{
+    return this.http.post(this.baseUrl + 'api/Posts/edit', post);
+  }
 }
 

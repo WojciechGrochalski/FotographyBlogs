@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import * as Editor from '../../../ckeditor5/ckeditor'
+import * as Editor from '../../../app/ckeditor5/ckeditor'
 import { FormGroup, FormBuilder,Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
-import { ArticleService } from '../../../services/article.service'
+import { ArticlesService } from '../../../Services/Articles.service'
 import { FlashMessagesService } from 'angular2-flash-messages'
 import {ImageSnippet} from '../../../models/Image'
+import {FileToUpload} from '../../../models/File';
+import {UsersService} from '../../../Services/Users.service';
+import {Article} from '../../../models/Article';
 
+const MAX_SIZE: number = 4194304;
 @Component({
   selector: 'app-new-article',
   templateUrl: './new-article.component.html',
@@ -18,63 +22,98 @@ export class NewArticleComponent implements OnInit {
   articleForm: FormGroup;
   submitted = false;
   selectedImage: ImageSnippet;
-  imageSrc: string;
+  imageSrc: string | ArrayBuffer;
+  profileForm: FormGroup;
+  file: File = null; // Variable to store file
+  theFile: any = null;
+
 
   constructor(
     private formBuilder: FormBuilder,
-    private articleService: ArticleService,
-    private router: Router, 
-    private flashMessagesService: FlashMessagesService
-  ) { }
+    private articleService: ArticlesService,
+    private router: Router,
+    private flashMessagesService: FlashMessagesService,
+    private userService: UsersService) { }
 
   ngOnInit() {
     this.articleForm = this.formBuilder.group({
       title: ['', Validators.required],
-      image: ['', Validators.required],
       content: ['', Validators.required]
     })
   }
 
-  get f() { return this.articleForm.controls;}
-  
+  get f() {
+    return this.articleForm.controls;
+  }
+
   onFileChange(event) {
-    const reader = new FileReader();
-    const file: File = event.target.files[0];
-    if (file) {
-      reader.readAsDataURL(file);
-      // console.log(file)
-      reader.onload = () => { 
-        this.imageSrc = reader.result as string
-        this.selectedImage = {imageSrc: this.imageSrc, file}; 
-        this.articleForm.patchValue({
-          image: {
-            imageSrc: reader.result as string,
-            file
-          }
+    this.theFile = null;
+    if (event.target.files && event.target.files.length > 0) {
+      // Don't allow file sizes over 1MB
+      if (event.target.files[0].size < MAX_SIZE) {
+        // Set theFile property
+      //  console.log(event.target.files[0]);
+        this.theFile = event.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload=(event=>{
+          this.imageSrc=reader.result;
         })
-      }      
+      }
+      else {
+        // Display error message
+
+      }
     }
   }
 
   articleSubmit() {
     this.submitted = true;
-    if (this.articleForm.invalid) {
-      return this.flashMessagesService.show('Wszystkie pola są wymagane!', {cssClass: 'alert-danger'})
-    }
-
+    // if (this.articleForm.invalid) {
+    //   return this.flashMessagesService.show('Wszystkie pola są wymagane!', {cssClass: 'alert-danger'})
+    // }
+    this.readAndUploadFile(this.theFile);
     // Dodać w serwisie URL do API na backendzie
-    this.articleService.addArticle(
-      this.f.title.value,
-      this.f.content.value,
-      this.f.image.value)
-      .subscribe(article => {
-        if (article) {
-          this.router.navigate(['/dashboard/articles'])
-          this.flashMessagesService.show('Artykuł dodany!', {cssClass: 'alert-success', timeout: 3000})
-        } else {
-          this.flashMessagesService.show('Ups! Coś poszło nie tak.', {cssClass: 'alert-danger'})
-        }
-    })
+
   }
 
+  private readAndUploadFile(theFile: any) {
+    console.log(this.theFile)
+    let file = new FileToUpload();
+    // Set File Information
+    file.fileName = theFile.name;
+    file.fileSize = theFile.size;
+    file.fileType = theFile.type;
+    file.lastModifiedTime = theFile.lastModified;
+    file.lastModifiedDate = theFile.lastModifiedDate;
+    let reader = new FileReader();
+    // Setup onload event for reader
+    reader.onload = async () => {
+      // Store base64 encoded representation of file
+      file.fileAsBase64 = reader.result.toString();
+      // POST to server
+      this.userService.uploadFile(file).subscribe(resp => {
+        this.submitted = true;
+        console.log("if")
+        let date_now = new Date().toLocaleDateString();
+        let newArticle = new Article(
+          this.f.title.value, sessionStorage.getItem('userName'), this.f.content.value, date_now, resp);
+        console.log("send article")
+       this.articleService.AddArticle(newArticle).subscribe(res => {
+          if (res) {
+            this.router.navigate(['/dashboard'])
+            console.log("success")
+            this.flashMessagesService.show('Profil został zaktualizowany', {cssClass: 'alert-success', timeout: 3000})
+
+          } else {
+            this.flashMessagesService.show('Ups! Coś poszło nie tak.', {cssClass: 'alert-danger'})
+          }
+        });
+      })
+
+    }
+    // Read the file
+    reader.readAsDataURL(theFile);
+    console.log("end readAndUploadFile")
+  }
 }
