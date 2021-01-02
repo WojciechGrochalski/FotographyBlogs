@@ -1,0 +1,24 @@
+
+.section-title{
+    margin: 2rem 0;
+    text-align: center;
+}
+form{
+    padding: 2rem;
+    max-width: 90%;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    margin: 0 auto;
+    box-shadow: 2px 1px 8px -2px;
+}
+.image-details{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 100%;
+}
+.image-details img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

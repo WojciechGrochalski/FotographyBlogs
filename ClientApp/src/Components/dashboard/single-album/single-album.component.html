@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="content">
+        <div class="album-details">
+            <h3>{{album.name}}</h3>
+            <p>{{album.description}}</p>
+        </div>
+        <div class="images">
+            <h4>Zdjęcia</h4>
+            <div class="grid">
+                <div class="image" *ngFor='let image of pictures'>
+                    <img src="{{image.imageSrc}}" alt="{{imageAlt}}">
+                </div>
+                <!-- <div class="image" *ngIf='newPicture'>
+                    <img src="{{newPicture.imageSrc}}" alt="{{imageAlt}}">
+                </div> -->
+                <form [formGroup]="imageForm" (ngSubmit)="imageSubmit()">
+                    <label for="image" class="add-image-label">
+                        <input 
+                            type="file" 
+                            formControlName="image" 
+                            id="image" 
+                            hidden
+                            class="custom-file-input"
+                            (change)="onFileChange($event)">
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

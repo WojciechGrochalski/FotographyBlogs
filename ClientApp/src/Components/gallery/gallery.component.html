@@ -1,0 +1,24 @@
+<app-blog-nav></app-blog-nav>
+<main>
+    <header>
+        <h1 class="main-title">Zdjęcia użytkowników</h1>
+        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores totam earum autem dolore nesciunt itaque.</p>
+        <hr class="separator">
+        <hr class="separator">
+    </header>
+
+    <section class="gallery">
+        <div class="content" *ngFor="let picture of pictures">
+            <div class="overlay">
+                <div class="header">
+                    <h4 class="user-link"><a href="#" > Username </a></h4>
+                </div>
+                <div class="stats">
+                    <small><i class="far fa-heart"></i>1405</small>
+                    <small><i class="far fa-calendar-alt"></i>12.09.2020</small>
+                </div>
+            </div>
+            <img src="{{picture.download_url}}" alt="">
+        </div>
+    </section>
+</main>

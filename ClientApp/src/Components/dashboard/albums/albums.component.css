@@ -1,0 +1,54 @@
+img{
+    max-width: 100%;
+    height: auto;
+}
+.section-title{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.albums-empty{
+    max-width: 50%;
+    margin: 0 auto;
+    background-color: rgb(243, 243, 243);
+    padding: 2rem;
+    text-align: center;
+    border-radius: 3px;
+}
+.albums-empty h4{
+    margin-bottom: 2rem;
+}
+.albums{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.btn{
+    color: white!important;
+    border-radius: 5px;
+    padding: .5rem .8rem;
+}
+.new{
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+}
+.btn.new::before{
+    content: '\f067';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: .5rem;
+
+}
+
+@media(max-width: 768px){
+    .albums{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .card{
+        width: 70%;
+    }
+}

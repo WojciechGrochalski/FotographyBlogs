@@ -1,0 +1,27 @@
+<section class="featured-articles">
+    <div class="container">
+
+        <h2 class="section-header">Featured articles</h2>
+        <p class="section-info">Some of the most popular articles here</p>
+
+        <hr class="separator">
+        <hr class="separator">
+    
+        <article class="card mb-4 p-4 article-snippet" *ngFor="let article of mostViewArticles">
+            <div class="row g-0">
+                <div class="col-md-6 article-image">
+                    <img src="{{article.image.imageSrc}}" alt="" >
+                </div>
+                <div class="col-md-6 article-review">
+                    <h3 class="card-title article-title mt-2">{{article.title}}</h3>
+                    <small class="people-read"><i class="fas fa-eye"></i> {{article.views}}</small>
+                    <p class="card-text article-meta"><small class="text-muted"><i class="fas fa-user"></i> {{article.author}} <i class="fas fa-calendar"></i> {{article.date}}</small></p>
+                    <p class="article-info">{{(article.content.length >500) ? (article.content | slice:0:500)+'...':(article.content)}} </p>
+                    <a routerLink="/detail/{{article.id}}" class="btn">Read More</a>
+                </div>
+            </div>
+        </article>
+        </div>     
+</section>
+
+

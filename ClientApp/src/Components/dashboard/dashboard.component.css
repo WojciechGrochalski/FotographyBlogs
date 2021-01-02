@@ -1,0 +1,139 @@
+/* UTILITIES STYLES */
+main{
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    background-color: rgb(240, 240, 240);
+}
+img{
+    width: 100%;
+    height: auto;
+}
+
+/* SIDEBAR STYLES */
+.sidebar{
+    background: linear-gradient(180deg, rgba(29,29,29,1) 54%, rgba(52,52,52,1) 79%, rgba(83,83,83,1) 97%); 
+    display: flex;
+    color: white;
+    width: 250px;
+    max-width: 100%;
+    min-width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.header-title{
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.header-title::after{
+    content: '';
+    display: block;
+    border-bottom: 2px solid white;
+    width: 100%;
+    padding: .5rem;
+}
+.user-detail{
+    padding: 1rem;
+}
+.user-detail img{
+    width: 60%;
+    border-radius: 50%;
+}
+.user-detail h4{
+    margin-top: .5rem;
+    opacity: .7;
+}
+.sidebar ul{
+    list-style: none;
+    margin: 5px 0 15px;
+    padding: 0;
+    display: block;
+    width: 100%;
+}
+.sidebar p{
+    margin: 0;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--clr-main);
+}
+.sidebar hr{
+    margin: .5rem 0;
+    border-color: var(--clr-main);
+}
+.sidemenu li{
+    padding: 1.5rem;
+    position: relative;
+    font-size: 1.2rem;
+    text-align: left;
+    z-index: 1;
+    transition: all .5s ease-in-out;
+}
+.sidemenu li::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:var(--clr-main);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    opacity: 0;
+    transition: transform .25s ease-in, opacity .25s linear;
+}
+.sidemenu li:hover::after{
+    transform: scaleX(1);
+    opacity: 1;
+    color: black;
+}
+.sidebar a{
+    text-decoration: none;
+    color: white;
+    transition: color .2s ease .1s;
+}
+.sidebar li:hover a, 
+.sidebar li:hover i{
+    color: black;
+}
+i{
+    margin-right: 1.5rem;
+    margin-left: 3rem;
+    transition: color .2s ease .1s;
+
+}
+@media(max-width: 1000px ){
+    .sidebar{
+        width: 200px;
+        justify-content: space-between;
+    }
+    .header-title{
+        font-size: 1.2rem;
+    }
+    .user-detail{
+        padding: .5rem;
+    }
+    .user-detail h4{
+        font-size: .8rem;
+    }
+    .sidemenu li{
+        padding: 1rem;
+    }
+    i{
+        margin-left: 1.5rem;
+    }
+}
+
+/* MAIN SECTION */
+.main-panel{
+    height: 100%;
+    width: 100%;
+    float: left;
+    padding: 20px;
+    background-color: white;
+}
+

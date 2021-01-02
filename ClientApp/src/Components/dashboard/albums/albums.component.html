@@ -1,0 +1,20 @@
+<div class="container">
+    <h3 class="section-title">Moje albumy</h3>
+    <div class="albums-empty" *ngIf="albums.length == 0">
+        <h4>Nie masz jeszcze żadnych albumów </h4>
+        <a class="btn btn-info btn-add">Dodaj</a>
+    </div>
+    <div *ngIf="albums.length > 0">
+        <div class="albums">
+            <div class="card" *ngFor="let album of albums">
+                <img src="{{album.images[0].imageSrc}}" class="card-img-top" alt="Jedno ze zdjęć albumu">
+                <div class="card-body">
+                  <h5 class="card-title">{{album.name}}</h5>
+                  <p class="card-text">{{album.description}}</p>
+                  <a routerLink="/dashboard/albums/{{album.id}}" class="btn btn-primary">Przeglądaj</a>
+                </div>
+              </div>
+            </div>
+            <a class="btn btn-info new" routerLink='new'>Nowy album</a>
+    </div>
+</div>

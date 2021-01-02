@@ -1,0 +1,38 @@
+<app-blog-nav></app-blog-nav>
+<main>
+    <div class="sidebar">
+        <h2 class="header-title">Panel użytkownika</h2>
+        <a routerLink="/dashboard">
+            <div class="user-detail">
+                <img src="https://unsplash.it/300" alt="">
+                <h4>Nazwa użytkownika</h4>
+            </div>
+        </a>
+        <p>Blog</p>
+        <hr class="separator">
+        <ul class="sidemenu nav">
+            <li><i class="fas fa-th-list"></i><a routerLink='articles'>Artykuły</a></li>
+            <li><i class="fas fa-plus-circle"></i><a routerLink='new-article'>Nowy</a></li>
+        </ul>
+        <p>Forum</p>
+        <hr class="separator">
+        <ul class="sidemenu">
+            <li><i class="fas fa-th-list"></i><a routerLink='threads'>Wątki</a></li>
+            <li><i class="fas fa-plus-circle"></i><a routerLink='new-thread'>Nowy</a></li>
+        </ul>
+        <p>Profil</p>
+        <hr class="separator">
+        <ul class="sidemenu">
+            <li><i class="fas fa-user-edit"></i><a routerLink='edit-profile'>Edytuj</a></li>
+            <li><i class="fas fa-image"></i><a routerLink='albums'>Albumy</a></li>
+        </ul>
+        <hr class="separator">
+        <ul class="sidemenu">
+            <li><i class="fas fa-sign-out-alt"></i><a href="#">Wyloguj</a></li>
+        </ul>
+    </div>
+    <div class="main-panel">
+        <flash-messages></flash-messages>
+        <router-outlet></router-outlet>
+    </div>
+</main>

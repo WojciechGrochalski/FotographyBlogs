@@ -1,0 +1,33 @@
+<div class="container">
+    <h2 class="section-title">Edytuj artykuł</h2>
+    <form [formGroup]="editForm" (ngSubmit)="articleSubmit()">
+        <div class="mb-3">
+            <label for="title">Tytuł</label>
+            <input 
+                type="text" 
+                formControlName="title" 
+                class="form-control">
+        </div>
+        <div class="custom-file mb-4">
+            <input 
+                type="file" 
+                formControlName="image" 
+                id="image" 
+                class="custom-file-input"
+                (change)="onFileChange($event)">
+            <label 
+                for="image" 
+                class="custom-file-label" 
+                data-browse="Przeglądaj">Dodaj zdjęcie artykułu</label>    
+        </div>
+        <div class="image-details" *ngIf="imageSrc">
+            <img [src]="imageSrc" style="height: 300px; width: 500px;">
+            <p *ngIf="selectedImage">{{selectedImage.file.name}}</p>
+        </div>
+        <div class="mb-3">
+            <label for="content">Treść artykułu</label>
+            <ckeditor [editor]="Editor" [tagName]="tagname" formControlName="content" ></ckeditor>
+        </div>
+        <button type="submit" class="btn btn-info">Opublikuj</button>
+    </form>
+</div>

@@ -1,0 +1,46 @@
+<div class="container">
+    <h3 class="section-title">Edycja profilu</h3>
+    <form [formGroup]="profileForm" (ngSubmit)="userSubmit()">
+        <div class="mb-3">
+            <label for="username">Nazwa użytkownika</label>
+            <input 
+                type="text" 
+                formControlName="username" 
+                class="form-control">
+            <p class="warning" *ngIf="f.username.invalid && (f.username.dirty || f.username.touched) && f.username.errors.minlength">Nazwa użytkownika powinna składać się z min. 4 znaków</p>
+        </div>
+        <div class="mb-3">
+            <label for="firstName" >Imię</label>    
+            <input 
+                type="text" 
+                formControlName="firstName" 
+                class="form-control">
+                <p class="warning" *ngIf="f.firstName.invalid && (f.firstName.dirty || f.firstName.touched) && f.firstName.errors.minlength">Imię powinno zawierać min 2 znaki</p>
+        </div>
+        <div class="mb-3">
+            <label for="lastName" >Nazwisko</label>    
+            <input 
+                type="text" 
+                formControlName="lastName" 
+                class="form-control">
+                <p class="warning" *ngIf="f.lastName.invalid && (f.lastName.dirty || f.lastName.touched) && f.lastName.errors.minlength">Nazwisko powinno zawierać conajmniej 2 znaki</p>
+        </div>
+        <div class="custom-file mb-4">
+            <input 
+                type="file" 
+                formControlName="profileImage" 
+                id="profileImage" 
+                class="custom-file-input"
+                (change)="onFileChange($event)">   
+            <label 
+                for="profileImage" 
+                class="custom-file-label" 
+                data-browse="Dodaj zdjęcie">Zdjęcie profilowe</label>    
+        </div>
+        <div class="image-details" *ngIf="imageSrc">
+            <img [src]="imageSrc" style="height: 300px; width: 500px;">
+            <p>{{selectedImage.file.name}}</p>
+        </div>
+        <button type="submit" class="btn btn-info">Zapisz zmiany</button>
+    </form>
+</div>

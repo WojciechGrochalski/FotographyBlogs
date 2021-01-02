@@ -1,0 +1,133 @@
+.navbar
+{
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 1px;
+  background-color: black;
+}
+.navbar .navbar-brand img{
+  width: 80px;
+  height: 47px;
+}
+.navbar-dark .navbar-nav .nav-item{
+  margin: 0 1rem;
+}
+.navbar-dark .navbar-nav .nav-link
+{
+  position: relative;
+  color: #fff;
+}
+
+.navbar-dark .navbar-nav .nav-link.log-in{
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+}
+.navbar-dark .navbar-nav .nav-link::before{
+  content:'';
+  position: absolute;
+  width: 95%;
+  transform: scaleX(0);
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-out;
+}
+.navbar-dark .navbar-nav .nav-link:hover::before{
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.dropdown-menu{
+  margin: 0.5rem 0 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999!important;
+}
+.dropdown-menu .dropdown-item{
+  color: #fff;
+  padding: .8rem;
+  position: relative;
+}
+.dropdown-menu .dropdown-item:hover{
+  background-color: transparent;
+}
+.dropdown-menu .dropdown-item::before{
+  content:'';
+  position: absolute;
+  width: 90%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-out;
+}
+.dropdown-menu .dropdown-item:hover::before{
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.disabled{
+  opacity: 0.9;
+}
+
+@media (max-width: 992px){
+
+  .navbar{
+    background-color: rgba(0,0,0,.9)!important;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 10px 50px;
+  }
+  .navbar.expand{
+    padding: 10px 50px;
+  }
+  .navbar-dark button.btn{
+    width: 100%;
+    text-align: start;
+    padding: 0!important;
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: .5rem 0!important;
+    margin: 0 1rem!important;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .navbar-dark button.btn::before{
+    content:'';
+    position: absolute;
+    width: 95%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    transform-origin: bottom left;
+    transition: transform 0.25s ease-out;
+  }
+
+  .navbar-dark .btn:hover::before{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .navbar-dark .navbar-nav .nav-item.dropdown div{
+    width: 100%;
+  }
+  
+  .navbar-dark .navbar-nav .dropdown-menu{
+    background-color: transparent;
+    border: none;
+  }
+
+  .navbar-brand img{
+    width: 45px;
+    height: 26px;
+
+  }
+
+}

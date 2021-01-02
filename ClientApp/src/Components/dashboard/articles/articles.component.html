@@ -1,0 +1,10 @@
+<div class="container">
+    <h3>Moje artykuły</h3>
+    <ul class="list-group articles-list">
+        <app-article-item
+            *ngFor="let article of articles"
+            [article]="article"
+            (deleteArticle)="deleteArticle($event)"
+        ></app-article-item>
+      </ul>
+</div>

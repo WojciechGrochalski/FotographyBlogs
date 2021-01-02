@@ -1,0 +1,34 @@
+<div class="container">
+    <h2 class="section-title">Kreator albumu</h2>
+    <form [formGroup]="albumForm" (ngSubmit)="albumSubmit()">
+        <div class="mb-3">
+            <label for="title">Nazwa albumu</label>
+            <input 
+                type="text" 
+                formControlName="name" 
+                class="form-control">
+        </div>
+        <div class="custom-file mb-4" >
+            <input 
+                type="file" 
+                formControlName="image" 
+                id="image" 
+                class="custom-file-input"
+                (change)="onFileChange($event)"
+               >
+            <label 
+                for="image" 
+                class="custom-file-label" 
+                data-browse="Przeglądaj">Dodaj zdjęcie</label>    
+        </div>
+        <div class="image-details" *ngIf="selectedImage">
+            <img [src]="imageSrc" style="height: 100px; width: 200px;">
+            <p>{{selectedImage.file.name}}</p>
+        </div>
+        <div class="mb-3">
+            <label for="description">Krótki opis</label>
+            <textarea class="form-control" name="description" formControlName="description" rows="5" maxlength="250"></textarea>
+        </div>
+        <button type="submit" class="btn btn-info">Stwórz</button>
+    </form>
+</div>

@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="blog-navigation">
+    <a  class="navbar-brand" href="/"> <img src="assets/Foto/logo.png" alt="Logotyp" >
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" >
+          <a class="nav-link" routerLink='/'> Start </a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" routerLink='/about'> O mnie </a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" routerLink='/gallery'>Galeria</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/forum'>Forum </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/blog'>Posty </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav justify-content-end">
+        <li class="nav-item" *ngIf="authenticationService.isLoggedIn()">
+          <a class="nav-link ml-auto" routerLink="#">Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="authenticationService.isLoggedIn()">
+          <a class="nav-link ml-auto" routerLink="#">Profile</a>
+        </li>
+        <li class="nav-item" *ngIf="!authenticationService.isLoggedIn()">
+          <a class="nav-link ml-auto" routerLink="/log-in">Zaloguj się</a>
+        </li>
+        <li class="nav-item" *ngIf="authenticationService.isLoggedIn()">
+          <a class="nav-link ml-auto" href="#" (click)="logout()">Wyloguj</a>
+        </li>
+      </ul>
+        
+    </div>
+  </nav>
+  
+  
