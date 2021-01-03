@@ -110,7 +110,6 @@ export class NewAlbumComponent implements OnInit {
     console.log(this.user,'user id');
     let newAlbum = new Album(this.f.name.value,
       this.f.description.value,this.user.id);
-    // Dodać w serwisie URL do API na backendzie
     this.userService.addAlbum(newAlbum)
       .subscribe(album => {
         const id: number = +album;

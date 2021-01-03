@@ -13,7 +13,7 @@ import {PostService} from '../../Services/post.service';
 export class PostComponent implements OnInit {
 
   @Input() post: Post;
-
+  view: number;
   constructor(
     private route: ActivatedRoute,
     private postService: PostService) { }
@@ -23,7 +23,7 @@ export class PostComponent implements OnInit {
   }
   ngOnInit() {
 
-
+    this.view= Math.floor(Math.random() * 589) + 1
   }
 
 }

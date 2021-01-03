@@ -35,3 +35,6 @@ input:focus{
     height: auto;
     display: block;
 }
+::ng-deep .ck-editor__editable {
+   min-height: 200px !important;
+ }

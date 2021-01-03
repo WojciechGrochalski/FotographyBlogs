@@ -1,36 +1,35 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, DoCheck, OnDestroy, OnInit} from '@angular/core';
 import {Post} from '../../models/Post';
 import {Comment} from '../../models/Comment';
 import {PostService} from '../../Services/post.service';
-
-
+import {delay} from 'rxjs/operators';
+import { interval, Subscription } from 'rxjs';
+const source = interval(1000);
+const text = 'Your Text Here';
 @Component({
   selector: 'app-post-template',
   templateUrl: './post-template.component.html',
   styleUrls: ['./post-template.component.css']
 })
-export class PostTemplateComponent implements OnInit, DoCheck {
+export class PostTemplateComponent implements OnInit, OnDestroy {
+
   post = {} as Post;
   id: number;
   comments: Comment[] = [];
+  newComments: Comment[] = [];
   defaultValue: string = 'write a comment...';
+  subscriptions: Subscription;
+
 
   constructor(private postService: PostService) {
+    this.subscriptions=interval(300).subscribe((fun=>{
+      this.getComentInterval();
+    }))
   }
 
   async ngOnInit() {
-    const postObserve = this.postService.GetPost();
-    postObserve.subscribe( res => {
-      if (res) {
-        this.post = res;
-        console.log(this.post.ID + ' from subscribe');
-        console.log(this.post, '1');
-        sessionStorage.setItem('post', JSON.stringify(res));
-      } else {
-        //this.post = JSON.parse(sessionStorage.getItem('post'));
-       // this.id = this.post.ID;
-      }
-    });
+
+    await this.SetPost();
     await this.GetComment();
   }
 
@@ -51,8 +50,6 @@ export class PostTemplateComponent implements OnInit, DoCheck {
       if (res) {
         this.post = res;
         this.id = res.ID;
-        console.log(this.post.ID + ' from subscribe');
-        console.log(this.post, '1');
         sessionStorage.setItem('post', JSON.stringify(res));
       } else {
         this.post = JSON.parse(sessionStorage.getItem('post'));
@@ -60,7 +57,16 @@ export class PostTemplateComponent implements OnInit, DoCheck {
       }
     });
   }
+getComentInterval(){
+  this.postService.GetCommentFromDB(this.post.ID).subscribe(res=>{
+    if(this.comments!=res){
+      this.comments=res;
+    }
 
+
+  })
+
+}
   async GetComment() {
     try {
       this.comments = await this.postService.GetCommentFromDB(this.post.ID).toPromise();
@@ -69,22 +75,12 @@ export class PostTemplateComponent implements OnInit, DoCheck {
       console.error(e);
     }
   }
-   delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
-  async ngDoCheck(): Promise<void> {
-    if(this.comments.length>1) {
-      await this.delay(1200);
-      try {
-        this.comments = await this.postService.GetCommentFromDB(this.post.ID).toPromise();
-
-      } catch (e) {
-        console.error(e);
-      }
-
-    }
-  }
 
   Clear() {
     if (this.defaultValue == 'write a comment...') {
@@ -97,5 +93,14 @@ export class PostTemplateComponent implements OnInit, DoCheck {
       this.defaultValue = 'write a comment...';
     }
   }
+  StartWrite()
+  {
+    this.defaultValue = ' ';
+
+  }
+
+
+
+
 
 }

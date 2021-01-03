@@ -5,9 +5,9 @@ import { FlashMessagesService } from 'angular2-flash-messages'
 import { Router, ActivatedRoute } from '@angular/router'
 import {User} from '../../../models/User';
 import {Album} from '../../../models/Album';
-import {ImageSnippet} from '../../../models/Image';
 import {FileToUpload} from '../../../models/File';
 const MAX_SIZE: number = 4194304;
+
 class ImageModel {
   constructor(
     public imageSrc: string,
@@ -26,17 +26,13 @@ export class ProfileEditComponent implements OnInit {
   submitted = false;
   selectedImage: ImageModel;
   imageSrc: string;
-  pictures: string[];
   album: Album;
-  imageForm: FormGroup;
-  imageAlt: string;
-  newPicture: ImageSnippet;
   theFile: any = null;
   messages: string[] = [];
   url:string | ArrayBuffer;
   loading: boolean = false; // Flag variable
   file: File = null; // Variable to store file
-  UserId: number;
+  User: User;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,7 +48,8 @@ export class ProfileEditComponent implements OnInit {
       lastName: ['', [Validators.minLength(2), Validators.required]],
       profileImage: ['']
     })
-    this.UserId = JSON.parse(sessionStorage.getItem('user')).ID;
+    this.User = JSON.parse(sessionStorage.getItem('user'));
+    console.log(this.User.id)
   }
   get f() { return this.profileForm.controls;}
 
@@ -78,7 +75,7 @@ export class ProfileEditComponent implements OnInit {
   }
 
   private  readAndUploadFile(theFile: any ) {
-    console.log(this.file)
+
     let file = new FileToUpload();
     // Set File Information
     file.fileName = theFile.name;
@@ -96,24 +93,22 @@ export class ProfileEditComponent implements OnInit {
         this.messages.push("Upload complete");
         this.submitted = true;
 
-        if (this.profileForm.invalid) {
-          return this.flashMessagesService.show('Pola nie mogą pozostać puste!', {cssClass: 'alert-danger'})
-        }
-
         let  newUserData =  new User(
-          this.f['username'].value,
-          this.f['firstName'].value,
-          this.f['lastName'].value)
+          this.User.username,
+          this.User.firstName,
+          this.User.lastName)
         newUserData.profileImg=resp;
 
-        this.userService.updateUser(newUserData, this.UserId).subscribe(res => {
+        this.userService.updateUser(newUserData, this.User.id).subscribe(res => {
           if (res) {
+            sessionStorage.setItem('user', JSON.stringify(res));
             this.router.navigate(['/dashboard'])
-            this.flashMessagesService.show('Profil został zaktualizowany', {cssClass: 'alert-success', timeout: 3000})
-          } else {
+            window.location.reload();
+            this.flashMessagesService.show('Profil został zaktualizowany', {cssClass: 'alert-success', timeout: 3000})}
+          else {
             this.flashMessagesService.show('Ups! Coś poszło nie tak.', {cssClass: 'alert-danger'})
           }
-        })
+        });
       });
     }
     // Read the file
@@ -122,7 +117,36 @@ export class ProfileEditComponent implements OnInit {
   }
   // Dodać w serwisie URL do API na backendzie
   userSubmit() {
-    this.readAndUploadFile(this.theFile);
+    if(this.theFile) {
+      this.readAndUploadFile(this.theFile);
+    }
+    else{
+      let  newUserData =  new User(
+        this.User.username,
+        this.User.firstName,
+        this.User.lastName)
+      newUserData.profileImg=this.User.profileImg;
+
+      this.userService.updateUser(newUserData, this.User.id).subscribe(res => {
+        if (res) {
+          sessionStorage.setItem('user', JSON.stringify(res));
+          this.router.navigate(['/dashboard'])
+          this.flashMessagesService.show('Profil został zaktualizowany', {cssClass: 'alert-success', timeout: 3000})}
+        else {
+          this.flashMessagesService.show('Ups! Coś poszło nie tak.', {cssClass: 'alert-danger'})
+        }
+      });
+    }
+  }
+
+  onKeyName(event) {
+    this.User.username= event.target.value;
+  }
+  onKeyFName(event) {
+    this.User.firstName= event.target.value;
+  }
+  onKeyLName(event) {
+    this.User.lastName= event.target.value;
   }
 
 }

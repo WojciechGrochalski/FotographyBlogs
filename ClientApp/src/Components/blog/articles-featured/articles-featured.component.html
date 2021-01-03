@@ -6,22 +6,48 @@
 
         <hr class="separator">
         <hr class="separator">
-
-        <article class="card mb-4 p-4 article-snippet" *ngFor="let article of mostViewArticles">
-            <div class="row g-0">
-                <div class="col-md-6 article-image">
-                    <img src="{{article.Img}}" alt="" >
-                </div>
-                <div class="col-md-6 article-review">
-                    <h3 class="card-title article-title mt-2">{{article.Title}}</h3>
-                    <small class="people-read"><i class="fas fa-eye"></i> {{article.view}}</small>
-                    <p class="card-text article-meta"><small class="text-muted"><i class="fas fa-user"></i> {{article.Author}} <i class="fas fa-calendar"></i> {{article.Date}}</small></p>
-                    <p class="article-info">{{(article.Content.length >500) ? (article.Content | slice:0:500)+'...':(article.Content)}} </p>
-                  <a (click)="RouteToArticleOB(article)" class="btn">Read More</a>
-                </div>
-            </div>
-        </article>
+      <div class="form-row justify-content-center">
+        <div class="form-group col-md-3">
+          <div class="input-group mx-auto mb-3">
+      <label>Search for article</label>
+      <input #search >
+      <button (click)="Search(search.value , search)" class="btn-primary">Search</button>
+          </div>
         </div>
+      </div>
+      <div *ngIf="articlefromSearch">
+      <article class="card mb-4 p-4 article-snippet" *ngFor="let article of articlefromSearch">
+        <div class="row g-0">
+          <div class="col-md-6 article-image">
+            <img src="{{article.Img}}" alt="" >
+          </div>
+          <div class="col-md-6 article-review">
+            <h3 class="card-title article-title mt-2">{{article.Title}}</h3>
+            <small class="people-read"><i class="fas fa-eye"></i> {{article.View}}</small>
+            <p class="card-text article-meta"><small class="text-muted"><i class="fas fa-user"></i> {{article.Author}} <i class="fas fa-calendar"></i> {{article.Date}}</small></p>
+            <div [innerHTML]="(article.Content.length >100) ? (article.Content | slice:0:100)+'...':(article.Content)"> </div>
+            <a (click)="RouteToArticleOB(article)" class="btn">Read More</a>
+          </div>
+        </div>
+      </article>
+      </div>
+      <div *ngIf="!articlefromSearch">
+      <article class="card mb-4 p-4 article-snippet" *ngFor="let article of mostViewArticles">
+        <div class="row g-0">
+          <div class="col-md-6 article-image">
+            <img src="{{article.Img}}" alt="" >
+          </div>
+          <div class="col-md-6 article-review">
+            <h3 class="card-title article-title mt-2">{{article.Title}}</h3>
+            <small class="people-read"><i class="fas fa-eye"></i> {{article.View}}</small>
+            <p class="card-text article-meta"><small class="text-muted"><i class="fas fa-user"></i> {{article.Author}} <i class="fas fa-calendar"></i> {{article.Date}}</small></p>
+            <div [innerHTML]="(article.Content.length >100) ? (article.Content | slice:0:100)+'...':(article.Content)"> </div>
+            <a routerLink="/detail/{{article.ID}}" class="btn">Read More</a>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
 </section>
 
 

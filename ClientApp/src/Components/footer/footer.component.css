@@ -3,8 +3,13 @@
   footer{
     background-color: #3f3f3f;
     color: #d5d5d5 !important;
+    position: static;
+    bottom: 0;
+    width: 100%;
+
+    padding-bottom: 10px;
   }
   footer p{
     margin: 0;
+
   }
-  

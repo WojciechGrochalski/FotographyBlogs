@@ -30,6 +30,7 @@ export class PostForumComponent implements OnInit, DoCheck {
     private postService: PostService){ }
 
   async ngOnInit() {
+
     this.IsUser=sessionStorage.getItem('userName');
     try {
       this.posts = await this.postService.GetPostsFromDB().toPromise();
@@ -78,8 +79,9 @@ export class PostForumComponent implements OnInit, DoCheck {
         this.messages.push("Upload complete");
         this.UrlToPostImg=resp;
         console.log(this.UrlToPostImg, 'from upload');
+        let AuthorID: number= +sessionStorage.getItem('userID');
         let date_now = new Date().toLocaleDateString();
-        let post = new Post(title, content, date_now, sessionStorage.getItem('userName'));
+        let post = new Post(title, content, date_now, sessionStorage.getItem('userName'),AuthorID);
         this.postService.AddPost(post).subscribe(res => {
           if (res) {
             // window.location.reload();

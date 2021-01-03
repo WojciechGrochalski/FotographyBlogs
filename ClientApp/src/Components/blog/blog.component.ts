@@ -11,7 +11,9 @@ export class BlogComponent implements OnInit {
 
 
   constructor( ) { }
- 
-  ngOnInit() {}
-  
+
+  ngOnInit() {
+    document.body.classList.add('bg-img-article');
+  }
+
 }

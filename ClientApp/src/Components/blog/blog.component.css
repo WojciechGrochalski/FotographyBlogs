@@ -16,3 +16,13 @@
 hr.dark{
     padding: 20px 0;
 }
+.bg-img
+{
+
+  background: url("../../assets/Foto/articleBG.jpg") no-repeat center center fixed;;
+  min-height: 101vh;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

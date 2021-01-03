@@ -2,7 +2,7 @@
 <div class="wrapper" *ngIf="post">
 
     <div class="overlay-content">
-      <h1 contentEditable role='textbox' aria-multiline='true' class="overlay-title">{{post.Title}}</h1>
+<!--      <h1 contentEditable role='textbox' aria-multiline='true' class="overlay-title">{{post.Title}}</h1>-->
 
     </div>
   </div>
@@ -11,7 +11,7 @@
     <p >{{post.Author}}</p>
     <div class="shadow-box"></div>
     <div class="post-text">
-      <h2>Article Subtitle One</h2>
+      <h2>{{post.Title}}</h2>
       <div [innerHTML]="post.Content"></div>
     </div>
   </div>
@@ -24,7 +24,7 @@
             Comment panel Max 150 characters!
           </div>
           <div class="panel-body">
-            <textarea class="form-control" maxlength="150"[(ngModel)]="defaultValue"  rows="3"  (mouseover)="Clear()" (mouseleave)="UnClear()" #Content></textarea>
+            <textarea class="form-control" maxlength="150"[(ngModel)]="defaultValue"  rows="3"  (click)="StartWrite()" (mouseover)="Clear()" (mouseleave)="UnClear()" #Content></textarea>
             <br>
             <button type="button" class="btn btn-info pull-right" (click)="AddComment(Content.value,post.ID)">Post</button>
             <div class="clearfix"></div>

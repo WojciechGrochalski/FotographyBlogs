@@ -22,15 +22,17 @@ export class ArticleDetailComponent implements OnInit {
     articleObservable.subscribe((res: Article) => {
       if(res) {
         this.article = res;
+        this.article.View =this.article.View+1;
         console.log(res);
+        this.articleService.EditArticle(this.article).subscribe();
         sessionStorage.setItem('content',JSON.stringify(res) );
       }
       else{
         this.article= JSON.parse(sessionStorage.getItem('content')) ;
       }
     });
-  }
 
+  }
 
   getArticleImage(): string{
     return this.article.Img;

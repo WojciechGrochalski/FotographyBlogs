@@ -20,11 +20,10 @@ import {BlogComponent} from '../Components/blog/blog.component';
 import {ArticleDetailComponent} from '../Components/blog/article-detail/article-detail.component';
 import {DashboardComponent} from '../Components/dashboard/dashboard.component';
 import {NewArticleComponent} from '../Components/dashboard/new-article/new-article.component';
-import {NewThreadComponent} from '../Components/dashboard/new-thread/new-thread.component';
 import {ProfileEditComponent} from '../Components/dashboard/profile-edit/profile-edit.component';
 import {AlbumsComponent} from '../Components/dashboard/albums/albums.component';
 import {ArticlesComponent} from '../Components/dashboard/articles/articles.component';
-import {ThreadsComponent} from '../Components/dashboard/threads/threads.component';
+
 import {ArticleItemComponent} from '../Components/dashboard/articles/article-item/article-item.component';
 import {EditArticleComponent} from '../Components/dashboard/edit-article/edit-article.component';
 import {NewAlbumComponent} from '../Components/dashboard/new-album/new-album.component';
@@ -78,12 +77,10 @@ import { NewPostComponent } from '../Components/dashboard/new-post/new-post.comp
     ArticleDetailComponent,
     DashboardComponent,
     NewArticleComponent,
-    NewThreadComponent,
     ProfileEditComponent,
     PostComponent,
     AlbumsComponent,
     ArticlesComponent,
-    ThreadsComponent,
     ArticleItemComponent,
     EditArticleComponent,
     NewAlbumComponent,
@@ -129,14 +126,6 @@ import { NewPostComponent } from '../Components/dashboard/new-post/new-post.comp
         {
           path: 'edytuj-artykul',
           component: EditArticleComponent
-        },
-        {
-          path: 'threads',
-          component: ThreadsComponent
-        },
-        {
-          path: 'new-thread',
-          component: NewThreadComponent
         },
         {
           path: 'edit-profile',

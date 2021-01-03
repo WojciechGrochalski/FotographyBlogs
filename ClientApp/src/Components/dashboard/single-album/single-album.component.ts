@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 
 import { UsersService } from '../../../Services/Users.service'
 import { FlashMessagesService } from 'angular2-flash-messages'
-import {ImageSnippet} from '../../../models/Image';
+
 import {Album} from '../../../models/Album';
 import {FileToUpload} from '../../../models/File';
 import {ImgPath} from '../../../models/ImgPath';
@@ -22,12 +22,10 @@ export class SingleAlbumComponent implements OnInit {
   pictures: ImgPath[]=[];
   album: Album;
   imageForm: FormGroup;
-  imageAlt: string;
   newPicture: string | ArrayBuffer;
   theFile: any = null;
   messages: string[] = [];
   url:string | ArrayBuffer;
-  UrlToPostImg: string = null;
   loading: boolean = false; // Flag variable
   file: File = null; // Variable to store file
 
@@ -45,6 +43,7 @@ export class SingleAlbumComponent implements OnInit {
    AlbumObserve.subscribe(res =>{
      if(res) {
        this.album = res;
+       console.log(this.album.ID)
        sessionStorage.setItem('album', JSON.stringify(res));
        this.pictures = res.ImgPaths;
      }
@@ -62,8 +61,7 @@ export class SingleAlbumComponent implements OnInit {
 
   get f() { return this.imageForm.controls;}
 
-  private  readAndUploadFile(theFile: any ) {
-    console.log(this.file)
+  private  readAndUploadFile(theFile: any) {
     let file = new FileToUpload();
     // Set File Information
     file.fileName = theFile.name;
@@ -77,10 +75,14 @@ export class SingleAlbumComponent implements OnInit {
       // Store base64 encoded representation of file
       file.fileAsBase64 = reader.result.toString();
       // POST to server
-      this.userService.addPicture(file,this.album.Id).subscribe(resp => {
+      this.userService.uploadFile(file).subscribe(resp => {
         this.messages.push("Upload complete");
-        this.UrlToPostImg=resp;
-        console.log(this.UrlToPostImg, 'from upload');
+        let img = new ImgPath(resp,this.album.ID);
+        console.log(this.album.ID)
+        this.album.ImgPaths.push(img);
+        sessionStorage.setItem('album', JSON.stringify(this.album));
+        this.theFile = null;
+        this.userService.addImgToAlbum(img).subscribe();
         if(resp){
           this.flashMessagesService.show('Dodano zdjęcie!', {cssClass: 'alert-success', timeout: 3000})
         }else {
@@ -93,7 +95,7 @@ export class SingleAlbumComponent implements OnInit {
     console.log("end readAndUploadFile")
   }
 
-  onFileChange(event) {
+  onFileChange(event,id:number) {
     this.theFile = null;
     if (event.target.files && event.target.files.length > 0) {
       // Don't allow file sizes over 1MB
@@ -105,7 +107,8 @@ export class SingleAlbumComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
         reader.onload=(event=>{
 
-            this.newPicture=reader.result;
+          this.newPicture=reader.result;
+          this.readAndUploadFile(this.theFile);
 
         })
       }
@@ -115,8 +118,8 @@ export class SingleAlbumComponent implements OnInit {
       }
     }
   }
-  imageSubmit() {
-  this.readAndUploadFile(this.theFile);
+  imageSubmit(id:number) {
+    // this.readAndUploadFile(this.theFile, id);
   }
 
 }

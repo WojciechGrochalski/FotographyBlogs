@@ -52,6 +52,9 @@ namespace foto_full.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("AuthorID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -64,7 +67,7 @@ namespace foto_full.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("View")
+                    b.Property<int>("View")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -125,6 +128,9 @@ namespace foto_full.Migrations
 
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AuthorID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");

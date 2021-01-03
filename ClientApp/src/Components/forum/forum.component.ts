@@ -37,7 +37,8 @@ export class ForumComponent implements  OnInit, DoCheck {
   async AddArticle(title: string, content: string) {
     let date_now = new Date().toLocaleDateString();
     console.log('Data time now', date_now)
-    let article = await new Article(title, content, date_now, sessionStorage.getItem('userName'),"");
+    let AuthorID: number= +sessionStorage.getItem('userID');
+    let article = await new Article(title, content, date_now, sessionStorage.getItem('userName'),"",AuthorID);
     await this.articleService.AddArticle(article).subscribe(res => {
       if (res) {
         window.location.reload();

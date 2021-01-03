@@ -1,8 +1,10 @@
 .content{
-  background: rgb(236, 236, 236);
+  background: rgba(236, 236, 236,0.5);
+
   padding-bottom: 20px;
 
 }
+
 .content .main-content{
   margin: 70px 200px 0 200px;
   padding-top: 30px;
@@ -16,3 +18,13 @@ hr.dark{
   padding: 20px 0;
 }
 
+.bg-img
+{
+  padding-top: 100px;
+  background: url("../../assets/Foto/postBG.jpg") no-repeat center center fixed;;
+  min-height: 100vh;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

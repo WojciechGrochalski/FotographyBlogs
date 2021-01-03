@@ -18,10 +18,7 @@
           <a class="nav-link" routerLink='/gallery'>Galeria</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink='/forum'>Forum </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/blog'>Posty </a>
+          <a class="nav-link" routerLink='/blog'>Artykuły </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink='/pforum'>Posty </a>
@@ -31,9 +28,7 @@
         <li class="nav-item" *ngIf="authenticationService.isLoggedIn()">
           <a class="nav-link ml-auto" routerLink="dashboard">Dashboard</a>
         </li>
-        <li class="nav-item" *ngIf="authenticationService.isLoggedIn()">
-          <a class="nav-link ml-auto" routerLink="#">Profile</a>
-        </li>
+
         <li class="nav-item" *ngIf="!authenticationService.isLoggedIn()">
           <a class="nav-link ml-auto" routerLink="/log-in">Zaloguj się</a>
         </li>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../../../models/Article'
 import { ArticlesService } from '../../../Services/Articles.service'
+import {User} from '../../../models/User';
 
 @Component({
   selector: 'app-articles',
@@ -10,14 +11,15 @@ import { ArticlesService } from '../../../Services/Articles.service'
 export class ArticlesComponent implements OnInit {
 
   articles: Article[];
+  User: User;
 
   constructor(
     private articleService: ArticlesService
   ) { }
 
   async ngOnInit() {
-
-    this.articles= await this.articleService.getUserArticles(sessionStorage.getItem('userName')).toPromise();
+    this.User = JSON.parse(sessionStorage.getItem('user'));
+    this.articles= await this.articleService.getUserArticles(this.User.id).toPromise();
     localStorage.setItem('articles', JSON.stringify(this.articles))
     this.articles = JSON.parse(localStorage.getItem('articles'))
   }

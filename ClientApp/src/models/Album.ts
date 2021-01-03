@@ -2,7 +2,7 @@ import {ImgPath} from './ImgPath';
 
 
 export class Album{
-    Id: number;
+    ID: number;
     Title: string;
     ImgPaths : ImgPath[]=[];
     Description: string;

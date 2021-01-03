@@ -31,8 +31,15 @@
 
         <div class="mb-3">
             <label for="content">Treść artykułu</label>
-            <ckeditor [editor]="Editor" [tagName]="tagname"  name="c"
-                      [ngModel]="article.Content"  (change)="onChange($event)"></ckeditor>
+            <ckeditor
+              name="content"
+              (ready)="onReady($event)"
+              [editor]="Editor"
+              [tagName]="tagname"
+              [ngModel]="article.Content"
+              (change)="onChange($event)">
+
+            </ckeditor>
         </div>
         <button type="submit" class="btn btn-info">Opublikuj</button>
     </form>

@@ -60,15 +60,15 @@ namespace foto_full.Controllers
         [HttpGet("{id}/Comment")]
         public async Task<List<Comment>> GetComments(int id)
         {
-            var query = _context.Comments.Where(com => com.Post_Id == id).ToList();
+            var query = _context.Comments.Where(com => com.Post_Id == id).OrderByDescending(i=>i.Date).ToList();
             await Task.CompletedTask;
             return query;
 
         }
         [HttpGet("user/{user}")]
-        public async Task<string> GetUserPost(string user)
+        public async Task<string> GetUserPost(int user)
         {
-            var query = _context.Posts.Where(s => s.Author == user).ToList();
+            var query = _context.Posts.Where(s => s.AuthorID == user).ToList();
             await Task.CompletedTask;
             string result = JsonConvert.SerializeObject(query, Formatting.Indented);
             return result;

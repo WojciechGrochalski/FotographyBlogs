@@ -52,3 +52,21 @@ textarea:focus{
   box-shadow: 0 0 0 .2rem rgba(41, 194, 168, .25)!important;
 }
 
+.bg-img
+{
+  background: url("assets/Foto/postBG.jpg") no-repeat center center fixed;;
+  min-height: 100vh;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/*.bg-img-article*/
+/*{*/
+/*  background: url("assets/Foto/articleBG.jpg") no-repeat center center fixed;;*/
+/*  min-height: 100vh;*/
+/*  -webkit-background-size: cover;*/
+/*  -moz-background-size: cover;*/
+/*  -o-background-size: cover;*/
+/*  background-size: cover;*/
+/*}*/

@@ -5,7 +5,7 @@ import {Post} from '../models/Post';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Comment} from '../models/Comment';
 import {FileToUpload} from '../models/File';
-import {Article} from '../models/Article';
+import {delay} from 'rxjs/operators';
 
 
 @Injectable({
@@ -51,7 +51,7 @@ export class PostService {
 
   }
   GetCommentFromDB(post_id: Number): Observable<any> {
-    return this.http.get<Comment[]>(this.baseUrl + 'api/Posts/'+post_id+'/Comment');
+    return this.http.get<Comment[]>(this.baseUrl + 'api/Posts/'+post_id+'/Comment').pipe(delay(500));
 
   }
 
@@ -64,7 +64,7 @@ export class PostService {
     return this.http.post(this.baseUrl+'api/File/photo/', file,{responseType: 'text'});
   }
 
-  getUserPosts(user: string): Observable<any>{
+  getUserPosts(user: Number): Observable<any>{
     return this.http.get(this.baseUrl + 'api/Posts/user/'+user);
   }
   DeletePost(id: number){

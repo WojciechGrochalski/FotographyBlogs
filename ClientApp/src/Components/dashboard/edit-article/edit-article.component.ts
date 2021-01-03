@@ -4,14 +4,13 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Article } from '../../../models/Article'
 import { FormGroup, FormBuilder, Validator, Validators } from '@angular/forms'
 import { FlashMessagesService } from 'angular2-flash-messages';
-import * as Editor from '../../../app/ckeditor5/ckeditor'
-
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {ArticlesService} from '../../../Services/Articles.service';
 import {Album} from '../../../models/Album';
-import {ImageSnippet} from '../../../models/Image';
 import {ChangeEvent} from '@ckeditor/ckeditor5-angular';
-const MAX_SIZE: number = 4194304;
 
+
+const MAX_SIZE: number = 4194304;
 
 @Component({
   selector: 'app-edit-article',
@@ -20,24 +19,26 @@ const MAX_SIZE: number = 4194304;
 })
 export class EditArticleComponent implements OnInit {
 
-  public Editor = Editor;
+  public Editor = ClassicEditor;
+  public onReady( editor ) {
+    editor.ui.view.editable.element.parentElement.insertBefore(
+      editor.ui.view.toolbar.element,
+      editor.ui.view.editable.element
+    );
+  }
   public tagname = "textarea"
   public article = {} as Article;
   public a = {} as Article;
   editForm= new FormGroup({});
   submitted = false;
   imageSrc: string | ArrayBuffer;
-  pictures: string[];
   album: Album;
-  imageForm: FormGroup;
-  imageAlt: string;
-  newPicture: ImageSnippet;
   theFile: any = null;
   messages: string[] = [];
   url:string | ArrayBuffer;
   loading: boolean = false; // Flag variable
   file: File = null; // Variable to store file
-  defaultValue: string = 'write a comment...';
+
 
   constructor(
     private route: ActivatedRoute,
@@ -49,16 +50,6 @@ export class EditArticleComponent implements OnInit {
 
   async ngOnInit() {
 
-    // const id = +this.route.snapshot.paramMap.get('id');
-    //   await this.articleService.GetArticleWithID(id).subscribe((res: Article)=>{
-    //    this.article=res;
-    //    this.defaultValue=res.Title;
-    //    this.imageSrc=res.Img;
-    //    console.log(JSON.stringify(res));
-    //     console.log(this.article.Img +' 2');
-    //     this.a= this.article;
-    //     console.log(this.a.Title+"  a");
-    // });
     const articleObservable = this.articleService.GetArticle();
     articleObservable.subscribe((res: Article) => {
       if(res) {

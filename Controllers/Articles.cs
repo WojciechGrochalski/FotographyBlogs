@@ -67,9 +67,9 @@ namespace foto_full.Controllers
         }
 
         [HttpGet("user/{user}")]
-        public async Task<string> GetUserArticles(string user)
+        public async Task<string> GetUserArticles(int user)
         {
-            var query = _context.Article.Where(s => s.Author == user);
+            var query = _context.Article.Where(s => s.AuthorID == user);
             await Task.CompletedTask;
             string result = JsonConvert.SerializeObject(query, Formatting.Indented);
             return result;

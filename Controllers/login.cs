@@ -53,7 +53,7 @@ namespace foto_full.Controllers
                 if ((user.Username == query.Username
                         && SecurePasswordHasher.Verify(user.Password, query.Password)))
                 {
-                    ReturnedUser returnedUser = new ReturnedUser(query.ID, query.FirstName, query.LastName, query.Username);
+                    ReturnedUser returnedUser = new ReturnedUser(query.ID, query.FirstName, query.LastName, query.Username, query.ProfileImg);
                     return new OkObjectResult(returnedUser);
 
                 }

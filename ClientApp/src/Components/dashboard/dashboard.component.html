@@ -3,10 +3,18 @@
     <div class="sidebar" *ngIf="user">
         <h2 class="header-title">Panel użytkownika</h2>
         <a routerLink="/dashboard">
-            <div class="user-detail">
-                <img src="https://unsplash.it/300" alt="">
+            <div *ngIf="user.profileImg" class="user-detail">
+                <img src="{{user.profileImg}}" alt=""  class="rounded-circle ">
+              <br>
+              <br>
                 <h4>{{user.username}}</h4>
             </div>
+          <div *ngIf="!user.profileImg" class="user-detail">
+            <img src="https://unsplash.it/300" alt="">
+            <br>
+            <br>
+            <h4>{{user.username}}</h4>
+          </div>
         </a>
         <p>Blog</p>
         <hr class="separator">
@@ -20,19 +28,25 @@
             <li><i class="fas fa-th-list"></i><a routerLink=mypost>Wątki</a></li>
             <li><i class="fas fa-plus-circle"></i><a routerLink='new-post'>Nowy</a></li>
         </ul>
-        <p>Profil</p>
-        <hr class="separator">
-        <ul class="sidemenu">
-            <li><i class="fas fa-user-edit"></i><a routerLink='edit-profile'>Edytuj</a></li>
-            <li><i class="fas fa-image"></i><a routerLink='albums'>Albumy</a></li>
-        </ul>
-        <hr class="separator">
-        <ul class="sidemenu">
-            <li><i class="fas fa-sign-out-alt"></i><a href="#">Wyloguj</a></li>
-        </ul>
+      <p>Portfolio</p>
+      <hr class="separator">
+      <ul class="sidemenu">
+        <li><i class="fas fa-image"></i><a routerLink='albums'>Albumy</a></li>
+
+      </ul>
+      <p>Profil</p>
+      <hr class="separator">
+      <ul class="sidemenu">
+        <li><i class="fas fa-user-edit"></i><a routerLink='edit-profile'>Edytuj</a></li>
+        <li><i class="fas fa-sign-out-alt"></i><a href="#" (click)="logout()">Wyloguj</a></li>
+      </ul>
     </div>
     <div class="main-panel">
         <flash-messages></flash-messages>
+
         <router-outlet></router-outlet>
     </div>
+
 </main>
+
+

@@ -13,10 +13,9 @@
             <div class="article-review">
                 <h3 class="card-title article-title">{{article.Title}}</h3>
                 <p class="card-text article-meta"><small class="text-muted"><i class="fas fa-user"></i> {{article.Author}} <i class="fas fa-calendar"></i> {{article.Date}}</small></p>
-                <p class="article-info">{{(article.Content.length >300) ? (article.Content | slice:0:300)+'...':(article.Content)}} </p>
-                <div class="btn-wrapper">
+              <div [innerHTML]="(article.Content.length >100) ? (article.Content | slice:0:100)+'...':(article.Content)"> </div>
+                <div class="btn-wrapper" >
                   <a (click)="RouteToArticleOB(article)" class="btn">Read More</a>
-<!--                  <a routerLink="/detail/{{article.ID}}" class="btn">Read More</a>-->
                 </div>
             </div>
         </article>

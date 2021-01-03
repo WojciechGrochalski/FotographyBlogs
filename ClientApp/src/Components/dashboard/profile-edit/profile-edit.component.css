@@ -28,6 +28,7 @@ input:focus{
     max-width: 100%;
     height: auto;
     display: block;
+
 }
 .warning{
     color: red;

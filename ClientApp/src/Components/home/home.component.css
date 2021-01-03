@@ -213,22 +213,24 @@ hr.dark{
   transform: scale(1.1);
 }
 
-
-/* Stopka */
-.footer-img{
-  width: 120px;
-  height: 70px;
-}
-
 footer{
-  background-color: #3f3f3f;
-  color: #d5d5d5;
-  padding-top: 2rem;
-  /* margin-top: 1rem;  */
+  position: static!important;
 }
-footer .row p, footer .row h5{
-  font-family: 'Lato', 'sans-serif';
-}
+/*!* Stopka *!*/
+/*.footer-img{*/
+/*  width: 120px;*/
+/*  height: 70px;*/
+/*}*/
+
+/*footer{*/
+/*  background-color: #3f3f3f;*/
+/*  color: #d5d5d5;*/
+/*  padding-top: 2rem;*/
+/*  !* margin-top: 1rem;  *!*/
+/*}*/
+/*footer .row p, footer .row h5{*/
+/*  font-family: 'Lato', 'sans-serif';*/
+/*}*/
 hr.light{
   border-top: 1px solid #d5d5d5;
   width: 75%;

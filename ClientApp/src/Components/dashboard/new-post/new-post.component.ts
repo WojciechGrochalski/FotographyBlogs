@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as Editor from '../../../app/ckeditor5/ckeditor'
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import { FlashMessagesService } from 'angular2-flash-messages'
@@ -14,7 +14,7 @@ import {Post} from '../../../models/Post';
 export class NewPostComponent implements OnInit {
 
 
-  public Editor = Editor;
+  public Editor = ClassicEditor;
   public tagname = "textarea"
   postForm: FormGroup;
   submitted = false;
@@ -43,8 +43,9 @@ export class NewPostComponent implements OnInit {
     else{
       this.submitted = true;
       let date_now = new Date().toLocaleDateString();
+      let AuthorID: number= +sessionStorage.getItem('userID');
       let newPost = new Post(
-        this.f.title.value, this.f.content.value, date_now, sessionStorage.getItem('userName'));
+        this.f.title.value, this.f.content.value, date_now, sessionStorage.getItem('userName'), AuthorID);
       console.log("send article")
       this.postService.AddPost(newPost).subscribe(res => {
         if (res) {

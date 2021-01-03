@@ -9,15 +9,23 @@ import {ArticlesService} from '../../../Services/Articles.service';
 })
 export class ArticlesFeaturedComponent implements OnInit {
 
-  mostViewArticles: Article[]
+ public mostViewArticles: Article[];
+  public articlefromSearch: Article[];
 
   constructor(
     private articleService: ArticlesService) { }
 
   async ngOnInit() {
     this.mostViewArticles = await this.articleService.GetFeaturedArticles().toPromise();
+
   }
   RouteToArticleOB( article: Article) {
     this.articleService.RouteTOArticleOB(article,'detail');
+  }
+  Search(keyword: string,search){
+    this.articleService.SearchForArticle(keyword).subscribe(res =>{
+      this.articlefromSearch=res;
+      search.value="";
+    });
   }
 }

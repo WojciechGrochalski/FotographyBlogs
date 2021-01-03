@@ -1,10 +1,18 @@
-<div class="post">
-  <div class="post-preview">
-    <h2><a (click)="RouteToPost(post)">{{post.Title}}</a></h2>
-    <i class="far fa-user"> {{post.Author}}</i>
-    <i class="far fa-calendar"> {{post.Date}}</i>
-    <p class="preview-text"> <div [innerHTML]="post.Content"></div>
 
-    <a (click)="RouteToPost(post)" class="btn">Czytaj więcej</a>
+<div class="inner-main-body p-2 p-sm-3 collapse forum-content show">
+  <div class="card mb-2">
+    <div class="card-body p-2 p-sm-3">
+      <div class="media forum-item">
+        <div class="media-body">
+          <h3><a data-toggle="collapse" data-target=".forum-content" class="text-body"(click)="RouteToPost(post)">{{post.Title}}</a></h3>
+          <i class="far fa-user">  Autor: {{post.Author}}</i>
+          <div  [innerHTML]="post.Content"></div>
+        </div>
+        <div class="text-muted small text-center align-self-center">
+          <span class="d-none d-sm-inline-block"><i class="far fa-eye"></i> {{view}}</span>
+            <span><i class="far fa-calendar ml-2"></i> {{post.Date}}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

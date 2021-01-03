@@ -85,9 +85,14 @@ namespace foto_full.Controllers
                 return new BadRequestResult();
             }
             user.Password = entity.Password;
+            user.ID = entity.ID;
+            user.Posts = entity.Posts;
+            user.Albums = entity.Albums;
             _context.Entry(entity).CurrentValues.SetValues(user);
             _context.SaveChanges();
-            return Ok();
+            user.Password = null;
+            
+            return new OkObjectResult(user);
         }
     }
 }

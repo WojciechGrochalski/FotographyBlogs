@@ -55,7 +55,7 @@ export class ArticlesService {
 
      return this.http.post(this.baseUrl + 'api/Articles/edit', article);
   }
-  getUserArticles(user: string): Observable<any>{
+  getUserArticles(user: Number): Observable<any>{
     return this.http.get(this.baseUrl + 'api/Articles/user/'+user);
   }
   DeleteArticle(id: number){

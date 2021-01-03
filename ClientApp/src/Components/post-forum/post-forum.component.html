@@ -1,37 +1,13 @@
 
-<div class="content">
+<div class="bg-img">
+<div class="content " >
   <div class="main-content">
+
     <h1 class="recent-title">Najnowsze publikacje</h1>
-    <hr class="dark">
-    <div *ngIf="IsUser">
-      <button (click)="Switch()">Dodaj Post</button>
-      <label>Tytuł</label>
-      <input #title>
-      <label>Treść postu</label>
-      <textarea class="form-control" maxlength="500" rows="15"   #content></textarea>
-    <h1>File Upload</h1>
-    <label>Select a File (&lt; 4Mb)</label><br/>
-    <input type="file" (change)="onFileChange($event)" /><br/>
-    <button (click)="uploadFile()" [disabled]="!theFile">Upload File</button><br/><br/>
-    <!-- ** BEGIN: INFORMATION MESSAGE AREA ** -->
-    <div *ngIf="messages.length > 0">
-    <span *ngFor="let msg of messages">
-        {{msg}}
-      <br />
-        </span>
-    </div>
-    <img [src]="url" alt="Loadding" width="200" *ngIf="url">
-      <div class="container" *ngIf="loading">
-        <h3>Loading ...</h3>
-      </div>
-<!--    <div *ngIf="PostReady">-->
-      <button (click)="SavePost(title.value, content.value )">Utwórz post</button>
-    </div>
-      <button (click)="ExitTemplate()">Wyjdz</button>
-<!--    </div>-->
+      <hr class="dark">
+
     <app-post *ngFor="let post of posts" [post]="post">
     </app-post>
   </div>
 </div>
-
-<app-footer></app-footer>
+</div>

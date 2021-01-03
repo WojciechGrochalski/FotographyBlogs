@@ -68,8 +68,8 @@ export class LogInComponent implements OnInit {
 
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         sessionStorage.setItem('userName', res.username);
-        sessionStorage.setItem('userID', res.id.toString());
         sessionStorage.setItem('user', JSON.stringify(res));
+        sessionStorage.setItem('userID', JSON.stringify(res.id));
         console.log(JSON.stringify(res));
         this.router.navigate([this.returnUrl]);
 

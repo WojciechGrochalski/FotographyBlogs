@@ -10,10 +10,10 @@
                 <div class="image" *ngFor='let image of album.ImgPaths'>
                     <img src="{{image.Path}}" alt="asd">
                 </div>
-               <div class="image" *ngIf='newPicture'>
-                    <img src="{{newPicture}}" alt="{{imageAlt}}">
-                </div>
-                <form [formGroup]="imageForm" (ngSubmit)="imageSubmit()">
+<!--               <div class="image" *ngIf='newPicture'>-->
+<!--                    <img src="{{newPicture}}" alt="{{imageAlt}}">-->
+<!--                </div>-->
+                <form [formGroup]="imageForm" (ngSubmit)="imageSubmit(album.ID)">
                     <label for="image" class="add-image-label">
                         <input
                             type="file"
@@ -21,7 +21,7 @@
                             id="image"
 
                             class="custom-file-input"
-                            (change)="onFileChange($event)">
+                            (change)="onFileChange($event,album.ID)">
                     </label>
                 </form>
             </div>

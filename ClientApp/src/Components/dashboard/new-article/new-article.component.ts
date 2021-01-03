@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as Editor from '../../../app/ckeditor5/ckeditor'
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import { ArticlesService } from '../../../Services/Articles.service'
@@ -17,7 +17,7 @@ const MAX_SIZE: number = 4194304;
 })
 export class NewArticleComponent implements OnInit {
 
-  public Editor = Editor;
+  public Editor = ClassicEditor;
   public tagname = "textarea"
   articleForm: FormGroup;
   submitted = false;
@@ -69,9 +69,15 @@ export class NewArticleComponent implements OnInit {
 
   articleSubmit() {
     this.submitted = true;
-    // if (this.articleForm.invalid) {
-    //   return this.flashMessagesService.show('Wszystkie pola są wymagane!', {cssClass: 'alert-danger'})
-    // }
+    if (this.theFile==null) {
+      return this.flashMessagesService.show('Wszystkie pola są wymagane!', {cssClass: 'alert-danger'})
+    }
+    if(!this.f.title.value ){
+      return this.flashMessagesService.show('Wszystkie pola są wymagane!', {cssClass: 'alert-danger'})
+    }
+    if(!this.f.content.value==null){
+      return this.flashMessagesService.show('Wszystkie pola są wymagane!', {cssClass: 'alert-danger'})
+    }
     this.readAndUploadFile(this.theFile);
     // Dodać w serwisie URL do API na backendzie
 
@@ -96,13 +102,15 @@ export class NewArticleComponent implements OnInit {
         this.submitted = true;
         console.log("if")
         let date_now = new Date().toLocaleDateString();
+        let AuthorID: number= +sessionStorage.getItem('userID');
         let newArticle = new Article(
-          this.f.title.value, sessionStorage.getItem('userName'), this.f.content.value, date_now, resp);
+          this.f.title.value, sessionStorage.getItem('userName'), this.f.content.value, date_now, resp,AuthorID);
         console.log("send article")
        this.articleService.AddArticle(newArticle).subscribe(res => {
           if (res) {
-            this.router.navigate(['/dashboard'])
+            this.router.navigate(['/dashboard/articles'])
             console.log("success")
+          //  window.location.reload();
             this.flashMessagesService.show('Profil został zaktualizowany', {cssClass: 'alert-success', timeout: 3000})
 
           } else {

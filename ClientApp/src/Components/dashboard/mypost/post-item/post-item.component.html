@@ -2,7 +2,7 @@
   <div >
     <p class="text-muted">{{post.Date}}</p>
     <p>{{post.Title}}</p>
-    <p class="article-info">{{(post.Content.length >150) ? (post.Content | slice:0:150)+'...':(post.Content)}} </p>
+    <div class="article-info" [innerHTML]="((post.Content.length >200) ? (post.Content | slice:0:200)+'...':(post.Content))"></div>
   </div>
   <div class="buttons">
     <a

@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {Article} from '../../../models/Article';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
-import {Album} from '../../../models/Album';
-import {ImageSnippet} from '../../../models/Image';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ArticlesService} from '../../../Services/Articles.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
-import * as Editor from '../../../app/ckeditor5/ckeditor'
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {PostService} from '../../../Services/post.service';
 import {Post} from '../../../models/Post';
 import {ChangeEvent} from '@ckeditor/ckeditor5-angular';
+
+
 @Component({
   selector: 'app-edit-post',
   templateUrl: './edit-post.component.html',
@@ -17,7 +15,7 @@ import {ChangeEvent} from '@ckeditor/ckeditor5-angular';
 })
 export class EditPostComponent implements OnInit {
   post: Post;
-  public Editor = Editor;
+  public Editor = ClassicEditor;
   public tagname = "textarea"
   editForm= new FormGroup({});
   submitted = false;
@@ -55,13 +53,13 @@ export class EditPostComponent implements OnInit {
 
   articleSubmit(f: NgForm) {
     this.submitted = true;
-
+    let AuthorID: number= +sessionStorage.getItem('userID');
     let editedPost = new Post (
       this.editForm.controls['title'].value,
       this.editForm.controls['content'].value,
       new Date().toLocaleDateString(),
-      sessionStorage.getItem('userName')
-    )
+      sessionStorage.getItem('userName'),
+      AuthorID )
     editedPost.ID=this.post.ID;
 
     console.log(this.post.Content)

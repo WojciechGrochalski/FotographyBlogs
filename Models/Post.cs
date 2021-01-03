@@ -13,7 +13,7 @@ namespace Backend_Foto.Models
         public string Content{ get; set; }
         public string Date { get; set; }
         public string Author { get; set; }
-
+        public int AuthorID { get; set; }
 
     }
 }
