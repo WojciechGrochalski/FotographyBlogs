@@ -7,12 +7,14 @@ namespace Backend_Foto.Models
 {
     public class Album
     {
-       
+
         public int ID { get; set; }
         public string Title { get; set; }
         public List<ImgPath> ImgPaths { get; set; }
         public string Description { get; set; }
-        public int UserModelID { get; set; }
+
+        public UserModel UserModel { get; set; }
+      //  public int UserModelID { get; set; }
       
        
     }

@@ -58,10 +58,10 @@ namespace foto_full.Controllers
         [HttpGet("album/{user}")]
         public async Task<string> GetAlbumForUser(int user)
         {
-            List<Album> query = _context.Album.Where(i =>i.UserModelID==user).ToList();
+            List<Album> query = _context.Album.Where(i =>i.UserModel.ID==user).ToList();
             foreach (Album item in query)
             {
-                item.ImgPaths = _context.ImgPaths.Where(i => i.AlbumID == item.ID).ToList();
+                item.ImgPaths = _context.ImgPaths.Where(i => i.Album.ID == item.ID).ToList();
             }
             await Task.CompletedTask;
             string result = JsonConvert.SerializeObject(query, Formatting.Indented);
@@ -70,7 +70,7 @@ namespace foto_full.Controllers
         [HttpGet("album/img/{id}")]
         public async Task<string> GetAlbumImg(int id)
         {
-            var query = _context.ImgPaths.Where(i => i.AlbumID == id).ToList();
+            var query = _context.ImgPaths.Where(i => i.Album.ID == id).ToList();
             await Task.CompletedTask;
             string result = JsonConvert.SerializeObject(query, Formatting.Indented);
             return result;

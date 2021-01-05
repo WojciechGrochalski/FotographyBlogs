@@ -74,9 +74,10 @@ export class UsersService {
     return this.http.post(this.baseUrl+'api/File/photo/album/'+albumID, file);
   }
 
-  addAlbum(album: any): Observable<any> {
+  addAlbum(album: Album, imgPath: string): Observable<any> {
+    const data ={album: album, path: imgPath}
 
-     return this.http.post(this.baseUrl+'api/UserAlbum', album,{responseType: 'text'});
+     return this.http.post(this.baseUrl+'api/UserAlbum', data,{responseType: 'text'});
   }
   addImgToAlbum(imgPath: ImgPaths): Observable<any> {
 

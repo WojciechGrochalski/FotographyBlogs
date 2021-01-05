@@ -28,19 +28,30 @@ namespace foto_full.Controllers
         {
             Album album= _context.Album.SingleOrDefault(s => s.ID == id);
             await Task.CompletedTask;
-            album.ImgPaths = _context.ImgPaths.Where(i => i.AlbumID == id).ToList();
+            album.ImgPaths = _context.ImgPaths.Where(i => i.Album.ID == id).ToList();
         
              string result = JsonConvert.SerializeObject(album, Formatting.Indented);
             return result;
         }
 
     [HttpPost]
-    public async Task<int> AddAlbum(Album album)
+    public async Task<int> AddAlbum(Album album, string Path)
     {
+            Album newAlbum=new Album { 
+                Description=album.Description,
+                Title=album.Title,
+                ImgPaths = new List<ImgPath>
+                {
+                    Pat
+                }
+            
+            }
         _context.Album.Add(album);
         _context.SaveChanges();
         await Task.CompletedTask;
-        var albumfromDB = _context.Album.Max(i => i.ID);
+         var newAlbum=   _context.Album.Find(1);
+            // var albumfromDB = _context.Album.Max(i => i.ID);
+            ImgPath img = new ImgPath(Path, newAlbum.ID);
         _context.SaveChanges();
         await Task.CompletedTask;
 
@@ -77,7 +88,7 @@ namespace foto_full.Controllers
     public async Task<IActionResult> RemoveImgFromAlbum(int id)
     {
         ImgPath imgPath = _context.ImgPaths.FirstOrDefault(s => s.ID == id);
-        Album album = _context.Album.FirstOrDefault(s => s.ID == imgPath.AlbumID);
+        Album album = _context.Album.FirstOrDefault(s => s.ID == imgPath.Album.ID);
         await Task.CompletedTask;
         ApiTools.RemoveImg(imgPath.Path);
         _context.ImgPaths.Remove(imgPath);

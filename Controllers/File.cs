@@ -75,7 +75,7 @@ namespace foto_full.Controllers
             }
             ImgPath imgPath = new ImgPath();
             imgPath.Path = filePathDetail;
-            imgPath.AlbumID = id;
+            imgPath.Album.ID = id;
             _context.ImgPaths.Add(imgPath);
             _context.SaveChanges();
             await Task.CompletedTask;
