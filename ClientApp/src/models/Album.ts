@@ -1,10 +1,10 @@
-import {ImgPath} from './ImgPath';
+import {ImgPaths} from './ImgPaths';
 
 
 export class Album{
     ID: number;
     Title: string;
-    ImgPaths : ImgPath[]=[];
+    ImgPaths : ImgPaths[]=[];
     Description: string;
     UserModelID: number;
   constructor( tittle: string, description: string, userId: number ) {

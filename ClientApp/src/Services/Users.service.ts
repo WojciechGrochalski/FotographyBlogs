@@ -3,9 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../models/User';
 import {Observable} from 'rxjs';
 import {FileToUpload} from '../models/File';
-import {ImgPath} from '../models/ImgPath';
 import {Album} from '../models/Album';
-import {map} from 'rxjs/operators';
+import {ImgPaths} from '../models/ImgPaths';
 
 
 
@@ -45,8 +44,8 @@ export class UsersService {
 
   }
 
-  getAlbum(albumId: number): Observable<any>{
-    return this.http.get(this.baseUrl+'api/UserAlbum/'+ albumId);
+  getAlbum(albumId: number){
+    return this.http.get<Album>(this.baseUrl+'api/UserAlbum/'+ albumId);
 
   }
 
@@ -66,12 +65,20 @@ export class UsersService {
     };
     return this.http.post(this.baseUrl+'api/File/photo', file,{responseType: 'text'});
   }
+  public uploadFileToAlbum(file: FileToUpload, albumID:Number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post(this.baseUrl+'api/File/photo/album/'+albumID, file);
+  }
 
   addAlbum(album: any): Observable<any> {
 
      return this.http.post(this.baseUrl+'api/UserAlbum', album,{responseType: 'text'});
   }
-  addImgToAlbum(imgPath: ImgPath): Observable<any> {
+  addImgToAlbum(imgPath: ImgPaths): Observable<any> {
 
     return this.http.post(this.baseUrl+'api/UserAlbum/addimg', imgPath );
   }
