@@ -1,6 +1,6 @@
 
-export class ImgPath{
-  Id: number;
+export class ImgPaths{
+  ID: number;
   Path: string;
   AlbumID: number;
 
