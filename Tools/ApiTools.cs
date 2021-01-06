@@ -11,7 +11,6 @@ namespace Backend_Foto.Tools
     public class ApiTools
     {
         public static string articleJsonPath = @"jsonfile/article.json";
-        static readonly string rootFolder = @"wwwroot";
 
         public static void WriteToJson(string path, string data)
         {
@@ -34,23 +33,9 @@ namespace Backend_Foto.Tools
         }
         public static string GetArticle()
         {
+            
             string content = File.ReadAllText(articleJsonPath);
             return content;
-        }
-
-        public static void RemoveImg(string img_name)
-        {
-            try
-            {
-                if (File.Exists(Path.Combine(rootFolder, img_name)))
-                {
-                    File.Delete(Path.Combine(rootFolder, img_name));
-                }
-            }
-            catch (IOException ioExp)
-            {
-                Console.WriteLine(ioExp.Message);
-            }
         }
     }
 }

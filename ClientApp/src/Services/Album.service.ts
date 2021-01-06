@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient} from '@angular/common/http'
 import { catchError } from 'rxjs/operators';
@@ -11,14 +11,9 @@ export class AlbumService {
 
   private unsplashUrl: string = 'https://picsum.photos/v2/list?limit=100';
   albumToSend: Album;
-  baseUrl: string = '';
-
   constructor(
     private http: HttpClient,
-    private router: Router,
-    @Inject('BASE_URL') baseUrl: string  ) {
-    this.baseUrl = baseUrl;
-  }
+    private router: Router   ) { }
 
   getPictures(): Observable<[]>{
     return this.http.get<[]>(this.unsplashUrl).pipe(catchError(this.handleError<[]>('getPictures', [])))
@@ -45,12 +40,5 @@ export class AlbumService {
       }, 200);
     });
     return albumObserve;
-  }
-
-  RemoveAlbum(ID: number) {
-    return this.http.get(this.baseUrl+'api/UserAlbum/Remove/album/'+ID ).subscribe();
-  }
-  RemoveAlbumImg(ID: number) {
-    return this.http.get(this.baseUrl+'api/UserAlbum/Remove/album/img/'+ID ).subscribe();
   }
 }

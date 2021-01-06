@@ -23,7 +23,6 @@ img{
     flex-direction: row;
     gap: 1rem;
     margin-bottom: 2rem;
-
 }
 .btn{
     color: white!important;
@@ -48,15 +47,8 @@ img{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      grid-template-rows: repeat(8, 5vw);
-
     }
     .card{
         width: 70%;
-      display: block;
     }
 }
-
-

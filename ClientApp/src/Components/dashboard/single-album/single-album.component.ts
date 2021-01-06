@@ -7,7 +7,7 @@ import { FlashMessagesService } from 'angular2-flash-messages'
 
 import {Album} from '../../../models/Album';
 import {FileToUpload} from '../../../models/File';
-import {ImgPaths} from '../../../models/ImgPaths';
+import {ImgPath} from '../../../models/ImgPath';
 import {AlbumService} from '../../../Services/Album.service';
 const MAX_SIZE: number = 4194304;
 
@@ -19,6 +19,7 @@ const MAX_SIZE: number = 4194304;
 
 export class SingleAlbumComponent implements OnInit {
 
+  pictures: ImgPath[]=[];
   album: Album;
   imageForm: FormGroup;
   newPicture: string | ArrayBuffer;
@@ -36,18 +37,22 @@ export class SingleAlbumComponent implements OnInit {
     private flashMessagesService: FlashMessagesService,
   ) { }
 
- ngOnInit() {
+  ngOnInit() {
 
-    const AlbumObserve = this.albumService.GetAlbum();
-    AlbumObserve.subscribe(res => {
-      if (res) {
-        this.album = res;
-        console.log(this.album)
-        sessionStorage.setItem('album', JSON.stringify(res));
-      } else {
-        this.album = JSON.parse(sessionStorage.getItem('album'));
-      }
-    })
+   const AlbumObserve= this.albumService.GetAlbum();
+   AlbumObserve.subscribe(res =>{
+     if(res) {
+       this.album = res;
+       console.log(this.album.ID)
+       sessionStorage.setItem('album', JSON.stringify(res));
+       this.pictures = res.ImgPaths;
+     }
+     else{
+       this.album = JSON.parse(sessionStorage.getItem('album'));
+     }
+
+   })
+
 
     this.imageForm = new FormGroup({
       image: new FormControl('', Validators.required)
@@ -70,19 +75,14 @@ export class SingleAlbumComponent implements OnInit {
       // Store base64 encoded representation of file
       file.fileAsBase64 = reader.result.toString();
       // POST to server
-      this.userService.uploadFileToAlbum(file,this.album.ID).subscribe(resp => {
+      this.userService.uploadFile(file).subscribe(resp => {
         this.messages.push("Upload complete");
-        // let img = new ImgPath(resp,this.album.ID);
-        // this.album.ImgPaths.push(img);
-        // sessionStorage.setItem('album', JSON.stringify(this.album));
-        // this.theFile = null;
-        // this.userService.addImgToAlbum(img).subscribe();
-        this.userService.getAlbum(this.album.ID).subscribe(res =>{
-          this.album.ImgPaths=null;
-          this.album.ImgPaths=res.ImgPaths;
-          console.log(this.album.ImgPaths);
-        });
-        this.GetAlbum();
+        let img = new ImgPath(resp,this.album.ID);
+        console.log(this.album.ID)
+        this.album.ImgPaths.push(img);
+        sessionStorage.setItem('album', JSON.stringify(this.album));
+        this.theFile = null;
+        this.userService.addImgToAlbum(img).subscribe();
         if(resp){
           this.flashMessagesService.show('Dodano zdjęcie!', {cssClass: 'alert-success', timeout: 3000})
         }else {
@@ -95,7 +95,7 @@ export class SingleAlbumComponent implements OnInit {
     console.log("end readAndUploadFile")
   }
 
-  onFileChange(event) {
+  onFileChange(event,id:number) {
     this.theFile = null;
     if (event.target.files && event.target.files.length > 0) {
       // Don't allow file sizes over 1MB
@@ -106,8 +106,10 @@ export class SingleAlbumComponent implements OnInit {
         let reader = new FileReader();
         reader.readAsDataURL(event.target.files[0]);
         reader.onload=(event=>{
+
           this.newPicture=reader.result;
           this.readAndUploadFile(this.theFile);
+
         })
       }
       else {
@@ -116,30 +118,8 @@ export class SingleAlbumComponent implements OnInit {
       }
     }
   }
-  imageSubmit() {
+  imageSubmit(id:number) {
     // this.readAndUploadFile(this.theFile, id);
   }
 
-  RemoveImg(image: ImgPaths) {
-    console.log(image);
-    let id:number = +image.ID;
-    this.albumService.RemoveAlbumImg(id);
-    let index=this.album.ImgPaths.findIndex(d=>d.ID===id);
-    this.album.ImgPaths.splice(index,1);
-    sessionStorage.setItem('album', JSON.stringify(this.album));
-
-  }
-  GetAlbum() {
-    const AlbumObserve = this.albumService.GetAlbum();
-    AlbumObserve.subscribe(res => {
-      if (res) {
-        this.album = res;
-        console.log(this.album)
-        sessionStorage.setItem('album', JSON.stringify(res));
-      } else {
-        this.album = JSON.parse(sessionStorage.getItem('album'));
-      }
-    })
-
-  }
 }

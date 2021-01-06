@@ -7,7 +7,7 @@ import { FlashMessagesService } from 'angular2-flash-messages'
 import { ImageSnippet } from '../../../models/Image'
 import {Album} from '../../../models/Album';
 import {FileToUpload} from '../../../models/File';
-import {ImgPaths} from '../../../models/ImgPaths';
+import {ImgPath} from '../../../models/ImgPath';
 import {User} from '../../../models/User';
 
 const MAX_SIZE: number = 4194304;
@@ -88,24 +88,7 @@ export class NewAlbumComponent implements OnInit {
         this.messages.push("Upload complete");
         this.UrlToPostImg=resp;
         console.log(this.UrlToPostImg, 'from upload');
-        this.submitted = true;
-        console.log(this.UrlToPostImg);
-        this.user = (JSON.parse( sessionStorage.getItem('user')));
-        console.log(this.user,'user id');
-        let newAlbum = new Album(this.f.name.value,
-          this.f.description.value,this.user.id);
-        this.userService.addAlbum(newAlbum, this.UrlToPostImg)
-          .subscribe(album => {
-            // const id: number = +album;
-            // let img = new ImgPaths(this.UrlToPostImg, id);
-            // this.userService.addImgToAlbum(img).subscribe();
-            if (album) {
-              this.router.navigate(['/dashboard/albums'])
-              this.flashMessagesService.show('Ablum utworzony!', {cssClass: 'alert-success', timeout: 3000})
-            } else {
-              this.flashMessagesService.show('Ups! Coś poszło nie tak.', {cssClass: 'alert-danger'})
-            }
-          });
+        this.createAndSubmit(resp);
         if(resp){
           this.flashMessagesService.show('Dodano zdjęcie!', {cssClass: 'alert-success', timeout: 3000})
         }else {
@@ -117,29 +100,29 @@ export class NewAlbumComponent implements OnInit {
     reader.readAsDataURL(theFile);
     console.log("end readAndUploadFile")
   }
-  // createAndSubmit(url: string){
-  //   this.submitted = true;
-  //   if (this.albumForm.invalid) {
-  //     return this.flashMessagesService.show('Wszystkie pola są wymagane!', {cssClass: 'alert-danger'})
-  //   }
-  //   console.log(this.UrlToPostImg);
-  //   this.user = (JSON.parse( sessionStorage.getItem('user')));
-  //   console.log(this.user,'user id');
-  //   let newAlbum = new Album(this.f.name.value,
-  //     this.f.description.value,this.user.id);
-  //   this.userService.addAlbum(newAlbum)
-  //     .subscribe(album => {
-  //       const id: number = +album;
-  //       let img = new ImgPaths(this.UrlToPostImg, id);
-  //       this.userService.addImgToAlbum(img).subscribe();
-  //       if (album) {
-  //         this.router.navigate(['/dashboard/albums'])
-  //         this.flashMessagesService.show('Ablum utworzony!', {cssClass: 'alert-success', timeout: 3000})
-  //       } else {
-  //         this.flashMessagesService.show('Ups! Coś poszło nie tak.', {cssClass: 'alert-danger'})
-  //       }
-  //     });
-  // }
+  createAndSubmit(url: string){
+    this.submitted = true;
+    if (this.albumForm.invalid) {
+      return this.flashMessagesService.show('Wszystkie pola są wymagane!', {cssClass: 'alert-danger'})
+    }
+    console.log(this.UrlToPostImg);
+    this.user = (JSON.parse( sessionStorage.getItem('user')));
+    console.log(this.user,'user id');
+    let newAlbum = new Album(this.f.name.value,
+      this.f.description.value,this.user.id);
+    this.userService.addAlbum(newAlbum)
+      .subscribe(album => {
+        const id: number = +album;
+        let img = new ImgPath(this.UrlToPostImg, id);
+        this.userService.addImgToAlbum(img).subscribe();
+        if (album) {
+          this.router.navigate(['/dashboard/albums'])
+          this.flashMessagesService.show('Ablum utworzony!', {cssClass: 'alert-success', timeout: 3000})
+        } else {
+          this.flashMessagesService.show('Ups! Coś poszło nie tak.', {cssClass: 'alert-danger'})
+        }
+      })
+  }
   albumSubmit() {
   this.readAndUploadFile(this.theFile);
   }
