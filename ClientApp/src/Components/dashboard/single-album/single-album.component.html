@@ -7,23 +7,27 @@
         <div class="images">
             <h4>Zdjęcia</h4>
             <div class="grid">
+
                 <div class="image" *ngFor='let image of album.ImgPaths'>
                     <img src="{{image.Path}}" alt="asd">
+                  <a (click)="RemoveImg(image)"  class="btn btn-danger">Usuń</a>
+
                 </div>
+
 <!--               <div class="image" *ngIf='newPicture'>-->
 <!--                    <img src="{{newPicture}}" alt="{{imageAlt}}">-->
 <!--                </div>-->
-                <form [formGroup]="imageForm" (ngSubmit)="imageSubmit(album.ID)">
+                <form [formGroup]="imageForm" (ngSubmit)="imageSubmit()">
                     <label for="image" class="add-image-label">
                         <input
                             type="file"
                             formControlName="image"
                             id="image"
-
                             class="custom-file-input"
-                            (change)="onFileChange($event,album.ID)">
+                            (change)="onFileChange($event)">
                     </label>
                 </form>
+
             </div>
         </div>
     </div>

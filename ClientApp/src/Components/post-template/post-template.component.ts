@@ -16,14 +16,13 @@ export class PostTemplateComponent implements OnInit, OnDestroy {
   post = {} as Post;
   id: number;
   comments: Comment[] = [];
-  newComments: Comment[] = [];
   defaultValue: string = 'write a comment...';
   subscriptions: Subscription;
 
 
   constructor(private postService: PostService) {
     this.subscriptions=interval(300).subscribe((fun=>{
-      this.getComentInterval();
+      this.getCommentInterval();
     }))
   }
 
@@ -57,15 +56,12 @@ export class PostTemplateComponent implements OnInit, OnDestroy {
       }
     });
   }
-getComentInterval(){
+getCommentInterval(){
   this.postService.GetCommentFromDB(this.post.ID).subscribe(res=>{
-    if(this.comments!=res){
+    if(this.comments.length!=res.length){
       this.comments=res;
     }
-
-
-  })
-
+  });
 }
   async GetComment() {
     try {
@@ -75,8 +71,7 @@ getComentInterval(){
       console.error(e);
     }
   }
-
-
+  
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }

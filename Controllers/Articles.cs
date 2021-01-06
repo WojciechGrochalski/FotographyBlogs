@@ -1,5 +1,6 @@
 ﻿using Backend_Foto;
 using Backend_Foto.Models;
+using Backend_Foto.Tools;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -21,7 +22,7 @@ namespace foto_full.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddArticle(Backend_Foto.Models.Article article)
+        public async Task<IActionResult> AddArticle(Article article)
         {
             _context.Article.Add(article);
             _context.SaveChanges();
@@ -87,11 +88,11 @@ namespace foto_full.Controllers
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> RemoveArtice(int id)
         {
-            Backend_Foto.Models.Article article = _context.Article.FirstOrDefault(s => s.ID== id);
+            Article article = _context.Article.FirstOrDefault(s => s.ID== id);
             _context.Article.Remove(article);
             _context.SaveChanges();
             await Task.CompletedTask;
-          
+            ApiTools.RemoveImg(article.Img);
             return Ok();
 
         }

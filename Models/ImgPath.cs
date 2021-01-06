@@ -9,7 +9,6 @@ namespace Backend_Foto.Models
     {
         public int ID { get; set; }
         public string Path { get; set; }
-
         public int AlbumID { get; set; }
 
     }
