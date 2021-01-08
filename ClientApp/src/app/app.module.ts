@@ -112,7 +112,6 @@ import { NewPostComponent } from '../Components/dashboard/new-post/new-post.comp
     {path: 'reg', component: RegistrationComponent},
     {path: 'log-in', component: LogInComponent},
     {path: 'blog', component: BlogComponent },
-    // {path: 'detail', component: ArticleDetailComponent },
     {path: 'detail', component: ArticleDetailComponent },
     {path: 'dashboard', component: DashboardComponent, children: [
         {

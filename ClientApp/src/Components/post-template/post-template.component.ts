@@ -21,7 +21,7 @@ export class PostTemplateComponent implements OnInit, OnDestroy {
 
 
   constructor(private postService: PostService) {
-    this.subscriptions=interval(300).subscribe((fun=>{
+    this.subscriptions=interval(400).subscribe((fun=>{
       this.getCommentInterval();
     }))
   }
@@ -39,7 +39,7 @@ export class PostTemplateComponent implements OnInit, OnDestroy {
     let date = date_now + ' ' + hour;
     let comment = new Comment(content, author, date, post_id);
     this.postService.SendCommentToDB(comment);
-    this.comments.push(comment);
+    //this.comments.push(comment);
     this.defaultValue = 'write a comment...';
   }
 
@@ -71,7 +71,7 @@ getCommentInterval(){
       console.error(e);
     }
   }
-  
+
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }

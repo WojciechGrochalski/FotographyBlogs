@@ -1,9 +1,9 @@
 
 <div class="wrapper" *ngIf="post">
-
+<div class="image">
     <div class="overlay-content">
-<!--      <h1 contentEditable role='textbox' aria-multiline='true' class="overlay-title">{{post.Title}}</h1>-->
 
+    </div>
     </div>
   </div>
   <div class="post-content">
@@ -28,7 +28,6 @@
             <br>
             <button type="button" class="btn btn-info pull-right" (click)="AddComment(Content.value,post.ID)">Post</button>
             <div class="clearfix"></div>
-<!--            <app-comment  *ngFor="let comment of comments" [Comment]="comment" > </app-comment>-->
             <div *ngFor="let item of comments ">
             <hr>
             <ul class="media-list">
@@ -58,4 +57,4 @@
 <br>
 <br>
 
-<app-footer></app-footer>
+
