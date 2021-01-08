@@ -3,7 +3,7 @@
 
 <div *ngIf="article.Img" class="image" [style.background-image] = "'url('+getArticleImage()+')'">
             <div class="overlay-content">
-                <h1 contentEditable role='textbox' aria-multiline='true' class="overlay-title">{{article.Title}}</h1>
+                <h1  aria-multiline='true' class="overlay-title">{{article.Title}}</h1>
                 <p class="overlay-meta"> {{article.Date}}</p>
                 <p class="overlay-meta">{{article.Author}}</p>
             </div>

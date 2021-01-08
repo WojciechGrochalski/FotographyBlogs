@@ -161,3 +161,17 @@ p.overlay-meta{
   width: 50%;
   height: auto;
 }
+.bg-img
+{
+
+  background: url("../../assets/Foto/postBG.jpg") no-repeat center center fixed;;
+  min-height: 101vh;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.media-body {
+  padding: 5px 5px 5px 5px;
+  background-color: aliceblue;
+}

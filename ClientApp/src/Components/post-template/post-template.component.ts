@@ -2,10 +2,8 @@ import {Component, DoCheck, OnDestroy, OnInit} from '@angular/core';
 import {Post} from '../../models/Post';
 import {Comment} from '../../models/Comment';
 import {PostService} from '../../Services/post.service';
-import {delay} from 'rxjs/operators';
 import { interval, Subscription } from 'rxjs';
-const source = interval(1000);
-const text = 'Your Text Here';
+
 @Component({
   selector: 'app-post-template',
   templateUrl: './post-template.component.html',
@@ -16,7 +14,9 @@ export class PostTemplateComponent implements OnInit, OnDestroy {
   post = {} as Post;
   id: number;
   comments: Comment[] = [];
+  user: string;
   defaultValue: string = 'write a comment...';
+  startWriting: boolean = false;
   subscriptions: Subscription;
 
 
@@ -30,6 +30,7 @@ export class PostTemplateComponent implements OnInit, OnDestroy {
 
     await this.SetPost();
     await this.GetComment();
+    this.user = sessionStorage.getItem('userName');
   }
 
   AddComment(content: string, post_id: number) {
@@ -39,7 +40,6 @@ export class PostTemplateComponent implements OnInit, OnDestroy {
     let date = date_now + ' ' + hour;
     let comment = new Comment(content, author, date, post_id);
     this.postService.SendCommentToDB(comment);
-    //this.comments.push(comment);
     this.defaultValue = 'write a comment...';
   }
 
@@ -78,24 +78,25 @@ getCommentInterval(){
 
 
   Clear() {
-    if (this.defaultValue == 'write a comment...') {
-      this.defaultValue = '';
+    if (!this.startWriting) {
+      if (this.defaultValue == 'write a comment...') {
+        this.defaultValue = '';
+      }
     }
   }
 
   UnClear() {
-    if (this.defaultValue == '') {
-      this.defaultValue = 'write a comment...';
+    if (!this.startWriting) {
+      if (this.defaultValue == '') {
+        this.defaultValue = 'write a comment...';
+      }
     }
   }
   StartWrite()
   {
-    this.defaultValue = ' ';
+    this.defaultValue = '';
+    this.startWriting = true;
 
   }
-
-
-
-
 
 }
