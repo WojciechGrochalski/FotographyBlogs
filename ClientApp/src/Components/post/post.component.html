@@ -8,11 +8,12 @@
           <i class="far fa-user">  Autor: {{post.Author}}</i>
           <div  [innerHTML]="post.Content"></div>
         </div>
-        <div class="text-muted small text-center align-self-center">
-          <span class="d-none d-sm-inline-block"><i class="far fa-eye"></i> {{view}}</span>
-            <span><i class="far fa-calendar ml-2"></i> {{post.Date}}</span>
+        <div class="text-muted small text-center align-self-center ">
+          <span class="d-none d-sm-inline-block"><i class="far fa-eye"></i> {{view}} &nbsp; </span>
+          <span class="d-none d-sm-inline-block"><i class="far fa-comment-alt"></i> {{post.CommentCount}}</span>
         </div>
       </div>
+      <span><i class="far fa-calendar ml-2"></i> {{post.Date}}</span>
     </div>
   </div>
 </div>

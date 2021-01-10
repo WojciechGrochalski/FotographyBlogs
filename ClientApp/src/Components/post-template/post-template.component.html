@@ -1,60 +1,61 @@
-
 <div class="wrapper" *ngIf="post">
-<div class="image">
+  <div class="image">
     <div class="overlay-content">
 
     </div>
-    </div>
   </div>
+</div>
 <div class="bg-img">
   <div class="post-content">
-    <p > {{post.Date}}</p>
-    <p >{{post.Author}}</p>
+    <p><i class="fas fa-calendar-alt"></i> {{post.Date}}</p>
+    <p>{{post.Author}}</p>
     <div class="shadow-box"></div>
     <div class="post-text">
       <h2>{{post.Title}}</h2>
       <div [innerHTML]="post.Content"></div>
     </div>
   </div>
-<div class="container" >
-  <div class="row bootstrap snippets bootdeys">
-    <div class="col-md-10 col-sm-12 ">
-      <div class="comment-wrapper">
-        <div class="panel panel-info ">
-          <div *ngIf="user">
-          <div class="panel-heading" >
-            Comment panel Max 150 characters!
-          <div class="panel-body">
-            <textarea class="form-control" maxlength="150"[(ngModel)]="defaultValue"  rows="3"  (click)="StartWrite()" (mouseover)="Clear()" (mouseleave)="UnClear()" #Content></textarea>
-            <br>
-            <button type="button" class="btn btn-info pull-right" (click)="AddComment(Content.value,post.ID)">Post</button>
+  <div class="container">
+    <div class="row bootstrap snippets bootdeys">
+      <div class="col-md-10 col-sm-12 ">
+        <div class="comment-wrapper">
+          <div class="panel panel-info ">
+            <div *ngIf="user">
+              <div class="panel-heading">
+                <div class="panel-body">
+                  <textarea class="form-control" maxlength="150" [(ngModel)]="defaultValue" rows="3"
+                            (click)="StartWrite()" (mouseover)="Clear()" (mouseleave)="UnClear()" #Content></textarea>
+                  <br>
+                  <button type="button" class="btn btn-info pull-right" (click)="AddComment(Content.value,post.ID)">
+                    Post
+                  </button>
 
-            <div class="clearfix"></div>
-          </div>
-          </div>
-          </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
 
             <div *ngFor="let item of comments ">
-            <hr>
-            <ul class="media-list">
-              <li class="media">
-                <div class="media-body">
+              <hr>
+              <ul class="media-list">
+                <li class="media">
+                  <div class="media-body">
                                 <span class="text-muted pull-right">
                                     <small class="text-muted">{{item.date}}</small>
                                 </span>
-                  <strong class="text-success">   @{{item.author}}</strong>
-                  <p>
-                   {{item.content}}
-                  </p>
-                </div>
-                </ul>
+                    <strong class="text-success"> @{{item.author}}</strong>
+                    <p>
+                      {{item.content}}
+                    </p>
+                  </div>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-</div>
+  </div>
 </div>
 
 

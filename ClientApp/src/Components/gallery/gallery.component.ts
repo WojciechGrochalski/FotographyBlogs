@@ -9,7 +9,7 @@ import { AlbumService} from '../../Services/Album.service'
 export class GalleryComponent implements OnInit {
 
   pictures: [];
-
+  showModal: boolean;
   constructor(private galleryService: AlbumService) { }
 
   ngOnInit() {
@@ -19,5 +19,17 @@ export class GalleryComponent implements OnInit {
   getPictures(): void{
     this.galleryService.getPictures().subscribe(pictures => this.pictures = pictures)
   }
+
+  show()
+  {
+    this.showModal = true; // Show-Hide Modal Check
+
+  }
+  //Bootstrap Modal Close event
+  hide()
+  {
+    this.showModal = false;
+  }
+
 
 }

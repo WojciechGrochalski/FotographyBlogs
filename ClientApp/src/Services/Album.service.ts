@@ -9,7 +9,7 @@ import {Album} from '../models/Album';
 })
 export class AlbumService {
 
-  private unsplashUrl: string = 'https://picsum.photos/v2/list?limit=100';
+  private unsplashUrl: string = 'https://picsum.photos/v2/list?limit=20';
   albumToSend: Album;
   baseUrl: string = '';
 

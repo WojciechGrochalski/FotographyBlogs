@@ -4,6 +4,7 @@ export class Post {
   Content: string;
   Date: string;
   Author: string;
+  CommentCount:number;
   AuthorID: number;
   constructor( title: string, content: string, date: string, author: string,  authorID: number) {
 

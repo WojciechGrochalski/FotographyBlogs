@@ -39,7 +39,8 @@
               "node_modules/hammerjs/hammer.min.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "src/assets/javascript/parallax.min.js"
+              "src/assets/javascript/parallax.min.js",
+              "src/assets/javascript/jquery.magnifier.js"
             ]
           },
           "configurations": {

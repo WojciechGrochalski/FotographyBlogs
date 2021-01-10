@@ -61,12 +61,4 @@ textarea:focus{
   -o-background-size: cover;
   background-size: cover;
 }
-/*.bg-img-article*/
-/*{*/
-/*  background: url("assets/Foto/articleBG.jpg") no-repeat center center fixed;;*/
-/*  min-height: 100vh;*/
-/*  -webkit-background-size: cover;*/
-/*  -moz-background-size: cover;*/
-/*  -o-background-size: cover;*/
-/*  background-size: cover;*/
-/*}*/
+

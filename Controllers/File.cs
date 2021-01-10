@@ -79,7 +79,7 @@ namespace foto_full.Controllers
             _context.ImgPaths.Add(imgPath);
             _context.SaveChanges();
             await Task.CompletedTask;
-            return new OkObjectResult(true);
+            return new OkObjectResult(filePathDetail);
         }
 
     }

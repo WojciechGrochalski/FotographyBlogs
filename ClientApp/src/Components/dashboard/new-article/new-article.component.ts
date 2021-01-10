@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder,Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import { ArticlesService } from '../../../Services/Articles.service'
 import { FlashMessagesService } from 'angular2-flash-messages'
-import {ImageSnippet} from '../../../models/Image'
 import {FileToUpload} from '../../../models/File';
 import {UsersService} from '../../../Services/Users.service';
 import {Article} from '../../../models/Article';
@@ -21,7 +20,6 @@ export class NewArticleComponent implements OnInit {
   public tagname = "textarea"
   articleForm: FormGroup;
   submitted = false;
-  selectedImage: ImageSnippet;
   imageSrc: string | ArrayBuffer;
   profileForm: FormGroup;
   file: File = null; // Variable to store file

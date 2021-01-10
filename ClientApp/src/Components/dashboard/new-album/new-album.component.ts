@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import {UsersService} from '../../../Services/Users.service'
-
 import { FlashMessagesService } from 'angular2-flash-messages'
-import { ImageSnippet } from '../../../models/Image'
 import {Album} from '../../../models/Album';
 import {FileToUpload} from '../../../models/File';
 import {ImgPaths} from '../../../models/ImgPaths';
@@ -28,7 +26,6 @@ export class NewAlbumComponent implements OnInit {
   img: string[]=[];
   albumForm: FormGroup;
   submitted = false;
-  selectedImage: ImageSnippet;
   private UrlToPostImg: string;
 
   constructor(

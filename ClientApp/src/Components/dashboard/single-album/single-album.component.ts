@@ -72,10 +72,10 @@ export class SingleAlbumComponent implements OnInit {
       // POST to server
       this.userService.uploadFileToAlbum(file,this.album.ID).subscribe(resp => {
         this.messages.push("Upload complete");
-        // let img = new ImgPath(resp,this.album.ID);
-        // this.album.ImgPaths.push(img);
-        // sessionStorage.setItem('album', JSON.stringify(this.album));
-        // this.theFile = null;
+        let img = new ImgPaths(resp,this.album.ID);
+        this.album.ImgPaths.push(img);
+        sessionStorage.setItem('album', JSON.stringify(this.album));
+        this.theFile = null;
         // this.userService.addImgToAlbum(img).subscribe();
         this.userService.getAlbum(this.album.ID).subscribe(res =>{
           this.album.ImgPaths=null;

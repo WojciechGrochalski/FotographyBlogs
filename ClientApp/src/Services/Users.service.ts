@@ -71,7 +71,7 @@ export class UsersService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post(this.baseUrl+'api/File/photo/album/'+albumID, file);
+    return this.http.post(this.baseUrl+'api/File/photo/album/'+albumID, file,{responseType: 'text'});
   }
 
   addAlbum(album: any): Observable<any> {

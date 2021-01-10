@@ -4,14 +4,16 @@ using Backend_Foto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace foto_full.Migrations
 {
     [DbContext(typeof(DBCTX))]
-    partial class DBCTXModelSnapshot : ModelSnapshot
+    [Migration("20210110084229_InitialCreate14")]
+    partial class InitialCreate14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
